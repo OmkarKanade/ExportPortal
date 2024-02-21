@@ -4,6 +4,7 @@ import CreateCustomerForm from './Controller//Admin/CreateCustomerForm';
 import CreateVendorForm from './Controller/Admin/CreateVendorForm';
 import ProductForm from './Controller/Admin/ProductForm';
 import LoginForm from './Component/LoginForm/LoginForm';
+import Layout from './Controller/Layout/Layout'
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
           <Route path="/create-vendorForm" element={<CreateVendorForm />} />
           <Route path="/create-customerForm" element={<CreateCustomerForm />} />
           <Route path="/create-ProductForm" element={<ProductForm />} />
+          <Route path="/layout" element={<Layout />} />
         </Routes>
      
     </Router>

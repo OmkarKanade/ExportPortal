@@ -5,17 +5,13 @@
     height: 100vh;
   }
 
-  h2 {
+  .form-box h2 {
     text-align: center;
     color: rgba(255,255,255, .7);
-    font-weight: 400;
+    font-weight: 500;
     font-size: 20px;
   }
 
-  .form-box h1 {
-    margin-bottom: 20px;
-    font-size: 24px; 
-  }
   
   
   .outer-box {
@@ -36,6 +32,8 @@
     max-width: 500px;
     width: 100%;
     padding: 0;
+    border:none;
+    box-shadow: none;
   } 
   
   

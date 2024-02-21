@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './customerform.css';
+import Layout from '../Layout/Layout';
 
 const CreateCustomerForm = () => {
   const [formData, setFormData] = useState({
@@ -32,6 +33,7 @@ const CreateCustomerForm = () => {
   };
 
   return (
+    <Layout>
     <div className="form-container">
       <div className="outer-box">
         <h1>Create Customer Account</h1>
@@ -45,6 +47,7 @@ const CreateCustomerForm = () => {
               onChange={handleChange}
               className="input-field"
             />
+            
           </div>
           <div className="form-group">
             <label>Name:</label>
@@ -156,10 +159,11 @@ const CreateCustomerForm = () => {
               className="input-field"
             />
           </div>
-          <button type="submit" className="submit-btn">Submit</button>
+          <button type="submit" className="submit-btn sbtbtn">Submit</button>
         </form>
       </div>
     </div>
+    </Layout>
   );
 };
 

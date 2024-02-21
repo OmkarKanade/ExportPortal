@@ -7,9 +7,11 @@
   width:100%;
 }
 
+
 .container {
   display: flex;
   flex: 1;
+  width:100%;
 }
 
 .sidebar-container {
@@ -31,17 +33,20 @@
   backdrop-filter: blur(10px);
   box-shadow: 0 0 10px rgba(255,255,255, .2);
   border: 2px solid rgba(255,255,255, .2);
+  height:70px;
   
 }
 
 .Logo {
   height: 50px;
+  
 }
 
 .HeaderButtons {
   display: flex;
   gap: 10px;
   justify-content: flex-end; /* Move buttons to the right */
+  align-items: center;
 }
 
 .HeaderButton {

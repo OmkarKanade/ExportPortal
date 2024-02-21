@@ -1,7 +1,7 @@
 
 .Header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-;
   align-items: center;
   padding: 10px;
   background: transparent;
@@ -10,8 +10,8 @@
   border: 2px solid rgba(255,255,255, .2);
 }
 
-h1{
-  font-size: 180%;
+.Header h1{
+  font-size: 25px;
   font-weight: bolder;
   color: rgba(255,255,255, 0.7);
 }
@@ -24,7 +24,8 @@ h1{
   display: flex;
   gap: 10px;
   justify-content: flex-end; 
-  width: 100%;
+  width: 200px;
+  align-items: center;
 }
 
 .HeaderButton {

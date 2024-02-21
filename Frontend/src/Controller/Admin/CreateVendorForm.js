@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './vendorform.css'; // Import CSS file
+import Layout from '../Layout/Layout';
 
 const CreateVendorForm = () => {
   const [formData, setFormData] = useState({
@@ -32,6 +33,7 @@ const CreateVendorForm = () => {
   };
 
   return (
+    <Layout>
     <div className="form-container">
       <div className="outer-box">
         <div className="form-box">
@@ -150,6 +152,7 @@ const CreateVendorForm = () => {
         </div>
       </div>
     </div>
+    </Layout>
   );
 };
 

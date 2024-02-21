@@ -7,6 +7,7 @@ import { FaUser, FaLock } from "react-icons/fa";
 
 const LoginForm = () => {
   return (
+    <div className="outer">
     <div className='wrapper'>
         <form action="">
             <h1>Login</h1>
@@ -26,6 +27,7 @@ const LoginForm = () => {
             <button type="submit">Login</button>
         </form>
 
+    </div>
     </div>
   )
 }
