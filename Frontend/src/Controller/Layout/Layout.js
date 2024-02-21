@@ -1,20 +1,21 @@
+// Layout.js
 import React from 'react';
-import Header from './Header';
-import Sidebar from './Sidebar';
-import './Layout.css'; 
+import Header from "./Header";
+import Sidebar from "./Sidebar";
 
-const Layout = (Component) => (props) => (
+const Layout = ({ children }) => {
+  return (
     <div className="layout">
       <Header />
-      <div className="container">
-        <div className="sidebar-container">
-          <Sidebar />
-        </div>
-        <div className="main-container">
-          <Component {...props} />
-        </div>
-      </div>
+      <aside className="sidebar">
+        <Sidebar />
+      </aside>
+      <main className="content">
+        {/* Content for different pages goes here */}
+        {children}
+      </main>
     </div>
-);
+  );
+};
 
 export default Layout;
