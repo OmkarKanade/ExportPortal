@@ -1,0 +1,52 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .container {
+    display: flex;
+    flex: 1;
+  }
+  
+  .sidebar-container {
+    width: 200px; /* Adjust width as needed */
+    background-color: #f0f0f0;
+  }
+  
+  .main-container {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffb703;
+  }
+  
+  .Logo {
+    height: 50px;
+  }
+  
+  .HeaderButtons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end; /* Move buttons to the right */
+  }
+  
+  .HeaderButton {
+    padding: 8px 16px;
+    border: none;
+    background-color: #023047;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+  
+  .HeaderButton:hover {
+    background-color: #0056b3;
+  }
+  

@@ -1,0 +1,63 @@
+/* App.css */
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  margin-top: 50px; /* Adjust to match the height of the Header */
+}
+
+.sidebar-container {
+  width: 200px; /* Adjust width as needed */
+  background-color: #f0f0f0;
+  position: fixed;
+  top: 50px; /* Match the height of the Header */
+  bottom: 0;
+  left: 0;
+}
+
+.main-container {
+  flex: 1;
+  padding: 20px;
+  margin-left: 200px; /* Adjust to match the width of Sidebar */
+}
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #ffb703;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+.Logo {
+  height: 50px;
+}
+
+.HeaderButtons {
+  display: flex;
+  gap: 10px;
+}
+
+.HeaderButton {
+  padding: 8px 16px;
+  border: none;
+  background-color: #023047;
+  color: white;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.HeaderButton:hover {
+  background-color: #0056b3;
+}
