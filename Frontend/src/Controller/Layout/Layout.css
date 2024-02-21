@@ -1,8 +1,10 @@
 /* Layout.css */
+
 .layout {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
+  width:100%;
 }
 
 .container {
@@ -12,12 +14,12 @@
 
 .sidebar-container {
   width: 200px; /* Fixed width for the sidebar */
-  background-color: #f0f0f0;
 }
 
 .main-container {
   flex: 1; /* Fill remaining space */
   padding: 20px;
+  
 }
 
 .Header {
@@ -25,7 +27,11 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: #ffb703;
+  background: transparent;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(255,255,255, .2);
+  border: 2px solid rgba(255,255,255, .2);
+  
 }
 
 .Logo {
@@ -41,12 +47,14 @@
 .HeaderButton {
   padding: 8px 16px;
   border: none;
-  background-color: #023047;
-  color: white;
+  background:transparent;
+  color: rgba(255,255,255, .7);
   cursor: pointer;
   border-radius: 10px;
+  font-weight: 700;
+
 }
 
 .HeaderButton:hover {
-  background-color: #0056b3;
+  text-decoration: underline;
 }

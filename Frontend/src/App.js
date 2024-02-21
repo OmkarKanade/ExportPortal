@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CreateCustomerForm from './Controller//Admin/CreateCustomerForm';
 import CreateVendorForm from './Controller/Admin/CreateVendorForm';
 import ProductForm from './Controller/Admin/ProductForm';
-import LoginForm from './Components/LoginForm/LoginForm';
+import LoginForm from './Component/LoginForm/LoginForm';
 
 const App = () => {
   return (

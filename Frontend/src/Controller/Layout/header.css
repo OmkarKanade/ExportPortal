@@ -1,14 +1,21 @@
+
 .Header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: #ffb703;
+  background: transparent;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(255,255,255, .2);
+  border: 2px solid rgba(255,255,255, .2);
 }
+
 h1{
   font-size: 180%;
   font-weight: bolder;
+  color: rgba(255,255,255, 0.7);
 }
+
 .Logo {
   height: 50px;
 }
@@ -23,12 +30,12 @@ h1{
 .HeaderButton {
   padding: 8px 16px;
   border: none;
-  background-color: #023047;
-  color: white;
+  background: transparent;
+  color: rgba(255,255,255, 0.7);
   cursor: pointer;
   border-radius: 10px;
 }
 
 .HeaderButton:hover {
-  background-color: #0056b3;
+  text-decoration: underline;
 }
