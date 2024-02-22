@@ -31,7 +31,7 @@ const ProductForm = () => {
 
 const BasicInfoTab = () => {
   return (
-    <div>
+    <div className='productf'>
     <div className="form-group">
       <label htmlFor="productId">Product ID (unique)</label>
       <input type="text" id="productId" name="productId" />
@@ -67,7 +67,7 @@ const BasicInfoTab = () => {
 
 const CostsTab = () => {
   return (
-<div>
+<div className='productf'>
       <div className="form-group">
         <label htmlFor="toPuneFreight">To Pune Freight (Amount)</label>
         <input type="text" id="toPuneFreight" name="toPuneFreight" />
@@ -107,7 +107,7 @@ const CostsTab = () => {
 
 const PackagingTab = () => {
   return (
-    <div>
+    <div className='productf'>
       <div className="form-group">
         <label htmlFor="grossWeight">Gross Weight (per pack in grams)</label>
         <input type="text" id="grossWeight" name="grossWeight" />
@@ -140,7 +140,7 @@ const PackagingTab = () => {
 
 const AdditionalInfoTab = () => {
   return (
-    <div>
+    <div className='productf'>
       <div className="form-group">
         <label htmlFor="ingredients">Ingredients</label>
         <input type="text" id="ingredients" name="ingredients"></input>
