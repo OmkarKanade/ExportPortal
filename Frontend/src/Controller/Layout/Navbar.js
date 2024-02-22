@@ -20,7 +20,7 @@ export default function Navbar() {
         <label for="login">LoginAs</label>
         <select name="login" id="login">
           <option value="Admin"><a href="/loginadmin" class="href">Admin</a></option>
-          <option value="Vendor">Vendor</option>
+          <option value="Vendor"><a href="/vendor" class="href">Vendor</a></option>
           <option value="Customer">Customer</option>
         </select>
       </div>

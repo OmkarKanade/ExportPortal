@@ -6,9 +6,8 @@ import ProductForm from './Controller/Admin/ProductForm';
 import AddNewCategory from './Controller/Admin/AddNewCategory';
 import LoginForm from './Component/LoginForm/LoginForm';
 import Home from './Controller/Layout/home';
-
-
-// import Vendor from './Controller/Vendor/vendorlogin';
+import Vendord from './Controller/Vendor/VendorDashboard';
+import Vendorlg from './Controller/Vendor/vendorlogin';
 import Layout from './Controller/Layout/Layout'
 
 const App = () => {
@@ -21,7 +20,9 @@ const App = () => {
           <Route path="/create-customerForm" element={<CreateCustomerForm />} />
           <Route path="/create-ProductForm" element={<ProductForm />} />
           <Route path="/create-Category" element={<AddNewCategory />} />
-          {/* <Route path="/vendor" element={<Vendor />} /> */}
+          <Route path="/vendord" element={<Vendord />} />
+          <Route path="/vendorlogin" element={<Vendorlg />} />
+          
           <Route path="/" element={<Home/>} />
           <Route path="/layout" element={<Layout />} />
         </Routes>
