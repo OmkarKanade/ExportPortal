@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './category.css';
 import Layout from '../Layout/Layout';
 
 const AddNewCategory = () => {
