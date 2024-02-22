@@ -4,7 +4,7 @@ import './sidebar.css';
 
 const Sidebar = () => {
   const lists = [
-    { name: 'View Profile', path: '/' },
+    { name: 'View Profile', path: '/customer-profile' },
     { name: 'View Products', path: '/customer-id'},
   ];
 

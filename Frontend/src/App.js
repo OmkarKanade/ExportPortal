@@ -11,6 +11,7 @@ import Vendorlg from './Controller/Vendor/vendorlogin';
 import Layout from './Controller/Layout/Layout'
 import Customer from './Controller/Customer/customer';
 import CustomerDashboard from './Controller/Customer/CustomerDashboard';
+import CustomerProfileView from './Controller/Customer/cutomerProfileView';
 
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
           
           <Route path="/" element={<Home/>} />
           <Route path='/customer-id' element={<Customer/>} />
+          <Route path='/customer-profile' element={<CustomerProfileView/>} />
           <Route path='/customerDashboard' element={<CustomerDashboard/>} />
           <Route path="/layout" element={<Layout />} />
         </Routes>

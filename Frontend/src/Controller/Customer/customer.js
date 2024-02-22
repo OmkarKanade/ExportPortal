@@ -35,6 +35,25 @@ const Customer = () => {
     }
   ]
   const [data, setData] = useState([]);
+  // const [loading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch('YOUR_API_ENDPOINT');
+  //       const result = await response.json();
+  //       setData(result);
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []); 
+
+
 
   useEffect(() => {
     setData(productData);
