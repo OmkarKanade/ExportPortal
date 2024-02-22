@@ -25,6 +25,7 @@
   
   .tabs button.active {
     background-color: #ccc;
+    color: black;
   }
   
   .tab-content {
