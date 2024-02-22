@@ -61,6 +61,7 @@ const BasicInfoTab = () => {
       <label htmlFor="hsnCode">HSN Code (unique)</label>
       <input type="text" id="hsnCode" name="hsnCode" />
     </div>
+    <button class="savepinfo">Save</button>
   </div>
   );
 };
@@ -101,6 +102,7 @@ const CostsTab = () => {
         <input type="text" id="totalRate" name="totalRate" readOnly />
         {/* This field will be calculated based on the sum of other fields */}
       </div>
+      <button class="savepinfo">Save</button>
     </div>
   );
 };
@@ -134,6 +136,7 @@ const PackagingTab = () => {
         <label htmlFor="bagBoxBumpers">1 Bag/Box = _____ Bumpers (number)</label>
         <input type="number" id="bagBoxBumpers" name="bagBoxBumpers" />
       </div>
+      <button class="savepinfo">Save</button>
     </div>
   );
 };
@@ -163,6 +166,7 @@ const AdditionalInfoTab = () => {
         <input type="radio" id="humanConsumptionNo" name="humanConsumption" value="no" />
         <label htmlFor="humanConsumptionNo">No</label>
       </div>
+      <button class="savepinfo">Save</button>
     </div>
   );
 };
