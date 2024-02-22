@@ -6,6 +6,7 @@ const Sidebar = () => {
   const lists = [
     { name: 'Create Customer Account', path: '/create-customerForm' },
     { name: 'Create Vendor Account', path: '/create-vendorForm' },
+    { name: 'Create Product', path: '/create-ProductForm'}
   ];
 
   return (
