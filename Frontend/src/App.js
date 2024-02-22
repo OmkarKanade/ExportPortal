@@ -6,11 +6,8 @@ import ProductForm from './Controller/Admin/ProductForm';
 import AddNewCategory from './Controller/Admin/AddNewCategory';
 import LoginForm from './Component/LoginForm/LoginForm';
 import Home from './Controller/Layout/home';
-
-
-// import Vendor from './Controller/Vendor/vendorlogin';
-import Layout from './Controller/Layout/Layout'
 import Customer from './Controller/Customer/customer';
+import Layout from './Controller/Layout/Layout';
 
 const App = () => {
   return (
@@ -22,8 +19,9 @@ const App = () => {
           <Route path="/create-customerForm" element={<CreateCustomerForm />} />
           <Route path="/create-ProductForm" element={<ProductForm />} />
           <Route path="/create-Category" element={<AddNewCategory />} />
-
+          <Route path='customer-id' element={<Customer/>} />
           <Route path="/layout" element={<Layout />} />
+          <Route path='/' element= {<Home /> }/>
         </Routes>
      
     </Router>
