@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import Layout from '../Layout/Layout';
 import './ProductDetails.css';
+import CustomerDashboard from './CustomerDashboard';
 
 const Customer = () => {
 
@@ -41,7 +41,8 @@ const Customer = () => {
   }, []);
 
   return (
-    <Layout>
+    <CustomerDashboard>
+    
       <div className="customer-table-container">
       <Fragment>
         <table>
@@ -78,8 +79,9 @@ const Customer = () => {
           </tbody>
         </table>
       </Fragment>
+
       </div>
-    </Layout>
+    </CustomerDashboard>
   )
 }
 
