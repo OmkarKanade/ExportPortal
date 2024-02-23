@@ -27,6 +27,16 @@
     
 }
 
+@media screen and (max-width: 544px) {
+    .wrapper {
+        width: 350px;
+    }
+    .wrapper button{
+        width: 50px;
+        
+    }
+}
+
 .wrapper h1{
     font-size: 36px;
     text-align: center;
