@@ -5,6 +5,25 @@
     text-align: center;
     font-size: large;
 }
+
 h1{
     font-size: xx-large;
 }
+
+@media (max-width: 600px) {
+    .home-content{
+        padding: 13%;
+        color: white;  
+        align-items: center;
+        text-align: center;
+        font-size: small;
+    }
+    h1{
+        font-size: large;
+    }
+
+    ul{
+        margin-top: 10%;
+        font-size: small;
+    }
+  }

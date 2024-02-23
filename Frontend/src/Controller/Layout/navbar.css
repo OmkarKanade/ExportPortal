@@ -4,6 +4,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size:larger;
     padding: 10px;
     background-color: #1a1b1c; /* Choose your desired background color */
     color: #fff; /* Text color */
@@ -57,18 +58,30 @@
   }
   
   /* Responsive styles for smaller screens */
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     .Header {
       flex-direction: column;
       align-items: flex-start;
+      font-size: medium;
     }
   
     .HeaderButtons {
-      margin-top: 10px;
+      margin-top: -10px;
+      margin-left: 6%;
     }
   
     .href {
       margin: 0 0 10px 0;
+    }
+    .src {
+      width: 30px; /* Adjust the width of the logo */
+      height: 30px; /* Adjust the height of the logo */
+      border-radius: 50%; /* Make the logo circular */
+      border: 2px solid aqua;
+    }
+    .src:hover{
+      width: 40px;
+      height: 40px;
     }
   }
   
