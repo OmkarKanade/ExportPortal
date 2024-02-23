@@ -10,9 +10,7 @@ const Home = () => {
       <Navbar />
       <div className="home-content">
         <h1>Welcome to Our Website!</h1>
-      <br></br>
-      <br></br>
-      <br></br>
+    
         <h2>Why Choose Us?</h2>
         <ul>
           <li>Quality Products</li>
