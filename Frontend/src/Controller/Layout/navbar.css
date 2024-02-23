@@ -27,6 +27,7 @@
   
   .href {
     margin: 0 15px; /* Add some spacing between links */
+    padding: 10px;
     text-decoration: none;
     color: #fff; /* Link text color */
     font-weight: bold;
