@@ -13,6 +13,7 @@ import CustomerDashboard from './Controller/Customer/CustomerDashboard';
 import CustomerProfileView from './Controller/Customer/cutomerProfileView';
 import VendorProfileView from './Controller/Vendor/vendorProfileView';
 import AssignedProducts from './Controller/Vendor/AssignedProducts';
+import PageNotFound from './Component/PageNotFound';
 
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path='/login' element={<LoginForm/>}/>
+          <Route  path='*' element={<PageNotFound/>} />
 
           {/* //Admin Routes// */}
           <Route path="/layout" element={<Layout />} />
