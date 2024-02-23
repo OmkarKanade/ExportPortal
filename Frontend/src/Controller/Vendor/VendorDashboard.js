@@ -3,7 +3,7 @@ import Header from './Vheader';
 import VendorSidebar from "../Layout/VendorSidebar";
 
 
-const Vlogin = () => {
+const VendorDashboard = ({ children }) => {
   return (
     <div className="layout">
       <Header />
@@ -12,12 +12,12 @@ const Vlogin = () => {
           <VendorSidebar />
         </aside>
         <main className="content">
-          
+        {children}
         </main>
       </div>
     </div>
   );
 };
 
-export default Vlogin;
+export default VendorDashboard;
 
