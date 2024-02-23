@@ -1,19 +1,18 @@
-
 .Header {
   display: flex;
-  justify-content: space-;
+  justify-content: space-between;
   align-items: center;
   padding: 10px;
   background: transparent;
   backdrop-filter: blur(10px);
-  box-shadow: 0 0 10px rgba(255,255,255, .2);
-  border: 2px solid rgba(255,255,255, .2);
+  box-shadow: 0 0 10px rgba(255, 255, 255, .2);
+  border: 2px solid rgba(255, 255, 255, .2);
 }
 
-.Header h1{
+.HeaderTitle {
   font-size: 25px;
   font-weight: bolder;
-  color: rgba(255,255,255, 0.7);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .Logo {
@@ -23,8 +22,7 @@
 .HeaderButtons {
   display: flex;
   gap: 10px;
-  justify-content: flex-end; 
-  width: 200px;
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -32,11 +30,45 @@
   padding: 8px 16px;
   border: none;
   background: transparent;
-  color: rgba(255,255,255, 0.7);
+  color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
   border-radius: 10px;
 }
 
 .HeaderButton:hover {
   text-decoration: underline;
+}
+
+/* Media Queries for Responsive Header */
+@media screen and (max-width: 768px) {
+  .Header {
+    flex-direction: column;
+    padding: 20px 10px;
+    text-align: center;
+  }
+
+  .HeaderTitle {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .HeaderButtons {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .HeaderTitle {
+    font-size: 18px;
+  }
+
+  .Logo {
+    height: 40px;
+  }
+
+  .HeaderButton {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
 }
