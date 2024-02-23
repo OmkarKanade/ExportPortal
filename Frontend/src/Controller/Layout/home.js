@@ -11,7 +11,7 @@ const Home = () => {
       <div className="home-content">
         <h1>Welcome to Our Website!</h1>
 
-        <h2>Why Choose Us?</h2>
+        <h2>Why Choose Us?</h2><br></br>
         <ul>
           <li>Quality Products</li>
           <li>Exceptional Service</li>

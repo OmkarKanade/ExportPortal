@@ -15,6 +15,10 @@ import VendorProfileView from './Controller/Vendor/vendorProfileView';
 import AssignedProducts from './Controller/Vendor/AssignedProducts';
 import PageNotFound from './Component/PageNotFound';
 
+// for checking purpose only dont remove till responsiveness come on createcustomer page
+import Sidebar from './Controller/Layout/Sidebar';
+
+
 
 const App = () => {
   return (
@@ -40,6 +44,9 @@ const App = () => {
           <Route path='/customerDashboard' element={<CustomerDashboard/>} />
           <Route path='/customer-id' element={<Customer/>} />
           <Route path='/customer-profile' element={<CustomerProfileView/>} />
+          
+{/* for checking purpose only dont remove till responsiveness come on createcustomer page */}
+          <Route path='/Sidebar' element={<Sidebar/>} />
           
         </Routes>
     </Router>
