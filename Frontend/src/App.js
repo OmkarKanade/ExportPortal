@@ -7,35 +7,39 @@ import AddNewCategory from './Controller/Admin/AddNewCategory';
 import LoginForm from './Component/LoginForm/LoginForm';
 import Home from './Controller/Layout/home';
 import Vendord from './Controller/Vendor/VendorDashboard';
-// import Vendorlg from './Controller/Vendor/vendorlogin';
 import Layout from './Controller/Layout/Layout'
 import Customer from './Controller/Customer/customer';
 import CustomerDashboard from './Controller/Customer/CustomerDashboard';
 import CustomerProfileView from './Controller/Customer/cutomerProfileView';
+import VendorProfileView from './Controller/Vendor/vendorProfileView';
+import AssignedProducts from './Controller/Vendor/AssignedProducts';
 
 
 const App = () => {
   return (
     <Router>
-      
         <Routes>
+          <Route path="/" element={<Home/>} />
           <Route path='/login' element={<LoginForm/>}/>
+
+          {/* //Admin Routes// */}
+          <Route path="/layout" element={<Layout />} />
           <Route path="/create-vendorForm" element={<CreateVendorForm />} />
           <Route path="/create-customerForm" element={<CreateCustomerForm />} />
           <Route path="/create-ProductForm" element={<ProductForm />} />
           <Route path="/create-Category" element={<AddNewCategory />} />
 
+          {/* //Vendor Routes// */}
           <Route path="/vendorDashboard" element={<Vendord />} />
-          {/* <Route path="/vendorlogin" element={<Vendorlg />} /> */}
-          
-          
-          <Route path="/" element={<Home/>} />
+          <Route path='/vendor-Profile' element={<VendorProfileView/>} />
+          <Route path='/vendor-assignedProducts' element={<AssignedProducts/>} />
+
+          {/* //Customer Routes// */}
+          <Route path='/customerDashboard' element={<CustomerDashboard/>} />
           <Route path='/customer-id' element={<Customer/>} />
           <Route path='/customer-profile' element={<CustomerProfileView/>} />
-          <Route path='/customerDashboard' element={<CustomerDashboard/>} />
-          <Route path="/layout" element={<Layout />} />
+          
         </Routes>
-     
     </Router>
   );
 };

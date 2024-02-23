@@ -1,94 +1,103 @@
 import React, { useState, useEffect } from 'react';
-import Vendord from './Vendord';
-import './CustomerProfileView.css';
+import VendorDashboard from './VendorDashboard';
+import './VendorProfileView.css';
 
 const VendorProfileView = () => {
-  const [customerDetails, setCustomerDetails] = useState({
-    username: '',
-    name: '',
-    organization: '',
-    contactNumber: '',
-    email: '',
-    state: '',
-    city: '',
-    address: '',
-    zipCode: '',
-    password: ''
+  const [vendorDetails, setVendorDetails] = useState({
+     // username: '',
+    // name: '',
+    // organization: '',
+    // contactNumber: '',
+    // email: '',
+    // state: '',
+    // city: '',
+    // address: '',
+    // zipCode: '',
+    // password: ''
+    username: 'john_doe',
+    name: 'John Doe',
+    organization: 'ABC Inc.',
+    contactNumber: '123-456-7890',
+    email: 'johndoe@example.com',
+    state: 'California',
+    city: 'Los Angeles',
+    address: '123 Main Street',
+    zipCode: '90001',
+    password: '******'
   });
 
   useEffect(() => {
     // Function to fetch customer details from ASP.NET API
-    const fetchCustomerDetails = async () => {
+    const fetchVendorDetails = async () => {
       try {
-        const response = await fetch('API_ENDPOINT/customer/details', {
+        const response = await fetch('API_ENDPOINT/vendor/details', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            // Add any necessary authentication headers if required
           },
         });
         if (!response.ok) {
-          throw new Error('Failed to fetch customer details');
+          throw new Error('Failed to fetch vendor details');
         }
         const data = await response.json();
-        setCustomerDetails(data); // Update state with fetched customer details
+        setVendorDetails(data); 
       } catch (error) {
-        console.error('Error fetching customer details:', error);
+        console.error('Error fetching vendor details:', error);
       }
     };
 
-    fetchCustomerDetails();
+    fetchVendorDetails();
   }, []);
 
   return (
-    <Vendord>
+    <VendorDashboard>
       <div className="container mt-4">
         <div className="row">
           <div className="col-md-8 offset-md-2">
             <div className="card">
               <div className="card-body">
-                <h2 className="text-center mb-4">Customer Profile</h2>
+                <h2 className="text-center mb-4">Vendor Profile</h2>
                 <table className="table user-view-table">
                   <tbody>
                     <tr>
                       <th className="text-light transparent">Username: </th>
-                      <td>{customerDetails.username}</td>
+                      <td>{vendorDetails.username}</td>
                     </tr>
                     <tr>
                       <th className="text-light transparent">Name:</th>
-                      <td>{customerDetails.name}</td>
+                      <td>{vendorDetails.name}</td>
                     </tr>
                     <tr>
                       <th className="text-light transparent">Organization:</th>
-                      <td>{customerDetails.organization}</td>
+                      <td>{vendorDetails.organization}</td>
                     </tr>
                     <tr>
                       <th className="text-light transparent">Contact:</th>
-                      <td>{customerDetails.contactNumber}</td>
+                      <td>{vendorDetails.contactNumber}</td>
                     </tr>
                     <tr>
                       <th className="text-light transparent">Email:</th>
-                      <td>{customerDetails.email}</td>
+                      <td>{vendorDetails.email}</td>
                     </tr>
                     <tr>
                       <th className="text-light transparent">State:</th>
-                      <td>{customerDetails.state}</td>
+                      <td>{vendorDetails.state}</td>
                     </tr>
                     <tr>
                       <th className="text-light transparent">City:</th>
-                      <td>{customerDetails.city}</td>
+                      <td>{vendorDetails.city}</td>
                     </tr>
                     <tr>
                       <th className="text-light transparent">Address:</th>
-                      <td>{customerDetails.address}</td>
+                      <td>{vendorDetails.address}</td>
                     </tr>
                     <tr>
                       <th className="text-light transparent">Zip Code:</th>
-                      <td>{customerDetails.zipCode}</td>
+                      <td>{vendorDetails.zipCode}</td>
                     </tr>
                     <tr>
                       <th className="text-light transparent">Password:</th>
-                      <td>{customerDetails.password}</td>
+                      <td>{vendorDetails.password}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -97,8 +106,9 @@ const VendorProfileView = () => {
           </div>
         </div>
       </div>
-    </Vendord>
+    </VendorDashboard>
   );
 };
 
 export default VendorProfileView;
+

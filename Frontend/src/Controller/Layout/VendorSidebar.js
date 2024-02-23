@@ -5,7 +5,7 @@ import './sidebar.css';
 const Sidebar = () => {
   const lists = [
     { name: 'View Profile', path: '/vendor-Profile' },
-    { name: 'View Assigned Products', path: '/assigned-products'},
+    { name: 'View Assigned Products', path: '/vendor-assignedProducts'},
   ];
 
   return (

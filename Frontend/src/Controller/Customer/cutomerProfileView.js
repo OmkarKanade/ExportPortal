@@ -61,47 +61,47 @@ const CustomerProfileView = () => {
               <h2 className="text-center-mb-4">Customer Profile</h2>
               <table className="table user-view-table">
               <tbody>
-  <tr>
-    <th className="text-light transparent">Username: </th>
-    <td>{customerDetails.username}</td>
-  </tr>
-  <tr>
-    <th className="text-light transparent">Name:</th>
-    <td>{customerDetails.name}</td>
-  </tr>
-  <tr>
-    <th className="text-light transparent">Organization:</th>
-    <td>{customerDetails.organization}</td>
-  </tr>
-  <tr>
-    <th className="text-light transparent">Contact:</th>
-    <td>{customerDetails.contactNumber}</td>
-  </tr>
-  <tr>
-    <th className="text-light transparent">Email:</th>
-    <td>{customerDetails.email}</td>
-  </tr>
-  <tr>
-    <th className="text-light transparent">State:</th>
-    <td>{customerDetails.state}</td>
-  </tr>
-  <tr>
-    <th className="text-light transparent">City:</th>
-    <td>{customerDetails.city}</td>
-  </tr>
-  <tr>
-    <th className="text-light transparent">Address:</th>
-    <td>{customerDetails.address}</td>
-  </tr>
-  <tr>
-    <th className="text-light transparent">Zip Code:</th>
-    <td>{customerDetails.zipCode}</td>
-  </tr>
-  <tr>
-    <th className="text-light transparent">Password:</th>
-    <td>{customerDetails.password}</td>
-  </tr>
-</tbody>
+                <tr>
+                  <th className="text-light transparent">Username: </th>
+                  <td>{customerDetails.username}</td>
+                </tr>
+                <tr>
+                  <th className="text-light transparent">Name:</th>
+                  <td>{customerDetails.name}</td>
+                </tr>
+                <tr>
+                  <th className="text-light transparent">Organization:</th>
+                  <td>{customerDetails.organization}</td>
+                </tr>
+                <tr>
+                  <th className="text-light transparent">Contact:</th>
+                  <td>{customerDetails.contactNumber}</td>
+                </tr>
+                <tr>
+                  <th className="text-light transparent">Email:</th>
+                  <td>{customerDetails.email}</td>
+                </tr>
+                <tr>
+                  <th className="text-light transparent">State:</th>
+                  <td>{customerDetails.state}</td>
+                </tr>
+                <tr>
+                  <th className="text-light transparent">City:</th>
+                  <td>{customerDetails.city}</td>
+                </tr>
+                <tr>
+                  <th className="text-light transparent">Address:</th>
+                  <td>{customerDetails.address}</td>
+                </tr>
+                <tr>
+                  <th className="text-light transparent">Zip Code:</th>
+                  <td>{customerDetails.zipCode}</td>
+                </tr>
+                <tr>
+                  <th className="text-light transparent">Password:</th>
+                  <td>{customerDetails.password}</td>
+                </tr>
+              </tbody>
 
               </table>
             </div>
