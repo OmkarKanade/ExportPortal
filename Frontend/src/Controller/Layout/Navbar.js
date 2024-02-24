@@ -15,10 +15,10 @@ export default function Navbar() {
           Home
         </Link>
         <Link to="/about" className="href">
-          AboutUs
+          About Us
         </Link>
         <Link to="/login" className="href">
-          Login
+          Login Here
         </Link>
       </div>
     </header>
