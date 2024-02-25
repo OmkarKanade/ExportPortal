@@ -9,33 +9,63 @@ const ProductForm = () => {
     setActiveTab(tabName);
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const requestData = {};
+    formData.forEach((value, key) => {
+      requestData[key] = value;
+    });
+
+    try {
+      const response = await fetch('https://localhost:7051/api/Product', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      if (response.ok) {
+        // Handle success, maybe show a success message
+        console.log('Product saved successfully!');
+      } else {
+        // Handle errors, maybe show an error message
+        console.error('Failed to save product.');
+      }
+    } catch (error) {
+      console.error('Error saving product:', error);
+    }
+  };
+
   return (
     <Layout>
-    <div className='tab-box'>
-      <div className="tabs">
-        <button onClick={() => handleTabChange('basicInfo')} className={activeTab === 'basicInfo' ? 'active' : ''}>Basic Info</button>
-        <button onClick={() => handleTabChange('costs')} className={activeTab === 'costs' ? 'active' : ''}>Costs</button>
-        <button onClick={() => handleTabChange('packaging')} className={activeTab === 'packaging' ? 'active' : ''}>Packaging</button>
-        <button onClick={() => handleTabChange('additionalInfo')} className={activeTab === 'additionalInfo' ? 'active' : ''}>Additional Info</button>
+      <div className='tab-box'>
+        <div className="tabs">
+          <button onClick={() => handleTabChange('basicInfo')} className={activeTab === 'basicInfo' ? 'active' : ''}>Basic Info</button>
+          <button onClick={() => handleTabChange('costs')} className={activeTab === 'costs' ? 'active' : ''}>Costs</button>
+          <button onClick={() => handleTabChange('packaging')} className={activeTab === 'packaging' ? 'active' : ''}>Packaging</button>
+          <button onClick={() => handleTabChange('additionalInfo')} className={activeTab === 'additionalInfo' ? 'active' : ''}>Additional Info</button>
+        </div>
+        <div className="tab-content">
+          {activeTab === 'basicInfo' && <BasicInfoTab onSubmit={handleSubmit} />}
+          {activeTab === 'costs' && <CostsTab onSubmit={handleSubmit} />}
+          {activeTab === 'packaging' && <PackagingTab onSubmit={handleSubmit} />}
+          {activeTab === 'additionalInfo' && <AdditionalInfoTab onSubmit={handleSubmit} />}
+        </div>
       </div>
-      <div className="tab-content">
-        {activeTab === 'basicInfo' && <BasicInfoTab />}
-        {activeTab === 'costs' && <CostsTab />}
-        {activeTab === 'packaging' && <PackagingTab />}
-        {activeTab === 'additionalInfo' && <AdditionalInfoTab />}
-      </div>
-    </div>
     </Layout>
   );
 };
 
-const BasicInfoTab = () => {
+const BasicInfoTab = ({ onSubmit }) => {
   return (
-    <div className='productf'>
-    <div className="form-group">
-      <label htmlFor="productId">Product ID (unique)</label>
-      <input type="text" id="productId" name="productId" />
-    </div>
+    <form onSubmit={onSubmit} className='productf'>
+      <div className="form-group">
+        <label htmlFor="productId">Product ID (unique)</label>
+        <input type="text" id="productId" name="productId" />
+      </div>
     <div className="form-group">
       <label htmlFor="productName">Product Name (unique)</label>
       <input type="text" id="productName" name="productName" />
@@ -61,14 +91,14 @@ const BasicInfoTab = () => {
       <label htmlFor="hsnCode">HSN Code (unique)</label>
       <input type="text" id="hsnCode" name="hsnCode" />
     </div>
-    <button class="savepinfo">Save</button>
-  </div>
+    <button className="savepinfo" type="submit">Save</button>
+    </form>
   );
 };
 
-const CostsTab = () => {
+const CostsTab = ({ onSubmit }) => {
   return (
-<div className='productf'>
+    <form onSubmit={onSubmit} className='productf'>
       <div className="form-group">
         <label htmlFor="toPuneFreight">To Pune Freight (Amount)</label>
         <input type="text" id="toPuneFreight" name="toPuneFreight" />
@@ -102,14 +132,14 @@ const CostsTab = () => {
         <input type="text" id="totalRate" name="totalRate" readOnly />
         {/* This field will be calculated based on the sum of other fields */}
       </div>
-      <button class="savepinfo">Save</button>
-    </div>
+      <button className="savepinfo" type="submit">Save</button>
+    </form>
   );
 };
 
-const PackagingTab = () => {
+const PackagingTab = ({ onSubmit }) => {
   return (
-    <div className='productf'>
+    <form onSubmit={onSubmit} className='productf'>
       <div className="form-group">
         <label htmlFor="grossWeight">Gross Weight (per pack in grams)</label>
         <input type="text" id="grossWeight" name="grossWeight" />
@@ -136,14 +166,14 @@ const PackagingTab = () => {
         <label htmlFor="bagBoxBumpers">1 Bag/Box = _____ Bumpers (number)</label>
         <input type="number" id="bagBoxBumpers" name="bagBoxBumpers" />
       </div>
-      <button class="savepinfo">Save</button>
-    </div>
+      <button className="savepinfo" type="submit">Save</button>
+    </form>
   );
 };
 
-const AdditionalInfoTab = () => {
+const AdditionalInfoTab = ({ onSubmit }) => {
   return (
-    <div className='productf'>
+    <form onSubmit={onSubmit} className='productf'>
       <div className="form-group">
         <label htmlFor="ingredients">Ingredients</label>
         <input type="text" id="ingredients" name="ingredients"></input>
@@ -166,8 +196,8 @@ const AdditionalInfoTab = () => {
         <input type="radio" id="humanConsumptionNo" name="humanConsumption" value="no" />
         <label htmlFor="humanConsumptionNo">No</label>
       </div>
-      <button class="savepinfo">Save</button>
-    </div>
+      <button className="savepinfo" type="submit">Save</button>
+    </form>
   );
 };
 

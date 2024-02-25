@@ -7,8 +7,6 @@ const AddNewCategory = () => {
     categoryDescription: ''
   });
 
-
-
   const handleCategoryChange = (e) => {
     const { name, value } = e.target;
     setCategoryData({
@@ -17,11 +15,27 @@ const AddNewCategory = () => {
     });
   };
 
-  
-
-  const handleCategorySubmit = (e) => {
+  const handleCategorySubmit = async (e) => {
     e.preventDefault();
-    console.log(categoryData);
+
+    try {
+      const response = await fetch('https://localhost:7051/api/VendorCategory', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(categoryData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      console.log('New category created:', data);
+    } catch (error) {
+      console.error('Error creating new category:', error);
+    }
   };
 
   return (
