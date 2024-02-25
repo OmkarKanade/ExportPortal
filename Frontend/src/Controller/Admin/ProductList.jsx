@@ -1,7 +1,6 @@
 import React from 'react';
-import './vassinedproducts.css'; // Import the CSS file for styling
-import Header from './Vheader';
-import Sidebar from './VendorSidebar';
+import './productlist.css'; // Import the CSS file for styling
+import Layout from '../Layout/Layout';
 
 const ProductCard = ({ image, name, price, description }) => {
   return (
@@ -18,7 +17,7 @@ const ProductCard = ({ image, name, price, description }) => {
   );
 };
 
-const ProductPagee = () => {
+const ProductPage = () => {
   const products = [
     {
       id: 1,
@@ -43,25 +42,8 @@ const ProductPagee = () => {
     },
   ];
 
-//   <div className="layout">
-//       <Header toggleSidebar={toggleSidebar} />
-//       <div className="container">
-//         <aside className={`sidebar ${showSidebar ? 'show' : 'hide'}`}>
-//           <Sidebar />
-//         </aside>
-//         <main className="content">
-//           {children}
-//         </main>
-//       </div>
-//     </div>
-
   return (
-    <div className='mainpage'>
-        <Header/>
-        <div className='containerpage'>
-        <aside className="psidebar">
-//           <Sidebar />
-//       </aside>
+    <Layout>
     <div className="product-page">
       <h1>Products List</h1>
       <div className="product-cards">
@@ -76,9 +58,8 @@ const ProductPagee = () => {
         ))}
       </div>
     </div>
-    </div>
-    </div>
+    </Layout>
   );
 };
 
-export default ProductPagee;
+export default ProductPage;

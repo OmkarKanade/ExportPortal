@@ -38,7 +38,7 @@ const Layout = ({ children }) => {
   return (
     <div className="layout">
       <Header toggleSidebar={toggleSidebar} />
-      <div className="container">
+      <div className="containerrr">
         <aside className={`sidebar ${showSidebar ? 'show' : 'hide'}`}>
           <Sidebar />
         </aside>

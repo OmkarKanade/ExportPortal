@@ -1,7 +1,7 @@
 import React from 'react';
-import './vassinedproducts.css'; // Import the CSS file for styling
-import Header from './Vheader';
-import Sidebar from './VendorSidebar';
+import './cproductlist.css'; // Import the CSS file for styling
+import Header from './CustomerHeader';
+import Sidebar from '../Layout/CustomerSidebar';
 
 const ProductCard = ({ image, name, price, description }) => {
   return (
