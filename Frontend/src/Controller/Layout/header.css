@@ -75,6 +75,7 @@
 
 /* Header.css */
 
+
 .headerr {
   background: transparent;
   backdrop-filter: blur(10px);
@@ -87,13 +88,17 @@
   justify-content: space-between;
 }
 
+
+
 .left {
   display: flex;
   align-items: center;
+  width:200px;
 }
 
 .left h1{
   margin-left: 10%;
+  font-size: 30px;
 }
 
 .toggle-btn {
@@ -106,7 +111,7 @@
 
 /* Responsive adjustments */
 @media only screen and (max-width: 768px) {
-  .header {
+  .headerr {
     padding: 10px 15px;
     text-align: center;
   }

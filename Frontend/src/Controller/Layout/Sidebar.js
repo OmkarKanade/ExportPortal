@@ -7,7 +7,8 @@ const Sidebar = () => {
     { name: 'Create Customer Account', path: '/create-customerForm' },
     { name: 'Create Vendor Account', path: '/create-vendorForm' },
     { name: 'Create Product', path: '/create-ProductForm'},
-    { name: 'Create Category', path: '/create-Category'}
+    { name: 'Create Category', path: '/create-Category'},
+    { name: 'Product List', path: '/ProductList'}
   ];
 
   return (

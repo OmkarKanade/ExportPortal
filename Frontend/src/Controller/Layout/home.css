@@ -1,10 +1,10 @@
 .home-content{
-    padding: 13%;
+    padding: 16%;
     color: white;  
     align-items: center;
     text-align: center;
     font-size: large;
 }
-h1{
+.home-content h1{
     font-size: xx-large;
 }

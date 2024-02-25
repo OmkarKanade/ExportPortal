@@ -1,0 +1,57 @@
+
+.product-page {
+    margin-left: 10%;
+}
+
+.product-page h1{
+    font-weight: 600;
+    color: white;
+    margin-bottom: 4%;
+    font-size: 20px;
+}
+
+.carddd {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background: transparent;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(255,255,255, .2);
+  }
+  
+  .carddd-img {
+    flex: 1;
+  }
+  
+  .carddd-img img {
+    height: 190px;
+    width:100%;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+  
+  .carddd-info {
+    flex: 2;
+    padding: 20px;
+  }
+  
+  .carddd-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color:white;
+    font-weight: 400;
+  }
+  
+  .carddd-text {
+    color: #666;
+    margin-bottom: 10px;
+    color:#ccc;
+  }
+  
+  .carddd-price {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color:azure;
+  }
+  

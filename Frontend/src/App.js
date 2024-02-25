@@ -14,7 +14,8 @@ import CustomerProfileView from './Controller/Customer/cutomerProfileView';
 import VendorProfileView from './Controller/Vendor/vendorProfileView';
 import AssignedProducts from './Controller/Vendor/AssignedProducts';
 import PageNotFound from './Component/PageNotFound';
-
+import ProductList from './Controller/Admin/ProductList';
+import CProductList from './Controller/Customer/CProductList';
 
 
 const App = () => {
@@ -24,7 +25,8 @@ const App = () => {
           <Route path="/" element={<Home/>} />
           <Route path='/login' element={<LoginForm/>}/>
           <Route  path='*' element={<PageNotFound/>} />
-          
+          <Route  path='/ProductList' element={<ProductList/>} />
+          <Route  path='/cProductList' element={<CProductList/>} />
 
           {/* //Admin Routes// */}
           <Route path="/layout" element={<Layout />} />
