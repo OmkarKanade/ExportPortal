@@ -16,12 +16,17 @@ import AssignedProducts from './Controller/Vendor/AssignedProducts';
 import PageNotFound from './Component/PageNotFound';
 import ProductList from './Controller/Admin/ProductList';
 import CProductList from './Controller/Customer/CProductList';
+import UserList from './Controller/UsersList';
 
 
 const App = () => {
   return (
     <Router>
         <Routes>
+
+          {/* //Get All Users// */}
+          <Route path="/getAll-users" element={<UserList />}></Route>
+          
           <Route path="/" element={<Home/>} />
           <Route path='/login' element={<LoginForm/>}/>
           <Route  path='*' element={<PageNotFound/>} />

@@ -1,0 +1,27 @@
+.user-list {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .user-category {
+    flex: 1;
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .user-category h2 {
+    margin-top: 0;
+  }
+  
+  .user-category ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .user-category li {
+    margin-bottom: 5px;
+  }
+  
