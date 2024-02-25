@@ -1,4 +1,4 @@
-.layout {
+/* .layout {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -43,7 +43,7 @@
 .HeaderButtons {
   display: flex;
   gap: 10px;
-  justify-content: flex-end; /* Move buttons to the right */
+  justify-content: flex-end; 
   align-items: center;
 }
 
@@ -60,4 +60,64 @@
 
 .HeaderButton:hover {
   text-decoration: underline;
+} */
+
+
+
+.layout::after {
+  content: "";
+  display: table;
+  clear: both;
 }
+
+/* Basic styling for the header */
+.headerr {
+  background:transparent;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(255,255,255, .2);
+  border: 2px solid rgba(255,255,255, .2);
+  color: white;
+  padding: 5px;
+}
+
+/* Basic styling for the container */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Styling for the sidebar */
+.sidebar {
+  flex:1;
+  padding: 20px;
+  height: 100vh; /* Set the height to 100% of the viewport height */
+  width: 250px; /* Set the width of the sidebar */
+  transition: transform 0.3s ease;
+}
+
+/* Styling for the main content */
+.content {
+  flex: 3;
+  padding: 20px;
+}
+
+/* Responsive layout adjustments */
+@media only screen and (max-width: 768px) {
+  /* On smaller screens, make the sidebar full-width and push it below the header */
+  .container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    flex: 1;
+    order: 2;
+    width: 100%;
+  }
+
+  .content {
+    flex: 3;
+    order: 1;
+    width: 100%;
+  }
+}
+

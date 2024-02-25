@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './sidebar.css';
+import './vsidebar.css';
 
 const Sidebar = () => {
   const lists = [
@@ -9,17 +9,15 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className='app-container'>
-      <div className="sidebar">
-        <ul>
+      <div className="vsidebar">
+        <ul className='vul'>
           {lists.map((list, index) => (
-            <li key={index}>
+            <li key={index} className='vlll'>
               <Link to={list.path}>{list.name}</Link>
             </li>
           ))}
         </ul>
       </div>
-    </div>
   );
 };
 

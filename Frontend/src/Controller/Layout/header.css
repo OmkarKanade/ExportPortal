@@ -1,4 +1,4 @@
-.Header {
+/* .Header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -39,7 +39,7 @@
   text-decoration: underline;
 }
 
-/* Media Queries for Responsive Header */
+
 @media screen and (max-width: 768px) {
   .Header {
     flex-direction: column;
@@ -70,5 +70,44 @@
   .HeaderButton {
     padding: 6px 12px;
     font-size: 14px;
+  }
+} */
+
+/* Header.css */
+
+.headerr {
+  background: transparent;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(255,255,255, .2);
+  border: 2px solid rgba(255,255,255, .2);
+  color: white;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.left h1{
+  margin-left: 10%;
+}
+
+.toggle-btn {
+  color: white;
+  width:40px;
+  box-shadow: 0 0 10px rgba(255,255,255, .2);
+  margin-bottom: 10px;
+
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 768px) {
+  .header {
+    padding: 10px 15px;
+    text-align: center;
   }
 }

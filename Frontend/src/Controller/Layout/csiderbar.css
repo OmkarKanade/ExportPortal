@@ -11,14 +11,6 @@
   }
   */
 
-  .sidebar.show {
-    background: transparent;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 10px rgba(255,255,255, .2);
-    border: 2px solid rgba(255,255,255, .2); 
-    width: 300px;
-  }
-  
   .nav-link {
     display: block;
     padding: 10px;
@@ -39,31 +31,35 @@
 
    /* Sidebar.css */
 
-.sidebar {
+.csidebar {
   flex:1;
   padding: 20px;
   height: 100vh; /* Set the height to 100% of the viewport height */
   width: 250px; /* Set the width of the sidebar */
   transition: transform 0.3s ease; /* Add smooth transition */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(255,255,255, .2);
+  border: 2px solid rgba(255,255,255, .2); 
+  width: 250px;
   
 }
 
 /* Hide the sidebar */
-.sidebar.hide {
+.csidebar.hide {
   transform: translateX(-100%);
 }
 
-.ul {
+.cul {
   line-height: 2rem;
 }
-.lll {
+.clll {
   padding: 5px;
-  width:220px;
+  width:200px;
   color: white;
 }
 
 
-.lll:hover {
+.clll:hover {
   box-shadow: 0 0 10px white;
   border-radius: 10px;
 
@@ -72,18 +68,18 @@
 
 /* Responsive adjustments */
 @media only screen and (max-width: 768px) {
-  .sidebar {
+  .csidebar {
     padding: 10px;
     width: 150px; /* Adjust the width for smaller screens */
     order: 2;
     width: 100%;
   }
 
-  .sidebar h2 {
+  .csidebar h2 {
     margin-top: 0;
   }
 
-  .sidebar ul {
+  .csidebar ul {
     padding-left: 20px;
   }
 }

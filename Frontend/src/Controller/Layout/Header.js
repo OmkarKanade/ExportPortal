@@ -1,14 +1,40 @@
-import React from "react";
-import "./header.css";
+// import React from "react";
+// import "./header.css";
 
-export default function Header() {
+// export default function Header() {
+//   return (
+//     <header className="Header">
+//       <h1><a href="#">Admin</a></h1>
+//       <div className="HeaderButtons">
+//         <button className="HeaderButton">My Cart</button>
+//         <button className="HeaderButton">Logout</button>
+//       </div>
+//     </header>
+//   );
+// }
+
+import React  from 'react';
+import "./header.css"; // Import the CSS file for the header
+
+const Header = ({ toggleSidebar }) => {
   return (
-    <header className="Header">
-      <h1><a href="#">Admin</a></h1>
+    <div className="headerr">
+      <div className='left'>
+      <button className="toggle-btn" onClick={toggleSidebar}>
+      ☰
+      </button>
+      <h1>Admin</h1>
+      </div>
+      <div className='right'>
       <div className="HeaderButtons">
         <button className="HeaderButton">My Cart</button>
-        <button className="HeaderButton">Logout</button>
+         <button className="HeaderButton">Logout</button>
+       </div>
       </div>
-    </header>
+      
+    </div>
   );
-}
+};
+
+export default Header;
+

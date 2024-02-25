@@ -13,9 +13,9 @@ const Sidebar = () => {
   return (
     <div className='app-container'>
       <div className="sidebar">
-        <ul>
+        <ul className='ul'>
           {lists.map((list, index) => (
-            <li key={index}>
+            <li key={index} className='lll'>
               <Link to={list.path}>{list.name}</Link>
             </li>
           ))}
@@ -26,3 +26,4 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+

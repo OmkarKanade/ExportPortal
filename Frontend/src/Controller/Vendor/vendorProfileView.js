@@ -54,8 +54,8 @@ const VendorProfileView = () => {
       <div className="container-mt-4">
         <div className="row">
           <div className="col-md-8 offset-md-2">
-            <div className="card">
-              <div className="card-body">
+            <div className="cardd">
+              <div className="cardd-body">
                 <h2 className="text-center-mb-4">Vendor Profile</h2>
                 <table className="table user-view-table">
                   <tbody>
