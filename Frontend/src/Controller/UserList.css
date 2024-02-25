@@ -1,6 +1,8 @@
 .user-list {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  padding:21%;
+
   }
   
   .user-category {

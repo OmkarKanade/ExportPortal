@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from 'react-router-dom';
 import "./vheader.css";
 
 const Header = ({ toggleSidebar }) => {
@@ -13,7 +13,9 @@ const Header = ({ toggleSidebar }) => {
       <div className='right'>
       <div className="HeaderButtons">
         <button className="HeaderButton">My Cart</button>
-         <button className="HeaderButton">Logout</button>
+         <button className="HeaderButton"><Link to="/" className="href">
+          Logout
+        </Link></button>
        </div>
       </div>
       
