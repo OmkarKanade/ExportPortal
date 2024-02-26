@@ -11,13 +11,16 @@ function UserList() {
     const fetchUsers = async () => {
       try {
         const adminsResponse = await axios.get('https://localhost:7051/api/Admin');
-        setAdmins(adminsResponse.data);
+        const adminsData = adminsResponse.data.map(user => ({ ...user, category: 'admin' }));
+        setAdmins(adminsData);
 
         const customersResponse = await axios.get('https://localhost:7051/api/Customer');
-        setCustomers(customersResponse.data);
+        const customersData = customersResponse.data.map(user => ({ ...user, category: 'customer' }));
+        setCustomers(customersData);
 
         const vendorsResponse = await axios.get('https://localhost:7051/api/Vendor');
-        setVendors(vendorsResponse.data);
+        const vendorsData = vendorsResponse.data.map(user => ({ ...user, category: 'vendor' }));
+        setVendors(vendorsData);
       } catch (error) {
         console.error('Error fetching users:', error);
       }
@@ -26,31 +29,33 @@ function UserList() {
     fetchUsers();
   }, []);
 
+  const renderUsers = (users) => {
+    return (
+      <ul>
+        {users.map((user, index) => (
+          <li key={user.id}>
+            <span className="user-serial">{index + 1}. </span>
+            <span className="user-name">{user.name}</span>
+            <span className="user-email"> ({user.email})</span>
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
   return (
     <div className="user-list">
       <div className="user-category">
         <h2>Admins: </h2>
-        <ul>
-          {admins.map((admin) => (
-            <li key={admin.id}>{admin.name}</li>
-          ))}
-        </ul>
+        {renderUsers(admins)}
       </div>
       <div className="user-category">
         <h2>Customers: </h2>
-        <ul>
-          {customers.map((customer) => (
-            <li key={customer.id}>{customer.name}</li>
-          ))}
-        </ul>
+        {renderUsers(customers)}
       </div>
       <div className="user-category">
         <h2>Vendors: </h2>
-        <ul>
-          {vendors.map((vendor) => (
-            <li key={vendor.id}>{vendor.name}</li>
-          ))}
-        </ul>
+        {renderUsers(vendors)}
       </div>
     </div>
   );
