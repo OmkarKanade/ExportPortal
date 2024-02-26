@@ -60,27 +60,33 @@ const ProductForm = () => {
 };
 
 const BasicInfoTab = ({ onSubmit }) => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    onSubmit(event); // Call the parent handleSubmit
+  };
+
   return (
-    <form onSubmit={onSubmit} className='productf'>
-      <div className="form-group">
+    <form onSubmit={handleSubmit} className='productf'>
+      {/* <div className="form-group">
         <label htmlFor="productId">Product ID (unique)</label>
         <input type="text" id="productId" name="productId" />
-      </div>
+      </div> */}
     <div className="form-group">
-      <label htmlFor="productName">Product Name (unique)</label>
-      <input type="text" id="productName" name="productName" />
+      <label htmlFor="name">Product Name (unique)</label>
+      <input type="text" id="name" name="name" />
     </div>
     <div className="form-group">
       <label htmlFor="scientificName">Product Scientific Name</label>
       <input type="text" id="scientificName" name="scientificName" />
     </div>
     <div className="form-group">
-      <label htmlFor="category">Select Category</label>
-      {/* Implement category dropdown */}
-      <select id="category" name="category">
+      <label htmlFor="vendorCategoryId">Select Category</label>
+      {/* Implement category dropdown
+      <select id="vendorCategoryId" name="vendorCategoryId">
         <option value="">Select Category</option>
         {/* Populate categories dynamically */}
-      </select>
+      {/* </select> */ }
+      <input type='text' id='vendorCategoryId' name='vendorCategoryId'></input>
     </div>
     <div className="form-group">
       <label htmlFor="productVendor">Product Vendor</label>
@@ -91,14 +97,20 @@ const BasicInfoTab = ({ onSubmit }) => {
       <label htmlFor="hsnCode">HSN Code (unique)</label>
       <input type="text" id="hsnCode" name="hsnCode" />
     </div>
-    <button className="savepinfo" type="submit">Save</button>
+      <button className="savepinfo" type="submit">Save</button>
     </form>
   );
 };
 
 const CostsTab = ({ onSubmit }) => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    onSubmit(event); // Call the parent handleSubmit
+  };
+
+
   return (
-    <form onSubmit={onSubmit} className='productf'>
+    <form onSubmit={handleSubmit} className='productf'>
       <div className="form-group">
         <label htmlFor="toPuneFreight">To Pune Freight (Amount)</label>
         <input type="text" id="toPuneFreight" name="toPuneFreight" />
@@ -129,7 +141,7 @@ const CostsTab = ({ onSubmit }) => {
       </div>
       <div className="form-group">
         <label htmlFor="totalRate">Total Rate</label>
-        <input type="text" id="totalRate" name="totalRate" readOnly />
+        <input type="text" id="totalRate" name="totalRate"  />
         {/* This field will be calculated based on the sum of other fields */}
       </div>
       <button className="savepinfo" type="submit">Save</button>
@@ -138,8 +150,24 @@ const CostsTab = ({ onSubmit }) => {
 };
 
 const PackagingTab = ({ onSubmit }) => {
+   const handleSubmit = async (event) => {
+    // event.preventDefault();
+    
+    const formData = new FormData(event.target);
+    const requestData = {};
+    formData.forEach((value, key) => {
+      requestData[key] = value;
+    });
+
+    // Modify the requestData to include the selected packageType
+    const packageType = formData.get('packageType'); // Get the selected packageType
+    requestData.packageType = packageType;
+
+    onSubmit(requestData); // Call the parent handleSubmit with updated requestData
+  };
+
   return (
-    <form onSubmit={onSubmit} className='productf'>
+    <form onSubmit={handleSubmit} className='productf'>
       <div className="form-group">
         <label htmlFor="grossWeight">Gross Weight (per pack in grams)</label>
         <input type="text" id="grossWeight" name="grossWeight" />
@@ -152,8 +180,8 @@ const PackagingTab = ({ onSubmit }) => {
         </select>
       </div>
       <div className="form-group">
-        <label htmlFor="bumperPerPouch">1 Bumper is ____ Pouches (number)</label>
-        <input type="number" id="bumperPerPouch" name="bumperPerPouch" />
+        <label htmlFor="bumperisPouches">1 Bumper is ____ Pouches (number)</label>
+        <input type="number" id="bumperisPouches" name="bumperisPouches" />
       </div>
       <div className="form-group">
         <label>Select Bag/Box</label><br />
@@ -163,8 +191,8 @@ const PackagingTab = ({ onSubmit }) => {
         <label htmlFor="box">Box</label>
       </div>
       <div className="form-group">
-        <label htmlFor="bagBoxBumpers">1 Bag/Box = _____ Bumpers (number)</label>
-        <input type="number" id="bagBoxBumpers" name="bagBoxBumpers" />
+        <label htmlFor="bagOrBoxBumpers">1 Bag/Box = _____ Bumpers (number)</label>
+        <input type="number" id="bagOrBoxBumpers" name="bagOrBoxBumpers" />
       </div>
       <button className="savepinfo" type="submit">Save</button>
     </form>
@@ -172,15 +200,34 @@ const PackagingTab = ({ onSubmit }) => {
 };
 
 const AdditionalInfoTab = ({ onSubmit }) => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    
+    const formData = new FormData(event.target);
+    const requestData = {};
+    formData.forEach((value, key) => {
+      requestData[key] = value;
+    });
+
+    // Handling radio buttons
+    const dairyDeclaration = formData.get('dairyDeclaration');
+    const humanConsumption = formData.get('humanConsumption');
+
+    requestData.dairyDeclaration = dairyDeclaration;
+    requestData.humanConsumption = humanConsumption;
+
+    onSubmit(requestData); // Call the parent handleSubmit with updated requestData
+  };
+
   return (
-    <form onSubmit={onSubmit} className='productf'>
+    <form onSubmit={handleSubmit} className='productf'>
       <div className="form-group">
         <label htmlFor="ingredients">Ingredients</label>
-        <input type="text" id="ingredients" name="ingredients"></input>
+        <input type="text" id="ingredients" name="ingredients" />
       </div>
       <div className="form-group">
-        <label htmlFor="manufacturingProcess">Manufacturing Process</label>
-        <input type="text" id="manufacturingProcess" name="manufacturingProcess"></input>
+      <label htmlFor="manufacturingProcess">Manufacturing Process</label>
+        <input type="text" id="manufacturingProcess" name="manufacturingProcess" />
       </div>
       <div className="form-group">
         <label>Dairy Declaration required?</label><br />
@@ -195,6 +242,10 @@ const AdditionalInfoTab = ({ onSubmit }) => {
         <label htmlFor="humanConsumptionYes">Yes</label>
         <input type="radio" id="humanConsumptionNo" name="humanConsumption" value="no" />
         <label htmlFor="humanConsumptionNo">No</label>
+      </div>
+      <div className='from-group'>
+        <label htmlFor='certification'>Certifications</label>
+        <input type='text' id='certificationId' name="certificationId" />
       </div>
       <button className="savepinfo" type="submit">Save</button>
     </form>

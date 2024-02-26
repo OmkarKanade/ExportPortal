@@ -3,8 +3,8 @@ import Layout from '../Layout/Layout';
 
 const AddNewCategory = () => {
   const [categoryData, setCategoryData] = useState({
-    categoryName: '',
-    categoryDescription: ''
+    name: '',
+    description: ''
   });
 
   const handleCategoryChange = (e) => {
@@ -48,8 +48,8 @@ const AddNewCategory = () => {
               <label>Category Name:</label>
               <input
                 type="text"
-                name="categoryName"
-                value={categoryData.categoryName}
+                name="name"
+                value={categoryData.name}
                 onChange={handleCategoryChange}
                 className="input-field"
               />
@@ -58,8 +58,8 @@ const AddNewCategory = () => {
               <label>Category Description:</label><br></br>
               <input
                 type="text"
-                name="categoryDescription"
-                value={categoryData.categoryDescription}
+                name="description"
+                value={categoryData.description}
                 onChange={handleCategoryChange}
                 className="input-field"
               />
