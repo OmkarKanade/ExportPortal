@@ -5,26 +5,16 @@ import './CustomerProfileView.css';
 
 const CustomerProfileView = () => {
   const [customerDetails, setCustomerDetails] = useState({
-    // username: '',
-    // name: '',
-    // organization: '',
-    // contactNumber: '',
-    // email: '',
-    // state: '',
-    // city: '',
-    // address: '',
-    // zipCode: '',
-    // password: '',
-    username: 'john_doe',
-    name: 'John Doe',
-    organization: 'ABC Inc.',
-    contactNumber: '123-456-7890',
-    email: 'johndoe@example.com',
-    state: 'California',
-    city: 'Los Angeles',
-    address: '123 Main Street',
-    zipCode: '90001',
-    password: '******'
+    username: '',
+    name: '',
+    organization: '',
+    contactNumber: '',
+    email: '',
+    state: '',
+    city: '',
+    address: '',
+    zipCode: '',
+    password: '',
   });
 
   useEffect(() => {

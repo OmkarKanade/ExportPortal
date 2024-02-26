@@ -30,33 +30,21 @@ const CreateVendorForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    const data = {
-      "name": "string",
-      "organizationName": "string",
-      "phoneNumber": "string",
-      "email": "string",
-      "state": "string",
-      "city": "string",
-      "address": "string",
-      "zipcode": 0,
-      "vendorCategoryId": "08dc36b1-56ad-4ed4-89f9-572123103c97"
-    }
-    
     e.preventDefault();
     setSuccessMessage('');
     setErrorMessage('');
 
-    console.log("Form Data:", data);
+    console.log("Form Data:", formData);
 
 
-    axios.post('https://localhost:7051/api/Vendor/Register', data)
+    axios.post('https://localhost:7051/api/Vendor/Register', formData)
       .then(response => {
         setSuccessMessage('Vendor created successfully');
         console.log('Response from server:', response.data);
       })
       .catch(error => {
         setErrorMessage('Failed to create Vendor');
-        console.error('Error creating Vendor:', error);
+        console.error('Error creating Vendor:', error.response);
       });
   };
 
