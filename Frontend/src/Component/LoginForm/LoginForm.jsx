@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './LoginForm.css';
 import { FaUser, FaLock } from "react-icons/fa";
-
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
+  const navigate = useNavigate(); // Hook for navigation
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -21,6 +23,26 @@ const LoginForm = () => {
       });
 
       if (response.ok) {
+        const data = await response.json();
+        const token = data.token;
+        const decodedToken = jwtDecode(token);
+
+        // Redirect based on role
+        switch (decodedToken.role) {
+          case 'admin':
+            navigate('/layout');
+            break;
+          case 'customer':
+            navigate('/customerDashboard');
+            break;
+          case 'vendor':
+            navigate('/vendorDashboard');
+            break;
+          default:
+            navigate('/');
+            break;
+        }
+
         console.log('Login successful!');
       } else {
         // Handle unsuccessful login
@@ -33,59 +55,41 @@ const LoginForm = () => {
     }
   };
 
+  return (
+    <div className="outer">
+      <div className='wrapper'>
+        <form onSubmit={handleLogin}>
+          <h1>Login</h1>
+          <div className='input-box'>
+            <input
+              type="text"
+              placeholder='Username'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+            <FaUser className='icon'/>
+          </div>
+          <div className='input-box'>
+            <input
+              type="password"
+              placeholder='Password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <FaLock className='icon'/>
+          </div>
+          
+          <div className="forgot">
+            <a href="#">Forgot password?</a>
+          </div>
 
-//     // Here you can check the credentials
-//     if (username === 'admin' && password === 'admin') {
-//       // Redirect to Admin page
-//       history.push('/layout');
-//     } else if (username === 'customer' && password === 'customer') {
-//       // Redirect to Customer Dashboard
-//       history.push('/customerDashboard');
-//     } else if (username === 'vendor' && password === 'vendor') {
-//       // Redirect to Vendor Dashboard
-//       history.push('/vendorDashboard');
-//     } else {
-//       alert('Invalid credentials. Please try again.');
-//     }
-//   };
-
-
-
-return (
-  <div className="outer">
-    <div className='wrapper'>
-      <form onSubmit={handleLogin}>
-        <h1>Login</h1>
-        <div className='input-box'>
-          <input
-            type="text"
-            placeholder='Username'
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-          <FaUser className='icon'/>
-        </div>
-        <div className='input-box'>
-          <input
-            type="password"
-            placeholder='Password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          <FaLock className='icon'/>
-        </div>
-        
-        <div className="forgot">
-          <a href="#">Forgot password?</a>
-        </div>
-
-        <button type="submit">Login</button>
-      </form>
+          <button type="submit">Login</button>
+        </form>
+      </div>
     </div>
-  </div>
-);
+  );
 };
 
 export default LoginForm;
