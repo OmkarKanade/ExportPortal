@@ -33,6 +33,7 @@ const LoginForm = () => {
     }
   };
 
+
 //     // Here you can check the credentials
 //     if (username === 'admin' && password === 'admin') {
 //       // Redirect to Admin page
@@ -47,6 +48,8 @@ const LoginForm = () => {
 //       alert('Invalid credentials. Please try again.');
 //     }
 //   };
+
+
 
 return (
   <div className="outer">
