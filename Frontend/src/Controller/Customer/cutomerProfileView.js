@@ -19,8 +19,6 @@ const CustomerProfileView = () => {
 
   useEffect(() => {
     fetchCustomerDetails();
-    
-    
   }
   , []);
   const sid = sessionStorage.getItem('sid');
