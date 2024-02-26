@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // Import Axios
 import './vendorform.css'; // Import CSS file
 import Layout from '../Layout/Layout';
 
 const CreateVendorForm = () => {
   const [formData, setFormData] = useState({
     name: '',
-    organization: '',
-    contactNumber: '',
+    organizationName: '',
+    phoneNumber: '',
     email: '',
     state: '',
     city: '',
-    addressLine1: '',
-    addressLine2: '',
-    addressLine3: '',
-    zipCode: '',
-    vendorCategory: '',
-    password: '123456', // Default password
+    address: '',
+    // addressLine2: '',
+    // addressLine3: '',
+    zipcode: '',
+    vendorCategoryId: '',
   });
+
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,25 +31,21 @@ const CreateVendorForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSuccessMessage('');
+    setErrorMessage('');
 
-    try {
-      const response = await fetch('https://localhost:7051/api/Vendor/Register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+    console.log("Form Data:", formData);
+
+
+    axios.post('https://localhost:7051/api/Vendor/Register', formData)
+      .then(response => {
+        setSuccessMessage('Vendor created successfully');
+        console.log('Response from server:', response.data);
+      })
+      .catch(error => {
+        setErrorMessage('Failed to create Vendor');
+        console.error('Error creating Vendor:', error);
       });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
-      console.log('Vendor created:', data);
-    } catch (error) {
-      console.error('Error creating vendor:', error);
-    }
   };
 
   return (
@@ -69,8 +68,8 @@ const CreateVendorForm = () => {
                 <label>Organization:</label>
                 <input
                   type="text"
-                  name="organization"
-                  value={formData.organization}
+                  name="organizationName"
+                  value={formData.organizationName}
                   onChange={handleChange}
                 />
               </div>
@@ -78,8 +77,8 @@ const CreateVendorForm = () => {
                 <label>Contact Number:</label>
                 <input
                   type="text"
-                  name="contactNumber"
-                  value={formData.contactNumber}
+                  name="phoneNumber"
+                  value={formData.phoneNumber}
                   onChange={handleChange}
                 />
               </div>
@@ -111,15 +110,15 @@ const CreateVendorForm = () => {
                 />
               </div>
               <div className="form-group">
-                <label>Address Line 1:</label>
+                <label>Address: </label>
                 <input
                   type="text"
-                  name="addressLine1"
-                  value={formData.addressLine1}
+                  name="address"
+                  value={formData.address}
                   onChange={handleChange}
                 />
               </div>
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label>Address Line 2:</label>
                 <input
                   type="text"
@@ -136,26 +135,26 @@ const CreateVendorForm = () => {
                   value={formData.addressLine3}
                   onChange={handleChange}
                 />
-              </div>
+              </div> */}
               <div className="form-group">
                 <label>Zip Code:</label>
                 <input
                   type="text"
-                  name="zipCode"
-                  value={formData.zipCode}
+                  name="zipcode"
+                  value={formData.zipcode}
                   onChange={handleChange}
                 />
               </div>
               <div className="form-group">
-                <label>Vendor Category:</label>
+                <label>Vendor Category Id:</label>
                 <input
                   type="text"
-                  name="vendorCategory"
-                  value={formData.vendorCategory}
+                  name="vendorCategoryId"
+                  value={formData.vendorCategoryId}
                   onChange={handleChange}
                 />
               </div>
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label>Password:</label>
                 <input
                   type="password"
@@ -163,7 +162,7 @@ const CreateVendorForm = () => {
                   value={formData.password}
                   onChange={handleChange}
                 />
-              </div>
+              </div> */}
               <button type="submit">Submit</button>
             </form>
           </div>

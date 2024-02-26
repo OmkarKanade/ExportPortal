@@ -1,7 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "./customerheader.css";
 
 const Header = ({ toggleSidebar }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Perform logout actions here...
+    // For example, clearing localStorage, removing tokens, etc.
+
+    // Redirect to the home page ("/")
+    navigate('/');
+  };
+
   return (
     <div className="Header">
       <div className='left'>
@@ -13,13 +23,14 @@ const Header = ({ toggleSidebar }) => {
       <div className='right'>
         <div className="HeaderButtons">
           <button className="HeaderButton">My Cart</button>
-          <button className="HeaderButton"><Link to="/" className="href">
-          Logout
-        </Link></button>
+          <button className="HeaderButton" onClick={handleLogout}>
+            Logout
+          </button>
         </div>
       </div>
     </div>
   );
 };
-
+  
 export default Header;
+

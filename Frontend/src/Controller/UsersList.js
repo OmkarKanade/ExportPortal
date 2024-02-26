@@ -29,7 +29,7 @@ function UserList() {
   return (
     <div className="user-list">
       <div className="user-category">
-        <h2>Admins</h2>
+        <h2>Admins: </h2>
         <ul>
           {admins.map((admin) => (
             <li key={admin.id}>{admin.name}</li>
@@ -37,7 +37,7 @@ function UserList() {
         </ul>
       </div>
       <div className="user-category">
-        <h2>Customers</h2>
+        <h2>Customers: </h2>
         <ul>
           {customers.map((customer) => (
             <li key={customer.id}>{customer.name}</li>
@@ -45,7 +45,7 @@ function UserList() {
         </ul>
       </div>
       <div className="user-category">
-        <h2>Vendors</h2>
+        <h2>Vendors: </h2>
         <ul>
           {vendors.map((vendor) => (
             <li key={vendor.id}>{vendor.name}</li>

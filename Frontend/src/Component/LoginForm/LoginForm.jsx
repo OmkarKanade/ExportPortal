@@ -3,39 +3,51 @@ import './LoginForm.css';
 import { FaUser, FaLock } from "react-icons/fa";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const LoginForm = () => {
   const navigate = useNavigate(); // Hook for navigation
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await fetch('https://localhost:7051/api/Login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username, password })
-      });
+      const body = ({
+        username: username,
+        password: password
+          });
+            const response = await axios.post(
+              "https://localhost:7051/api/Login",
+              body
+            );
+    
+      console.log(response);
+      if (response.data) {
+        const authToken = response.data.jwtToken;
+              const decodeToken = jwtDecode(authToken);
+              const roles =
+                decodeToken[
+                  "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+                ];
+              sessionStorage.setItem("authToken", authToken);
+              sessionStorage.setItem("roles", roles);
 
-      if (response.ok) {
-        const data = await response.json();
-        const token = data.token;
-        const decodedToken = jwtDecode(token);
-
+              console.log(roles);
+              // console.log(authToken);
+              // navigate("/layout");
         // Redirect based on role
-        switch (decodedToken.role) {
-          case 'admin':
+        switch (roles) {
+          case 'Admin':
             navigate('/layout');
             break;
-          case 'customer':
+          case 'Customer':
             navigate('/customerDashboard');
             break;
-          case 'vendor':
+          case 'Vendor':
             navigate('/vendorDashboard');
             break;
           default:

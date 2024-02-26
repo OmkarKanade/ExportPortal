@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import './customerform.css';
 import Layout from '../Layout/Layout';
-import axios from 'axios'; // Import axios library
+import axios from 'axios'; 
 
 
 const CreateCustomerForm = () => {
   const [formData, setFormData] = useState({
-    username: '',
+    // username: '',
     name: '',
-    organization: '',
-    contactNumber: '',
+    organizationName: '',
+    phoneNumber: '',
     email: '',
     state: '',
     city: '',
     address: '',
-    zipCode: '',
-    password: 'passwor@1234', // Default password
+    zipcode: '',
+    // password: 'Pass@123', // Default password
   });
 
   const [successMessage, setSuccessMessage] = useState('');
@@ -33,17 +33,21 @@ const CreateCustomerForm = () => {
     e.preventDefault();
     setSuccessMessage('');
     setErrorMessage('');
+    
+    console.log("Form Data:", formData); // Log form data 
+  
+    
     // Send form data to the API
-    axios.post('http://localhost:5250/api/Customer', formData)
+    axios.post('https://localhost:7051/api/Customer/Register', formData)
       .then(response => {
         setSuccessMessage('Customer created successfully');
-        console.log(response.data); // Log the response from the API
-        // Optionally, you can perform actions based on the API response
+        console.log('Response from server:', response.data);
+        
       })
       .catch(error => {
         setErrorMessage('Failed to create customer');
         console.error('Error creating customer:', error); // Log any errors
-        // Optionally, you can handle errors or display error messages to the user
+
       });
   };
 
@@ -53,7 +57,7 @@ const CreateCustomerForm = () => {
         <div className="outer-box">
           <h1>Create Customer Account</h1>
           <form onSubmit={handleSubmit} className="form">
-            <div className="form-group">
+            {/* <div className="form-group">
               <label>Username:</label>
               <input
                 type="text"
@@ -63,7 +67,7 @@ const CreateCustomerForm = () => {
                 className="input-field"
               />
 
-            </div>
+            </div> */}
             <div className="form-group">
               <label>Name:</label>
               <input
@@ -78,8 +82,8 @@ const CreateCustomerForm = () => {
               <label>Organization:</label>
               <input
                 type="text"
-                name="organization"
-                value={formData.organization}
+                name="organizationName"
+                value={formData.organizationName}
                 onChange={handleChange}
                 className="input-field"
               />
@@ -88,8 +92,8 @@ const CreateCustomerForm = () => {
               <label>Contact Number:</label>
               <input
                 type="text"
-                name="contactNumber"
-                value={formData.contactNumber}
+                name="phoneNumber"
+                value={formData.phoneNumber}
                 onChange={handleChange}
                 className="input-field"
               />
@@ -138,13 +142,13 @@ const CreateCustomerForm = () => {
               <label>Zip Code:</label>
               <input
                 type="text"
-                name="zipCode"
-                value={formData.zipCode}
+                name="zipcode"
+                value={formData.zipcode}
                 onChange={handleChange}
                 className="input-field"
               />
             </div>
-            <div className="form-group">
+            {/* <div className="form-group">
               <label>Password:</label>
               <input
                 type="password"
@@ -153,7 +157,7 @@ const CreateCustomerForm = () => {
                 onChange={handleChange}
                 className="input-field"
               />
-            </div>
+            </div> */}
             <button type="submit" className="submit-btn sbtbtn">Submit</button>
           </form>
         </div>
