@@ -33,11 +33,14 @@ const LoginForm = () => {
                 decodeToken[
                   "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
                 ];
+            const sid = decodeToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid"];
+            sessionStorage.setItem('sid', sid);
               sessionStorage.setItem("authToken", authToken);
               sessionStorage.setItem("roles", roles);
 
               console.log(roles);
-              // console.log(authToken);
+              console.log(sid);
+              console.log(authToken);
               // navigate("/layout");
         // Redirect based on role
         switch (roles) {
