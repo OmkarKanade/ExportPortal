@@ -25,7 +25,8 @@ const CustomerProfileView = () => {
     city: '',
     address: '',
     zipcode: '',
-    password: '',
+    newPassword: '',
+    currentPassword:'',
   });
 
   useEffect(() => {
@@ -52,13 +53,15 @@ const CustomerProfileView = () => {
       city: customerDetails.city,
       address: customerDetails.address,
       zipcode: customerDetails.zipcode,
-      password: customerDetails.password,
+      newPassword: customerDetails.newPassword,
+      currentPassword: customerDetails.currentPassword,
     });
     setEditModalOpen(true);
   };
 
   const handleEditModalClose = () => {
     setEditModalOpen(false);
+
   };
 
   const handleInputChange = (e) => {
@@ -70,6 +73,7 @@ const CustomerProfileView = () => {
   };
 
   const handleSaveChanges = async () => {
+    console.log(editedCustomerDetails);
     try {
       const confirmUpdate = window.confirm(`Do you really want to update details for ${sid}?`);
       if (confirmUpdate) {
@@ -156,7 +160,7 @@ const CustomerProfileView = () => {
                   disabled
                 />
               </div>
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label>Email:</label>
                 <input
                   type="text"
@@ -164,14 +168,23 @@ const CustomerProfileView = () => {
                   value={customerDetails.email}
                   disabled
                 />
-              </div>
+              </div> */}
               <div className="form-group">
-                <label>Password:</label>
+                <label>New Password:</label>
                 <input
                   type="password"
-                  name="password"
-                  value={customerDetails.password}
-                  disabled
+                  name="newPassword"
+                  value={customerDetails.newPassword}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>Current Password:</label>
+                <input
+                  type="password"
+                  name="currentPassword"
+                  value={customerDetails.currentPassword}
+                  onChange={handleInputChange}
                 />
               </div>
               <div className="form-group">
