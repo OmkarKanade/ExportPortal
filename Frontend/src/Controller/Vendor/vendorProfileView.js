@@ -155,7 +155,7 @@ const VendorProfileView = () => {
             </span>
             <h2>Edit Profile</h2>
             <form>
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label>Name:</label>
                 <input
                   type="text"
@@ -163,7 +163,7 @@ const VendorProfileView = () => {
                   value={editedVendorDetails.name}
                   onChange={handleInputChange}
                 />
-              </div>
+              </div> */}
               <div className="form-group">
                 <label>Organization:</label>
                 <input
