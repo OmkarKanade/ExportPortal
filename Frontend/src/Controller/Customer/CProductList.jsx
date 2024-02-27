@@ -25,16 +25,16 @@ const ProductCard = ({ name, scientificName, totalRate, grossWeight, ingredients
 const ProductPagee = () => {
   const [products, setProducts] = useState([]);
   const images = [
-    '/images/image1.png',
-    '/images/image2.jpeg',
-    '/images/image3.jpeg',
-    '/images/image4.jpg',
-    '/images/image5.jpg',
-    '/images/image6.jpg',
-    '/images/image7.jpg',
-    '/images/image8.jpg',
-    '/images/image9.jpg',
-    '/images/image10.jpg',
+    '/images/1.png',
+    '/images/2.jpeg',
+    '/images/3.jpeg',
+    '/images/4.jpg',
+    '/images/5.jpg',
+    '/images/6.jpg',
+    '/images/7.jpg',
+    '/images/8.jpg',
+    '/images/9.jpg',
+    '/images/10.jpg',
   ];
 
   useEffect(() => {
