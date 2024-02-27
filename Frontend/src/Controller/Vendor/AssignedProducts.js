@@ -4,7 +4,7 @@ import Header from './Vheader';
 import Sidebar from './VendorSidebar';
 import axios from 'axios';
 
-const ProductCard = ({ name, scientificName, vendorCategory, totalRate, grossWeight, ingredients, certificationId }) => {
+const ProductCard = ({ name, scientificName, totalRate, grossWeight, ingredients, certificationId }) => {
   return (
     <div className="carddd">
     {/* <div className="carddd-img">
@@ -70,7 +70,9 @@ useEffect(() => {
   const sid = sessionStorage.getItem('sid');
 
   const fetchData = async () => {
+    console.log(products);
     try {
+      
       const response = await axios.get(`https://localhost:7051/api/Product/Vendor/${sid}`);
       setProducts(response.data);
     } catch (error) {
