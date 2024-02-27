@@ -11,25 +11,20 @@
   }
   
   .gradient-text {
-    background: linear-gradient(45deg, #ff6b6b, #8e44ad);
+    background: linear-gradient(45deg, #f87c7c, #8d4fa7);
     -webkit-background-clip: text;
     color: transparent;
     display: inline-block;
     font-size: xx-large;
     font-weight: 900;
   }
-  .gradient-text1 {
-    background: linear-gradient(45deg, #4fde39, #e1dc7e);
+  .h2 {
+    background: linear-gradient(45deg, #62c753, #e5e198);
     -webkit-background-clip: text;
     color: transparent;
     display: inline-block;
     font-size: x-large;
     font-weight: 900;
-  }
-  
-  .about-us-container h2 {
-    color: white;
-    margin-top: 20px;
   }
   
   .about-us-container p {
@@ -46,6 +41,39 @@
   .about-us-container ul li {
     color: white;
   }
+
+
+
+  .footer {
+    margin-top: 50px;
+    padding: 10px 0;
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .footer p {
+    margin: 0;
+  }
+  
+  .social-icons {
+  margin-top: 10px;
+}
+
+.social-icons a {
+  margin-right: 10px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2); /* Scale the icon on hover */
+  color: #00aced; /* Change color on hover */
+}
+
+  
   
   /* Add more styles as needed based on your design preferences */
   
