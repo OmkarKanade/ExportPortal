@@ -19,7 +19,7 @@ const VendorProfileView = () => {
 
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [editedVendorDetails, setEditedVendorDetails] = useState({
-    // name: '',
+    name: '',
     organizationName: '',
     phoneNumber: '',
     state: '',
@@ -28,34 +28,27 @@ const VendorProfileView = () => {
     zipcode: '',
     password: ''
   });
+
+
   useEffect(() => {
-       fetchVendorDetails();
+    fetchVendorDetails();
   }, []);
+
   const sid = sessionStorage.getItem('sid');
+
   const fetchVendorDetails = async () => {
     try {
       const response = await axios.get(`https://localhost:7051/api/Vendor/${sid}`);
-      console.log('Response from server:', response.data);
       const profileData = response.data;
-      setVendorDetails(profileData); // Update state with fetched customer details
-      console.log(profileData);
+      setVendorDetails(profileData);
     } catch (error) {
-      console.error('Error fetching customer details:', error);
+      console.error('Error fetching vendor details:', error);
     }
   };
 
-
-
   const handleEditModalOpen = () => {
     setEditedVendorDetails({
-      name: vendorDetails.name,
-      organizationName: vendorDetails.organizationName,
-      phoneNumber: vendorDetails.phoneNumber,
-      state: vendorDetails.state,
-      city: vendorDetails.city,
-      address: vendorDetails.address,
-      zipcode: vendorDetails.zipcode,
-      password: vendorDetails.password
+      ...vendorDetails // Initialize edited details with current vendor details
     });
     setEditModalOpen(true);
   };
@@ -74,13 +67,20 @@ const VendorProfileView = () => {
 
   const handleSaveChanges = async () => {
     try {
-      // Make API call to update vendor details with editedVendorDetails
-      console.log('Saving changes:', editedVendorDetails);
-
-      // Close the modal after saving changes
-      setEditModalOpen(false);
+      const confirmUpdate = window.confirm(`Do you really want to update details for ${sid}?`);
+      if (confirmUpdate) {
+        const response = await axios.put(`https://localhost:7051/api/Vendor/${sid}`, editedVendorDetails);
+        if (response.status === 200) {
+          setEditModalOpen(false);
+          fetchVendorDetails();
+          alert('Profile updated successfully!');
+        } else {
+          alert('Failed to update profile. Please try again.');
+        }
+      }
     } catch (error) {
       console.error('Error saving changes:', error);
+      alert('Error saving changes. Please try again.');
     }
   };
 
@@ -150,8 +150,7 @@ const VendorProfileView = () => {
       {editModalOpen && (
         <div className="edit-modal">
           <div className="edit-modal-content">
-            <span className="close" onClick={handleEditModalClose}>
-              &times;
+            <span className="close" onClick={handleEditModalClose}>&times;
             </span>
             <h2>Edit Profile</h2>
             <form>
