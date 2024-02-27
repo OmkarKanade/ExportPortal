@@ -39,8 +39,8 @@
   transition: transform 0.3s ease; /* Add smooth transition */
   backdrop-filter: blur(10px);
   box-shadow: 0 0 10px rgba(255,255,255, .2);
-    border: 2px solid rgba(255,255,255, .2); 
-    width: 250px;
+  border: 2px solid rgba(255,255,255, .2); 
+  width: 250px;
   
 }
 
