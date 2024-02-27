@@ -16,7 +16,17 @@ const CustomerProfileView = () => {
     zipcode: '',
     password: 'Pass@123',
   });
-
+const [editModalOpen, setEditModalOpen] = useState(false);
+  const [editedCustomerDetails, setEditedCustomerDetails] = useState({
+ 
+    organizationName: '',
+    phoneNumber: '',
+    state: '',
+    city: '',
+    address: '',
+    zipcode: '',
+    password: '',
+  });
   useEffect(() => {
     fetchCustomerDetails();
   }
@@ -33,6 +43,47 @@ const CustomerProfileView = () => {
       console.error('Error fetching customer details:', error);
     }
   };
+
+
+
+
+  const handleEditModalOpen = () => {
+    setEditedCustomerDetails({
+      // name: customerDetails.name,
+      organizationName: customerDetails.organizationName,
+      phoneNumber: customerDetails.phoneNumber,
+      state: customerDetails.state,
+      city: customerDetails.city,
+      address: customerDetails.address,
+      zipcode: customerDetails.zipcode,
+    });
+    setEditModalOpen(true);
+  };
+
+  const handleEditModalClose = () => {
+    setEditModalOpen(false);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditedCustomerDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: value,
+    }));
+  };
+
+  const handleSaveChanges = async () => {
+    try {
+      // Make API call to update customer 
+      console.log('Saving changes:', editedCustomerDetails);
+
+      // Close the modal after saving changes
+      setEditModalOpen(false);
+    } catch (error) {
+      console.error('Error saving changes:', error);
+    }
+  };
+
   return (
     <CustomerDashboard>
      
@@ -83,14 +134,98 @@ const CustomerProfileView = () => {
                     <tr>
                       <th className="text-light transparent">Password:</th>
                       <td>{customerDetails.password}</td>
-                    </tr>
+                      </tr>
                   </tbody>
                 </table>
+                <button className="btn btn-primary" onClick={handleEditModalOpen}>
+                  Edit Profile
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Edit Profile Modal */}
+      {editModalOpen && (
+        <div className="edit-modal">
+          <div className="edit-modal-content">
+            <span className="close" onClick={handleEditModalClose}>
+              &times;
+            </span>
+            <h2>Edit Profile</h2>
+            <form>
+              <div className="form-group">
+                <label>Name:</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={editedCustomerDetails.name}
+                  onChange={handleInputChange}
+                  readOnly
+                />
+              </div>
+              <div className="form-group">
+                <label>Organization:</label>
+                <input
+                  type="text"
+                  name="organizationName"
+                  value={editedCustomerDetails.organizationName}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>Contact:</label>
+                <input
+                  type="text"
+                  name="phoneNumber"
+                  value={editedCustomerDetails.phoneNumber}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>State:</label>
+                <input
+                  type="text"
+                  name="state"
+                  value={editedCustomerDetails.state}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>City:</label>
+                <input
+                  type="text"
+                  name="city"
+                  value={editedCustomerDetails.city}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>Address:</label>
+                <input
+                  type="text"
+                  name="address"
+                  value={editedCustomerDetails.address}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="form-group">
+                <label>Zip Code:</label>
+                <input
+                  type="text"
+                  name="zipcode"
+                  value={editedCustomerDetails.zipcode}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <button type="button" className="btn btn-primary" onClick={handleSaveChanges}>
+                Save Changes
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </CustomerDashboard>
   );
 };
