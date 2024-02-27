@@ -11,11 +11,11 @@ const ProductCard = ({ name, scientificName, vendorCategoryId, totalRate, grossW
         <img src={image} alt={name} />
       </div> */}
       <div className="carddd-info">
-        <h5 className="carddd-title">Name:   {name}</h5>
+        <h5 className="carddd-text">Name:   {name}</h5>
         <p className="carddd-text">ScientificName:  {scientificName}</p>
-        <p className='cardd-text'>Vendor Category: {vendorCategoryId}</p>
-        <p className="carddd-price">Total Price:  {totalRate} Rs</p>
-        <p className='carddd-weight'>Gross Weight{grossWeight}</p>
+        <p className='carddd-text'>Vendor Category: {vendorCategoryId}</p>
+        <p className="carddd-text">Total Price:  {totalRate} Rs</p>
+        <p className='carddd-text'>Gross Weight:  {grossWeight}</p>
         <p className='carddd-text'>Ingredients:  {ingredients}</p>
         <p className='carddd-text'>CertificationId:  {certificationId}</p>
 
