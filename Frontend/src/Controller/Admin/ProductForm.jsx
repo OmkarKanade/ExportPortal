@@ -90,7 +90,7 @@ const ProductForm = () => {
 
   return (
     <Layout>
-      <form onSubmit={handleSubmit} className='product-form'>
+      <form onSubmit={handleSubmit} className='product-f'>
         <div className="form-group">
           <label htmlFor="name">Product Name (unique)</label>
           <input type="text" id="name" name="name" onChange={handleChange} />
