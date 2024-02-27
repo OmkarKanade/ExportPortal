@@ -38,15 +38,17 @@ const CreateVendorForm = () => {
 
 
     axios.post('https://localhost:7051/api/Vendor/Register', formData)
-      .then(response => {
-        setSuccessMessage('Vendor created successfully');
-        console.log('Response from server:', response.data);
-      })
-      .catch(error => {
-        setErrorMessage('Failed to create Vendor');
-        console.error('Error creating Vendor:', error.response);
-      });
-  };
+    .then(response => {
+      setSuccessMessage('Vendor created successfully');
+      // Show pop-up message
+      alert(`Vendor ${formData.name} is created`);
+      console.log('Response from server:', response.data);
+    })
+    .catch(error => {
+      setErrorMessage('Failed to create Vendor');
+      console.error('Error creating Vendor:', error.response);
+    });
+};
 
   return (
     <Layout>
