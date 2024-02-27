@@ -37,17 +37,16 @@ const CreateCustomerForm = () => {
     console.log("Form Data:", formData); // Log form data 
   
     
-    // Send form data to the API
     axios.post('https://localhost:7051/api/Customer/Register', formData)
       .then(response => {
         setSuccessMessage('Customer created successfully');
+        // Show pop-up message
+        alert(`Customer ${formData.name} is created`);
         console.log('Response from server:', response.data);
-        
       })
       .catch(error => {
         setErrorMessage('Failed to create customer');
-        console.error('Error creating customer:', error); // Log any errors
-
+        console.error('Error creating customer:', error);
       });
   };
 
