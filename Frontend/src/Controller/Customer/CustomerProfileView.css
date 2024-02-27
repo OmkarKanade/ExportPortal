@@ -48,16 +48,23 @@
   }
   
   .edit-modal-content {
-    background-color: #fff;
+    background-color:transparent;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     padding: 20px;
     border-radius: 5px;
     width: 400px;
     max-width: 90%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-left: 20%;
+    margin-top: 10%;
   }
   
   .edit-modal-content h2 {
     margin-top: 0;
+    color:white;
+    font-size: 20px;
+    font-weight: 700;
   }
   
   .edit-modal-content form {
@@ -71,7 +78,7 @@
   
   .edit-modal-content label {
     font-weight: bold;
-    color: #333;
+    color: white;
   }
   
   .edit-modal-content input[type='text'] {
@@ -80,6 +87,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     transition: border-color 0.15s ease-in-out;
+    color:white;
   }
   
   .edit-modal-content input[type='text']:focus {
@@ -88,9 +96,11 @@
   }
   
   .edit-modal-content .btn-primary {
-    background-color: #007bff;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     color: #fff;
-    border: none;
+    border: 0 0 10px rgba(255, 255, 255, 0.2);
     padding: 10px 15px;
     cursor: pointer;
     border-radius: 4px;
@@ -98,7 +108,7 @@
   }
   
   .edit-modal-content .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: black;
   }
   
   /* Close button */

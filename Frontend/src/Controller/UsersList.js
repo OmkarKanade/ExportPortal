@@ -46,13 +46,16 @@ function UserList() {
 
   return (
     <div className="user-list">
+      <div className='backbutton'>
       <Link to="/layout" className="back-button">
         Back to Layout
       </Link>
+      </div>
       {/* <div className="user-category">
         <h2>Admins: </h2>
         {renderUsers(admins)}
       </div> */}
+      <div className='userlistcontent'>
       <div className="user-category">
         <h2>Customers: </h2>
         {renderUsers(customers)}
@@ -60,6 +63,7 @@ function UserList() {
       <div className="user-category">
         <h2>Vendors: </h2>
         {renderUsers(vendors)}
+      </div>
       </div>
     </div>
   );
