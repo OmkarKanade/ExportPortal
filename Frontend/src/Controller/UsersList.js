@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import './UserList.css'; // Your CSS file for styling
 
 function UserList() {
-  const [admins, setAdmins] = useState([]);
+  // const [admins, setAdmins] = useState([]);
   const [customers, setCustomers] = useState([]);
   const [vendors, setVendors] = useState([]);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const adminsResponse = await axios.get('https://localhost:7051/api/Admin');
-        const adminsData = adminsResponse.data.map(user => ({ ...user, category: 'admin' }));
-        setAdmins(adminsData);
+        // const adminsResponse = await axios.get('https://localhost:7051/api/Admin');
+        // const adminsData = adminsResponse.data.map(user => ({ ...user, category: 'admin' }));
+        // setAdmins(adminsData);
 
         const customersResponse = await axios.get('https://localhost:7051/api/Customer');
         const customersData = customersResponse.data.map(user => ({ ...user, category: 'customer' }));
@@ -45,10 +46,13 @@ function UserList() {
 
   return (
     <div className="user-list">
-      <div className="user-category">
+      <Link to="/layout" className="back-button">
+        Back to Layout
+      </Link>
+      {/* <div className="user-category">
         <h2>Admins: </h2>
         {renderUsers(admins)}
-      </div>
+      </div> */}
       <div className="user-category">
         <h2>Customers: </h2>
         {renderUsers(customers)}
