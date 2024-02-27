@@ -52,15 +52,15 @@ const ProductForm = () => {
         </div>
         <div className="form-group">
           <label htmlFor="productVendor1">Product Vendor 1</label>
-          <input type="text" id="productVendor1" name="productVendor1" onChange={handleChange} />
+          <input type="text" id="productVendor1" name="vendorId1" onChange={handleChange} />
         </div>
         <div className="form-group">
           <label htmlFor="productVendor2">Product Vendor 2</label>
-          <input type="text" id="productVendor2" name="productVendor2" onChange={handleChange} />
+          <input type="text" id="productVendor2" name="vendorId2" onChange={handleChange} />
         </div>
         <div className="form-group">
           <label htmlFor="productVendor3">Product Vendor 3</label>
-          <input type="text" id="productVendor3" name="productVendor3" onChange={handleChange} />
+          <input type="text" id="productVendor3" name="vendorId3" onChange={handleChange} />
         </div>
         <div className="form-group">
           <label htmlFor="hsnCode">HSN Code (unique)</label>
@@ -105,10 +105,13 @@ const ProductForm = () => {
         </div>
         <div className="form-group">
           <label htmlFor="pouchType">Select Pouch Type</label>
-          <select id="pouchType" name="pouchType" onChange={handleChange}>
+          <input type='text' id='pouchType' name='pouchType'onChange={handleChange} ></input>
+
+          
+          {/* <select id="pouchType" name="pouchType" onChange={handleChange}>
             <option value="type1">Type 1</option>
             <option value="type2">Type 2</option>
-          </select>
+          </select> */}
         </div>
         <div className="form-group">
           <label htmlFor="bumperisPouches">1 Bumper is ____ Pouches (number)</label>
@@ -116,9 +119,9 @@ const ProductForm = () => {
         </div>
         <div className="form-group">
           <label>Select Bag/Box</label><br />
-          <input type="radio" id="bag" name="packageType" value="bag" onChange={handleChange}/>
+          <input type="radio" id="bag" name="bagOrBox" value="bag" onChange={handleChange}/>
           <label htmlFor="bag">Bag</label>
-          <input type="radio" id="box" name="packageType" value="box" onChange={handleChange}/>
+          <input type="radio" id="box" name="bagOrBox" value="box" onChange={handleChange}/>
           <label htmlFor="box">Box</label>
         </div>
         <div className="form-group">
@@ -135,17 +138,17 @@ const ProductForm = () => {
         </div>
         <div className="form-group">
           <label>Dairy Declaration required?</label><br />
-          <input type="radio" id="dairyDeclarationYes" name="dairyDeclaration" value="yes" onChange={handleChange}/>
-          <label htmlFor="dairyDeclarationYes">Yes</label>
-          <input type="radio" id="dairyDeclarationNo" name="dairyDeclaration" value="no" onChange={handleChange}/>
-          <label htmlFor="dairyDeclarationNo">No</label>
+          <input type="radio" id="dairyDeclarationYes" name="dairyDeclarationRequired" value="true" onChange={handleChange}/>
+          <label htmlFor="dairyDeclarationYes">True</label>
+          <input type="radio" id="dairyDeclarationNo" name="dairyDeclarationRequired" value="false" onChange={handleChange}/>
+          <label htmlFor="dairyDeclarationNo">False</label>
         </div>
         <div className="form-group">
           <label>Is this product for Human Consumption?</label><br />
-          <input type="radio" id="humanConsumptionYes" name="humanConsumption" value="yes" onChange={handleChange}/>
-          <label htmlFor="humanConsumptionYes">Yes</label>
-          <input type="radio" id="humanConsumptionNo" name="humanConsumption" value="no" onChange={handleChange}/>
-          <label htmlFor="humanConsumptionNo">No</label>
+          <input type="radio" id="humanConsumptionYes" name="isForHumanConsumption" value="true" onChange={handleChange}/>
+          <label htmlFor="humanConsumptionYes">True</label>
+          <input type="radio" id="humanConsumptionNo" name="isForHumanConsumption" value="false" onChange={handleChange}/>
+          <label htmlFor="humanConsumptionNo">False</label>
         </div>
         <div className='from-group'>
           <label htmlFor='certification'>Certifications</label>
