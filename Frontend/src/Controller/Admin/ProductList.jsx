@@ -3,16 +3,21 @@ import './productlist.css'; // Import the CSS file for styling
 import Layout from '../Layout/Layout';
 import axios from 'axios';
 
-const ProductCard = ({ image, name, price, description }) => {
+const ProductCard = ({ name, scientificName, vendorCategory, totalRate, grossWeight, ingredients, certificationId }) => {
   return (
     <div className="carddd">
-      <div className="carddd-img">
+      {/* <div className="carddd-img">
         <img src={image} alt={name} />
-      </div>
+      </div> */}
       <div className="carddd-info">
-        <h5 className="carddd-title">{name}</h5>
-        <p className="carddd-text">{description}</p>
-        <p className="carddd-price">{price} Rs</p>
+        <h5 className="carddd-text">Name:   {name}</h5>
+        <p className="carddd-text">ScientificName:  {scientificName}</p>
+        {/* <p className='carddd-text'>Vendor Category: {vendorCategory}</p> */}
+        <p className="carddd-text">Total Price:  {totalRate} Rs</p>
+        <p className='carddd-text'>Gross Weight:  {grossWeight} g</p>
+        <p className='carddd-text'>Ingredients:  {ingredients}</p>
+        <p className='carddd-text'>CertificationId:  {certificationId}</p>
+
       </div>
     </div>
   );
@@ -63,11 +68,13 @@ const ProductPage = () => {
       <div className="product-cards">
         {products.map(product => (
           <ProductCard
-            key={product.id}
-            name={product.name}
-            price={product.price}
-            image={product.image}
-            description={product.description}
+          name={product.name}
+          scientificName={product.scientificName}
+          // vendorCategoryId={product.vendorCategory}
+          totalRate={product.totalRate}
+          grossWeight={product.grossWeight}
+          ingredients={product.ingredients}
+          certificationId={product.certificationId}
           />
         ))}
       </div>
