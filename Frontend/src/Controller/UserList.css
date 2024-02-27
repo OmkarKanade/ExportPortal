@@ -2,7 +2,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
+  padding: 24%;
+  margin-top: -250px;
+}
+
+.userlistcontent {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10%;
 }
 
 .user-category {
@@ -12,9 +19,12 @@
   padding: 40px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background:transparent;
+  backdrop-filter: blur(10px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
+  margin-right: 40px;
+
 }
 
 .user-category:hover {
@@ -24,7 +34,7 @@
 .user-category h2 {
   margin-top: 0;
   font-size: 2rem;
-  color: #333;
+  color: white;
 }
 
 .user-category ul {
