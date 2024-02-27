@@ -59,7 +59,7 @@ const ProductPagee = () => {
     <div className='mainpage'>
         <Header/>
         <div className='containerpage'>
-        <aside className="psidebar">
+        <aside className="vasidebar">
 //           <Sidebar />
 //       </aside>
     <div className="product-page">
