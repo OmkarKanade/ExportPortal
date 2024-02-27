@@ -4,16 +4,21 @@ import Header from './CustomerHeader';
 import Sidebar from '../Layout/CustomerSidebar';
 import axios from 'axios';
 
-const ProductCard = ({ image, name, price, description }) => {
+const ProductCard = ({ name, scientificName, vendorCategoryId, totalRate, grossWeight, ingredients, certificationId }) => {
   return (
     <div className="carddd">
-      <div className="carddd-img">
+      {/* <div className="carddd-img">
         <img src={image} alt={name} />
-      </div>
+      </div> */}
       <div className="carddd-info">
-        <h5 className="carddd-title">{name}</h5>
-        <p className="carddd-text">{description}</p>
-        <p className="carddd-price">{price} Rs</p>
+        <h5 className="carddd-title">Name:   {name}</h5>
+        <p className="carddd-text">ScientificName:  {scientificName}</p>
+        <p className='cardd-text'>Vendor Category: {vendorCategoryId}</p>
+        <p className="carddd-price">Total Price:  {totalRate} Rs</p>
+        <p className='carddd-weight'>Gross Weight{grossWeight}</p>
+        <p className='carddd-text'>Ingredients:  {ingredients}</p>
+        <p className='carddd-text'>CertificationId:  {certificationId}</p>
+
       </div>
     </div>
   );
@@ -72,11 +77,14 @@ const ProductPagee = () => {
       <div className="product-cards">
         {products.map(product => (
           <ProductCard
-            key={product.id}
+            // key={product.id}
             name={product.name}
-            price={product.price}
-            image={product.image}
-            description={product.description}
+            scientificName={product.scientific_name}
+            vendorCategoryId={product.vendorCategoryId}
+            totalRate={product.totalRate}
+            grossWeight={product.grossWeight}
+            ingredients={product.ingredients}
+            certificationId={product.certificationId}
           />
         ))}
       </div>

@@ -23,7 +23,7 @@
     box-shadow: 0 0 10px rgba(255,255,255, .2);
   }
   
-  .carddd-img {
+  /* .carddd-img {
     flex: 1;
   }
   
@@ -32,6 +32,11 @@
     width:100%;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
+  } */
+  
+  .carddd-info {
+    flex: 2;
+    padding: 20px;
   }
   
   .carddd-info {
@@ -42,21 +47,22 @@
   .carddd-title {
     font-size: 1.2rem;
     margin-bottom: 10px;
-    color:white;
+    color: white;
     font-weight: 400;
   }
   
   .carddd-text {
     color: #666;
     margin-bottom: 10px;
-    color:#ccc;
+    color: #ccc;
   }
   
-  .carddd-price {
+  .carddd-price, .carddd-weight {
     font-size: 1.1rem;
     font-weight: bold;
-    color:azure;
+    color: azure;
   }
+  
 
   .psidebar{
     margin-top: -25px;
