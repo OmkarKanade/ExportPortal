@@ -17,6 +17,7 @@ import PageNotFound from './Component/PageNotFound';
 import ProductList from './Controller/Admin/ProductList';
 import CProductList from './Controller/Customer/CProductList';
 import UserList from './Controller/UsersList';
+import AboutUsPage from './Controller/Layout/aboutus';
 
 
 const App = () => {
@@ -32,6 +33,7 @@ const App = () => {
           <Route  path='*' element={<PageNotFound/>} />
           <Route  path='/ProductList' element={<ProductList/>} />
           <Route  path='/cProductList' element={<CProductList/>} />
+          <Route  path='/aboutus' element={<AboutUsPage/>} />
 
           {/* //Admin Routes// */}
           <Route path="/layout" element={<Layout />} />

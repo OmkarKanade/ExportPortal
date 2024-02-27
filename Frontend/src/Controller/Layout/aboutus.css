@@ -1,0 +1,50 @@
+.about-us-container {
+    max-width: 80vw;
+    margin: 50px auto;
+    padding: 2% 5%;
+    background-color: transparent;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid white;
+    border-radius: 5px;
+    color: white;
+  }
+  
+  .gradient-text {
+    background: linear-gradient(45deg, #ff6b6b, #8e44ad);
+    -webkit-background-clip: text;
+    color: transparent;
+    display: inline-block;
+    font-size: xx-large;
+    font-weight: 900;
+  }
+  .gradient-text1 {
+    background: linear-gradient(45deg, #4fde39, #e1dc7e);
+    -webkit-background-clip: text;
+    color: transparent;
+    display: inline-block;
+    font-size: x-large;
+    font-weight: 900;
+  }
+  
+  h2 {
+    color: white;
+    margin-top: 20px;
+  }
+  
+  p {
+    color: white;
+    line-height: 1.6;
+  }
+  
+  ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+  
+  li {
+    color: white;
+  }
+  
+  /* Add more styles as needed based on your design preferences */
+  
