@@ -3,6 +3,7 @@
     margin: 50px auto;
     padding: 2% 5%;
     background-color: transparent;
+    backdrop-filter: blur(10px);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border: 2px solid white;
     border-radius: 5px;
@@ -26,23 +27,23 @@
     font-weight: 900;
   }
   
-  h2 {
+  .about-us-container h2 {
     color: white;
     margin-top: 20px;
   }
   
-  p {
+  .about-us-container p {
     color: white;
     line-height: 1.6;
   }
   
-  ul {
+  .about-us-container ul {
     list-style-type: disc;
     margin-left: 20px;
     margin-bottom: 20px;
   }
   
-  li {
+  .about-us-container ul li {
     color: white;
   }
   
