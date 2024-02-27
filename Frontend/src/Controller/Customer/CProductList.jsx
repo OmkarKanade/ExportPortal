@@ -4,7 +4,7 @@ import Header from './CustomerHeader';
 import Sidebar from '../Layout/CustomerSidebar';
 import axios from 'axios';
 
-const ProductCard = ({ name, scientificName, vendorCategory, totalRate, grossWeight, ingredients, certificationId }) => {
+const ProductCard = ({ name, scientificName, totalRate, grossWeight, ingredients, certificationId }) => {
   return (
     <div className="carddd">
       {/* <div className="carddd-img">

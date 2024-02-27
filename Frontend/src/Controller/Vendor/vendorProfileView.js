@@ -131,10 +131,10 @@ const VendorProfileView = () => {
                       <th className="text-light transparent">Zip Code:</th>
                       <td>{vendorDetails.zipcode}</td>
                     </tr>
-                    <tr>
+                    {/* <tr>
                       <th className="text-light transparent">Password:</th>
                       <td>{vendorDetails.password}</td>
-                    </tr>
+                    </tr> */}
                   </tbody>
                 </table>
                 <button className="btn btn-primary" onClick={handleEditModalOpen}>
@@ -217,7 +217,7 @@ const VendorProfileView = () => {
                   onChange={handleInputChange}
                 />
               </div>
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label>Password:</label>
                 <input
                   type="password"
@@ -225,7 +225,7 @@ const VendorProfileView = () => {
                   value={editedVendorDetails.password}
                   onChange={handleInputChange}
                 />
-              </div>
+              </div> */}
               <button type="button" className="btn btn-primary" onClick={handleSaveChanges}>
                 Save Changes
               </button>

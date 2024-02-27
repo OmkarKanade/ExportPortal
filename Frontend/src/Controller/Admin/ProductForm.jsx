@@ -1,27 +1,80 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './productform.css';
-import Layout from '../Layout/Layout';
 import axios from 'axios';
+import Select from 'react-select';
+import Layout from '../Layout/Layout';
 
 
 const ProductForm = () => {
   const [formData, setFormData] = useState({});
+  const [categories, setCategories] = useState([]);
+  const [certifications, setCertifications] = useState([]);
+  const [vendors, setVendors] = useState([]);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
+  const vendorOptions = vendors.map(vendor => ({
+    value: vendor.id,
+    label: vendor.name
+  }));
+
+  const fetchCategories = () => {
+    axios.get('https://localhost:7051/api/VendorCategory')
+      .then(response => {
+        setCategories(response.data);
+      })
+      .catch(error => {
+        setErrorMessage('Failed to fetch categories');
+        console.error('Error fetching categories:', error);
+      });
+  };
+
+  const fetchCertifications = () => {
+    axios.get('https://localhost:7051/api/Certification')
+      .then(response => {
+        setCertifications(response.data);
+      })
+      .catch(error => {
+        setErrorMessage('Failed to fetch certifications');
+        console.error('Error fetching certifications:', error);
+      });
+  };
+
+  const fetchVendors = () => {
+    axios.get('https://localhost:7051/api/Vendor')
+      .then(response => {
+        setVendors(response.data);
+      })
+      .catch(error => {
+        setErrorMessage('Failed to fetch vendor');
+        console.error('Error fetching vendor:', error);
+      });
+  };
+
+  useEffect(() => {
+    fetchCategories();
+    fetchVendors();
+    fetchCertifications();
+  }, []);
+
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+
+    const { name, value, type, checked } = e.target;
+
+  // If it's a checkbox, use the 'checked' value
+  const inputValue = type === 'checkbox' ? checked : value;
+
+  setFormData({ ...formData, [name]: inputValue });
   };
   // https://localhost:7051/api/Product
   
   const handleSubmit = async (event) => {
-    console.log("Form Data:", formData); // Log form data 
     event.preventDefault();
-
+    console.log("Form Data:", formData); // Log form data 
+    
       axios.post('https://localhost:7051/api/Product', formData)
       .then(response => {
-        setSuccessMessage('Customer created successfully');
+        setSuccessMessage('Product created successfully');
         // Show pop-up message
         alert(`Product ${formData.name} is created`);
         console.log('Response from server:', response.data);
@@ -47,66 +100,104 @@ const ProductForm = () => {
           <input type="text" id="scientificName" name="scientificName" onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label htmlFor="vendorCategoryId">Select Category</label>
-          <input type='text' id='vendorCategoryId' name='vendorCategoryId' onChange={handleChange} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="productVendor1">Product Vendor 1</label>
-          <input type="text" id="productVendor1" name="vendorId1" onChange={handleChange} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="productVendor2">Product Vendor 2</label>
-          <input type="text" id="productVendor2" name="vendorId2" onChange={handleChange} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="productVendor3">Product Vendor 3</label>
-          <input type="text" id="productVendor3" name="vendorId3" onChange={handleChange} />
-        </div>
+        <label htmlFor="categorySelect">Select a category:</label>
+        <select required id="categorySelect" name="vendorCategoryId" value={formData.vendorCategoryId} onChange={handleChange}>
+        <option value="" disabled selected>Select an option</option>
+          {categories.map(category => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="form-group">
+      <label htmlFor="vendorSelect1">Select Vendor 1:</label>
+      <Select
+        required
+        id="vendorSelect1"
+        name="vendorId1"
+        value={vendorOptions.find(option => option.value === formData.vendorId1)}
+        onChange={(selectedOption) => handleChange({ target: { name: 'vendorId1', value: selectedOption.value } })}
+        options={vendorOptions}
+        placeholder="Select an option"
+      />
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="vendorSelect2">Select Vendor 2:</label>
+      <Select
+        id="vendorSelect2"
+        name="vendorId2"
+        value={vendorOptions.find(option => option.value === formData.vendorId2)}
+        onChange={(selectedOption) => handleChange({ target: { name: 'vendorId2', value: selectedOption.value } })}
+        options={vendorOptions}
+        placeholder="Select an option"
+      />
+    </div>
+
+    <div className="form-group">
+      <label htmlFor="vendorSelect3">Select Vendor 3:</label>
+      <Select
+        id="vendorSelect3"
+        name="vendorId3"
+        value={vendorOptions.find(option => option.value === formData.vendorId3)}
+        onChange={(selectedOption) => handleChange({ target: { name: 'vendorId3', value: selectedOption.value } })}
+        options={vendorOptions}
+        placeholder="Select an option"
+      />
+    </div>
+
         <div className="form-group">
           <label htmlFor="hsnCode">HSN Code (unique)</label>
           <input type="text" id="hsnCode" name="hsnCode" onChange={handleChange} />
         </div>
         <div className="form-group">
           <label htmlFor="toPuneFreight">To Pune Freight (Amount)</label>
-          <input type="text" id="toPuneFreight" name="toPuneFreight" onChange={handleChange}/>
+          <input type="number" step="0.01" id="toPuneFreight" name="toPuneFreight" onChange={handleChange}/>
         </div>
         <div className="form-group">
           <label htmlFor="innerPackageMaterial">Inner Package Material (Amount)</label>
-          <input type="text" id="innerPackageMaterial" name="innerPackageMaterial"onChange={handleChange} />
+          <input type="number" step="0.01" id="innerPackageMaterial" name="innerPackageMaterial"onChange={handleChange} />
         </div>
         <div className="form-group">
           <label htmlFor="outerPackageMaterial">Outer Package Material (Amount)</label>
-          <input type="text" id="outerPackageMaterial" name="outerPackageMaterial" onChange={handleChange} />
+          <input type="number" step="0.01" id="outerPackageMaterial" name="outerPackageMaterial" onChange={handleChange} />
         </div>
         <div className="form-group">
           <label htmlFor="manualPackage">Manual Package (Amount)</label>
-          <input type="text" id="manualPackage" name="manualPackage" onChange={handleChange}/>
+          <input type="number" step="0.01" id="manualPackage" name="manualPackage" onChange={handleChange}/>
         </div>
         <div className="form-group">
           <label htmlFor="machinePackage">Machine Package (Amount)</label>
-          <input type="text" id="machinePackage" name="machinePackage" onChange={handleChange}/>
+          <input type="number" step="0.01" id="machinePackage" name="machinePackage" onChange={handleChange}/>
         </div>
         <div className="form-group">
           <label htmlFor="localTransport">Local Transport (Amount)</label>
-          <input type="text" id="localTransport" name="localTransport" onChange={handleChange}/>
+          <input type="number" step="0.01" id="localTransport" name="localTransport" onChange={handleChange}/>
         </div>
         <div className="form-group">
           <label htmlFor="fumigation">Fumigation (Amount)</label>
-          <input type="text" id="fumigation" name="fumigation" onChange={handleChange}/>
+          <input type="number" step="0.01" id="fumigation" name="fumigation" onChange={handleChange}/>
         </div>
         <div className="form-group">
           <label htmlFor="totalRate">Total Rate</label>
-          <input type="text" id="totalRate" name="totalRate" onChange={handleChange}/>
+          <input type="number" step="0.01" id="totalRate" name="totalRate" onChange={handleChange}/>
           {/* This field will be calculated based on the sum of other fields */}
         </div>
         <div className="form-group">
           <label htmlFor="grossWeight">Gross Weight (per pack in grams)</label>
-          <input type="text" id="grossWeight" name="grossWeight" onChange={handleChange} />
+          <input type="number" id="grossWeight" name="grossWeight" onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label htmlFor="pouchType">Select Pouch Type</label>
-          <input type='text' id='pouchType' name='pouchType'onChange={handleChange} ></input>
-
+          <div className="form-group">
+        <label htmlFor="pouchType">Select Pouch Type</label>
+        <select required id="pouchType" name="pouchType" onChange={handleChange} value={formData.pouchType}>
+        <option value="" disabled selected>Select an option</option>
+          <option value="Type1">Type 1</option>
+          <option value="Type2">Type 2</option>
+        </select>
+      </div>
           
           {/* <select id="pouchType" name="pouchType" onChange={handleChange}>
             <option value="type1">Type 1</option>
@@ -119,9 +210,9 @@ const ProductForm = () => {
         </div>
         <div className="form-group">
           <label>Select Bag/Box</label><br />
-          <input type="radio" id="bag" name="bagOrBox" value="bag" onChange={handleChange}/>
+          <input type="radio" id="bag" name="bagOrBox" value="Bag" onChange={handleChange}/>
           <label htmlFor="bag">Bag</label>
-          <input type="radio" id="box" name="bagOrBox" value="box" onChange={handleChange}/>
+          <input type="radio" id="box" name="bagOrBox" value="Box" onChange={handleChange}/>
           <label htmlFor="box">Box</label>
         </div>
         <div className="form-group">
@@ -137,31 +228,45 @@ const ProductForm = () => {
           <input type="text" id="manufacturingProcess" name="manufacturingProcess" onChange={handleChange}/>
         </div>
         <div className="form-group">
-          <label>Dairy Declaration required?</label><br />
-          <input type="radio" id="dairyDeclarationYes" name="dairyDeclarationRequired" value="true" onChange={handleChange}/>
-          <label htmlFor="dairyDeclarationYes">True</label>
-          <input type="radio" id="dairyDeclarationNo" name="dairyDeclarationRequired" value="false" onChange={handleChange}/>
-          <label htmlFor="dairyDeclarationNo">False</label>
-        </div>
+        <label>Dairy Declaration required?</label><br />
+        <input
+          type="checkbox"
+          id="dairyDeclarationCheckbox"
+          name="dairyDeclarationRequired"
+          checked={formData.dairyDeclarationRequired}
+          onChange={handleChange}
+        />
+        <label htmlFor="dairyDeclarationCheckbox">Yes</label>
+      </div>
+
+      <div className="form-group">
+        <label>Is this product for Human Consumption?</label><br />
+        <input
+          type="checkbox"
+          id="humanConsumptionCheckbox"
+          name="isForHumanConsumption"
+          checked={formData.isForHumanConsumption}
+          onChange={handleChange}
+        />
+        <label htmlFor="humanConsumptionCheckbox">Yes</label>
+      </div>
+    
         <div className="form-group">
-          <label>Is this product for Human Consumption?</label><br />
-          <input type="radio" id="humanConsumptionYes" name="isForHumanConsumption" value="true" onChange={handleChange}/>
-          <label htmlFor="humanConsumptionYes">True</label>
-          <input type="radio" id="humanConsumptionNo" name="isForHumanConsumption" value="false" onChange={handleChange}/>
-          <label htmlFor="humanConsumptionNo">False</label>
-        </div>
-        <div className='from-group'>
-          <label htmlFor='certification'>Certifications</label>
-          <input type='text' id='certificationId' name="certificationId" onChange={handleChange}/>
-        </div>
-
-
-
+        <label htmlFor="certificationSelect">Select a certification:</label>
+        <select required id="certificationSelect" name="certificationId" value={formData.certificationId} onChange={handleChange}>
+        <option value="" disabled selected>Select an option</option>
+          {certifications.map(certification => (
+            <option key={certification.id} value={certification.id}>
+              {certification.name}
+            </option>
+          ))}
+        </select>
+      </div>
 
         <button className="save-button" type="submit">Save</button>
       </form>
-    </Layout>
+      </Layout>
   );
 };
 
-export default ProductForm;
+export default ProductForm;

@@ -68,7 +68,7 @@ useEffect(() => {
 }, []);
 
   const sid = sessionStorage.getItem('sid');
-
+  
   const fetchData = async () => {
     console.log(products);
     try {
