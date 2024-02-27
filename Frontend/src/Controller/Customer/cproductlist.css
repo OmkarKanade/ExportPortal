@@ -59,7 +59,7 @@
     font-weight: bold;
     color: azure;
   } */
-  .carddd-text {
+  /* .carddd-text {
     color: white;
     margin-bottom: 10px;
     color: #ccc;
@@ -79,5 +79,45 @@
 
   .psidebar{
     margin-top: 0px;
-  }
+  } */
   
+
+  .carddd-img {
+    flex: 1;
+}
+
+.carddd-img img {
+    height: 190px;
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.carddd-info {
+    flex: 2;
+    padding: 20px;
+    line-height: 25px;
+}
+
+.carddd-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: white;
+    font-weight: 400;
+}
+
+.carddd-text {
+    color: white;
+    margin-bottom: 10px;
+    color: #ccc;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.product-cards {
+    color: white;
+}
+
+.psidebar {
+    margin-top: 0px;
+}
