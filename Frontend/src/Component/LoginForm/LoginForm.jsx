@@ -10,7 +10,7 @@ const LoginForm = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  
+
 
 
   const handleLogin = async (e) => {
@@ -19,29 +19,32 @@ const LoginForm = () => {
       const body = ({
         username: username,
         password: password
-          });
-            const response = await axios.post(
-              "https://localhost:7051/api/Login",
-              body
-            );
-    
+      });
+      const response = await axios.post(
+        "https://localhost:7051/api/Login",
+        body
+      );
+
       console.log(response);
       if (response.data) {
         const authToken = response.data.jwtToken;
-              const decodeToken = jwtDecode(authToken);
-              const roles =
-                decodeToken[
-                  "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
-                ];
-            const sid = decodeToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid"];
-            sessionStorage.setItem('sid', sid);
-              sessionStorage.setItem("authToken", authToken);
-              sessionStorage.setItem("roles", roles);
+        const decodeToken = jwtDecode(authToken);
+        const roles =
+          decodeToken[
+          "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+          ];
+        const sid = decodeToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid"];
+        sessionStorage.setItem('sid', sid);
+        sessionStorage.setItem("authToken", authToken);
+        sessionStorage.setItem("roles", roles);
 
-              console.log(roles);
-              console.log(sid);
-              console.log(authToken);
-              // navigate("/layout");
+        // Show pop-up message with username
+        alert(`${username} logged in successfully!`);
+
+        console.log(roles);
+        console.log(sid);
+        console.log(authToken);
+        // navigate("/layout");
         // Redirect based on role
         switch (roles) {
           case 'Admin':
@@ -83,7 +86,7 @@ const LoginForm = () => {
               onChange={(e) => setUsername(e.target.value)}
               required
             />
-            <FaUser className='icon'/>
+            <FaUser className='icon' />
           </div>
           <div className='input-box'>
             <input
@@ -93,9 +96,9 @@ const LoginForm = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <FaLock className='icon'/>
+            <FaLock className='icon' />
           </div>
-          
+
           <div className="forgot">
             <a href="#">Forgot password?</a>
           </div>
