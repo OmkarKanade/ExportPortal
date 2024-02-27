@@ -25,8 +25,8 @@ const CustomerProfileView = () => {
     city: '',
     address: '',
     zipcode: '',
-    newPassword: '',
-    currentPassword:'',
+    // newPassword: '',
+    // currentPassword:'',
   });
 
   useEffect(() => {
@@ -53,8 +53,8 @@ const CustomerProfileView = () => {
       city: customerDetails.city,
       address: customerDetails.address,
       zipcode: customerDetails.zipcode,
-      newPassword: customerDetails.newPassword,
-      currentPassword: customerDetails.currentPassword,
+      // newPassword: customerDetails.newPassword,
+      // currentPassword: customerDetails.currentPassword,
     });
     setEditModalOpen(true);
   };
@@ -140,10 +140,10 @@ const handleSaveChanges = async () => {
                       <th className="text-light transparent">Zip Code:</th>
                       <td>{customerDetails.zipcode}</td>
                     </tr>
-                    <tr>
+                    {/* <tr>
                       <th className="text-light transparent">Password:</th>
                       <td>{customerDetails.password}</td>
-                    </tr>
+                    </tr> */}
                   </tbody>
                 </table>
                 <button className="btn btn-primary" onClick={handleEditModalOpen}>
@@ -181,7 +181,7 @@ const handleSaveChanges = async () => {
                   disabled
                 />
               </div> */}
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label>New Password:</label>
                 <input
                   type="password"
@@ -189,8 +189,8 @@ const handleSaveChanges = async () => {
                   value={customerDetails.newPassword}
                   onChange={handleInputChange}
                 />
-              </div>
-              <div className="form-group">
+              </div> */}
+              {/* <div className="form-group">
                 <label>Current Password:</label>
                 <input
                   type="password"
@@ -198,7 +198,7 @@ const handleSaveChanges = async () => {
                   value={customerDetails.currentPassword}
                   onChange={handleInputChange}
                 />
-              </div>
+              </div> */}
               <div className="form-group">
                 <label>Organization:</label>
                 <input
