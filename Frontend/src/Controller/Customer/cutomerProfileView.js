@@ -64,27 +64,39 @@ const CustomerProfileView = () => {
 
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setEditedCustomerDetails((prevDetails) => ({
-      ...prevDetails,
-      [name]: value,
-    }));
-  };
+// In handleInputChange function, ensure Zipcode is converted to an integer:
+const handleInputChange = (e) => {
+  const { name, value } = e.target;
+  setEditedCustomerDetails((prevDetails) => ({
+    ...prevDetails,
+    [name]: name === 'zipcode' ? parseInt(value, 10) : value, // Convert Zipcode to int
+  }));
+};
 
-  const handleSaveChanges = async () => {
-    console.log(editedCustomerDetails);
-    try {
-      const confirmUpdate = window.confirm(`Do you really want to update details for ${sid}?`);
-      if (confirmUpdate) {
-        await axios.put(`https://localhost:7051/api/Customer/${sid}`, editedCustomerDetails);
+// Ensure Zipcode is passed as an integer in the updatedData object:
+const handleSaveChanges = async () => {
+  try {
+    const confirmUpdate = window.confirm(`Do you really want to update details for ${sid}?`);
+    if (confirmUpdate) {
+      const updatedData = {
+        ...customerDetails,
+        ...editedCustomerDetails,
+      };
+      const response = await axios.put(`https://localhost:7051/api/Customer/${sid}`, updatedData);
+      if (response.status === 200) {
         setEditModalOpen(false);
         fetchCustomerDetails(); // Refresh customer details after update
+        alert('Profile updated successfully!');
+      } else {
+        alert('Failed to update profile. Please try again.');
       }
-    } catch (error) {
-      console.error('Error saving changes:', error);
     }
-  };
+  } catch (error) {
+    console.error('Error saving changes:', error);
+    alert('Error saving changes. Please try again.');
+  }
+};
+  
 
   return (
     <CustomerDashboard>
