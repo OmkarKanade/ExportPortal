@@ -3,10 +3,8 @@ import './customerform.css';
 import Layout from '../Layout/Layout';
 import axios from 'axios'; 
 
-
 const CreateCustomerForm = () => {
   const [formData, setFormData] = useState({
-    // username: '',
     name: '',
     organizationName: '',
     phoneNumber: '',
@@ -15,7 +13,6 @@ const CreateCustomerForm = () => {
     city: '',
     address: '',
     zipcode: '',
-    // password: 'Pass@123', // Default password
   });
 
   const [successMessage, setSuccessMessage] = useState('');
@@ -29,6 +26,19 @@ const CreateCustomerForm = () => {
     });
   };
 
+  const resetForm = () => {
+    setFormData({
+      name: '',
+      organizationName: '',
+      phoneNumber: '',
+      email: '',
+      state: '',
+      city: '',
+      address: '',
+      zipcode: '',
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setSuccessMessage('');
@@ -36,13 +46,12 @@ const CreateCustomerForm = () => {
     
     console.log("Form Data:", formData); // Log form data 
   
-    
     axios.post('https://localhost:7051/api/Customer/Register', formData)
       .then(response => {
         setSuccessMessage('Customer created successfully');
-        // Show pop-up message
         alert(`Customer ${formData.name} is created`);
         console.log('Response from server:', response.data);
+        resetForm(); // Call resetForm after successful submission
       })
       .catch(error => {
         setErrorMessage('Failed to create customer');
@@ -56,17 +65,6 @@ const CreateCustomerForm = () => {
         <div className="outer-box">
           <h1>Create Customer Account</h1>
           <form onSubmit={handleSubmit} className="form">
-            {/* <div className="form-group">
-              <label>Username:</label>
-              <input
-                type="text"
-                name="username"
-                value={formData.username}
-                onChange={handleChange}
-                className="input-field"
-              />
-
-            </div> */}
             <div className="form-group">
               <label>Name:</label>
               <input
@@ -147,16 +145,6 @@ const CreateCustomerForm = () => {
                 className="input-field"
               />
             </div>
-            {/* <div className="form-group">
-              <label>Password:</label>
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                className="input-field"
-              />
-            </div> */}
             <button type="submit" className="submit-btn sbtbtn">Submit</button>
           </form>
         </div>

@@ -33,6 +33,15 @@ const AddNewCategory = () => {
 
       const data = await response.json();
       console.log('New category created:', data);
+      // Add an alert when category is created
+      alert('New category created!');
+
+      // Clear the form data after successful submission
+      setCategoryData({
+        name: '',
+        description: ''
+      });
+      
     } catch (error) {
       console.error('Error creating new category:', error);
     }
