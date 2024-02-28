@@ -21,6 +21,7 @@ const ProductPage = () => {
     fetchData();
   }, []);
 
+
   return (
     <Layout>
       <div className="product-page">
@@ -41,6 +42,8 @@ const ProductPage = () => {
           ))}
         </div>
       </div>
+    </Layout>
+  );
     </Layout>
   );
 };
