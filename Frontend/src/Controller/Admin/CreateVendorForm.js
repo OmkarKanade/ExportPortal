@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './vendorform.css';
 import Layout from '../Layout/Layout';
 
 const CreateVendorForm = () => {
+  // const[VendorCategory, setVendorCategory] = useState({});
+  const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({
     name: '',
     organizationName: '',
@@ -40,6 +42,22 @@ const CreateVendorForm = () => {
       vendorCategoryId: '',
     });
   };
+ 
+
+  const fetchVendorCategory = () => {
+    axios.get('https://localhost:7051/api/VendorCategory')
+      .then(response => {
+        setCategories(response.data); // Update state with response data
+      })
+      .catch(error => {
+        setErrorMessage('Failed to fetch vendor category');
+        console.error('Error fetching vendor category:', error);
+      });
+  };
+
+  useEffect(() =>{
+    fetchVendorCategory();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -140,14 +158,23 @@ const CreateVendorForm = () => {
                   onChange={handleChange}
                 />
               </div>
+              {/* https://localhost:7051/api/VendorCategory */}
               <div className="form-group">
-                <label>Vendor Category Id:</label>
-                <input
-                  type="text"
+                <label htmlFor="categorySelect">Vendor-Category :</label>
+                <select
+                  required
+                  id="categorySelect"
                   name="vendorCategoryId"
                   value={formData.vendorCategoryId}
                   onChange={handleChange}
-                />
+                >
+                  <option value="" disabled>Select an option</option>
+                  {categories.map(category => (
+                    <option key={category.id} value={category.id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
               </div>
               <button type="submit">Submit</button>
             </form>
