@@ -5,9 +5,9 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 
-const ProductCard = ({ id, name, scientificName, totalRate, grossWeight, ingredients, certification }) => {
+const ProductCard = ({ id, name, scientificName, totalRate, grossWeight, ingredients, certificationid }) => {
   return (
-    <div className="carddd" onClick={handleClick}>
+    <div className="carddd" >
       <div className="carddd-info">
         <h5 className="carddd-text">Product ID: {id}</h5>
         <h5 className="carddd-text">Name: {name}</h5>
@@ -75,7 +75,7 @@ const ProductPage = () => {
               totalRate={product.totalRate}
               grossWeight={product.grossWeight}
               ingredients={product.ingredients}
-              certificationId={product.certification.id}
+              certificationId={product.certificationid}
             />
           ))}
         </div>
