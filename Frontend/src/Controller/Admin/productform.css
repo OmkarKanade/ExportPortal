@@ -9,6 +9,11 @@
  margin-top: 50px;
 }
 
+.subbbb {
+  display: flex;
+  justify-content: center;
+}
+
 .tabs button {
   background-color: rgba(0,0,0,0.3);
   border: none;
@@ -60,7 +65,6 @@ select {
 input[type="text"] {
   color:white;
   /* background-color: rgba(255,255,255,0.1); */
-  
 }
 
 
@@ -84,4 +88,19 @@ input[type="text"] {
 .autocomplete-item:hover {
   background-color: #f4f4f4;
 }
+
+.pnext-button {
+  width:50%;
+  margin-left: 20%;
+  background: transparent;
+  backdrop-filter: blur(10px);
+}
+
+.psubmit-button {
+  width:50%;
+  margin-left: 20%;
+  background: transparent;
+  backdrop-filter: blur(10px);
+}
+
 

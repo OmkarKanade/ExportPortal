@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react'
 
 const SingleProduct = ({ productId }) => {
   const [product, setProduct] = useState(null);
@@ -53,4 +52,4 @@ const SingleProduct = ({ productId }) => {
   );
 };
 
-export default SingleProduct;
+export default SingleProduct

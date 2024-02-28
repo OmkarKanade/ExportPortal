@@ -5,27 +5,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 
-// const ProductCard = ({ id, name, scientificName, totalRate, grossWeight, ingredients, certificationI }) => {
-//   return (
-//     <div className="carddd">
-//       <div className="carddd-info">
-//         <h5 className="carddd-text">Product ID: {id}</h5>
-//         <h5 className="carddd-text">Name: {name}</h5>
-//         <p className="carddd-text">Scientific Name: {scientificName}</p>
-//         <p className="carddd-text">Total Price: {totalRate} Rs</p>
-//         <p className="carddd-text">Gross Weight: {grossWeight} g</p>
-//         <p className="carddd-text">Ingredients: {ingredients}</p>
-//         <p className="carddd-text">Certification ID: {certificationId}</p>
-//       </div>
-//     </div>
-//   );
-// };
-
-const ProductCard = ({ id, name, scientificName, totalRate, grossWeight, ingredients, certificationId }) => {
-  const handleClick = () => {
-    window.location.href = `/singleProduct/${id}`;
-  };
-
+const ProductCard = ({ id, name, scientificName, totalRate, grossWeight, ingredients, certification }) => {
   return (
     <div className="carddd" onClick={handleClick}>
       <div className="carddd-info">
@@ -35,7 +15,7 @@ const ProductCard = ({ id, name, scientificName, totalRate, grossWeight, ingredi
         <p className="carddd-text">Total Price: {totalRate} Rs</p>
         <p className="carddd-text">Gross Weight: {grossWeight} g</p>
         <p className="carddd-text">Ingredients: {ingredients}</p>
-        <p className="carddd-text">Certification ID: {certificationId}</p>
+        <p className="carddd-text">Certification ID: {certificationid}</p>
       </div>
     </div>
   );
@@ -95,7 +75,7 @@ const ProductPage = () => {
               totalRate={product.totalRate}
               grossWeight={product.grossWeight}
               ingredients={product.ingredients}
-              certificationId={product.certification.Id}
+              certificationId={product.certification.id}
             />
           ))}
         </div>

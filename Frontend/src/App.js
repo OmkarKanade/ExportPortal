@@ -20,7 +20,7 @@ import UserList from './Controller/UsersList';
 import AboutUsPage from './Controller/Layout/aboutus';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import SingleProduct from './SingleProduct/SingleProduct';
+import SingleProduct from './Controller/SingleProduct/SingleProduct';
 
 
 
