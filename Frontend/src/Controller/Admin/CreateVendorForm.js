@@ -78,7 +78,7 @@ const CreateVendorForm = () => {
         <div className="outer-box">
           <div className="form-box">
             <h2>Create Vendor Account</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className='VForm'>
               <div className="form-group">
                 <label>Name:</label>
                 <input

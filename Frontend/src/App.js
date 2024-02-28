@@ -20,6 +20,10 @@ import UserList from './Controller/UsersList';
 import AboutUsPage from './Controller/Layout/aboutus';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import SingleProduct from './Controller/SingleProduct/SingleProduct';
+
+
+
 
 const App = () => {
   return (
@@ -37,6 +41,7 @@ const App = () => {
           <Route  path='/ProductList' element={<ProductList/>} />
           <Route  path='/cProductList' element={<CProductList/>} />
           <Route  path='/aboutus' element={<AboutUsPage/>} />
+          <Route path='/singleProduct' element={<SingleProduct/>} />
 
           {/* //Admin Routes// */}
           <Route path="/layout" element={<Layout />} />
