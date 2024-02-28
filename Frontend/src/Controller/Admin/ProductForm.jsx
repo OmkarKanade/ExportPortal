@@ -3,7 +3,8 @@ import './productform.css';
 import axios from 'axios';
 import Select from 'react-select';
 import Layout from '../Layout/Layout';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductForm = () => {
   const [formData, setFormData] = useState({});
@@ -58,36 +59,27 @@ const ProductForm = () => {
   }, []);
 
   const handleChange = (e) => {
-
     const { name, value, type, checked } = e.target;
-
-  // If it's a checkbox, use the 'checked' value
-  const inputValue = type === 'checkbox' ? checked : value;
-
-  setFormData({ ...formData, [name]: inputValue });
+    const inputValue = type === 'checkbox' ? checked : value;
+    setFormData({ ...formData, [name]: inputValue });
   };
-  // https://localhost:7051/api/Product
   
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Form Data:", formData); // Log form data 
+    console.log("Form Data:", formData);
     
-      axios.post('https://localhost:7051/api/Product', formData)
+    axios.post('https://localhost:7051/api/Product', formData)
       .then(response => {
         setSuccessMessage('Product created successfully');
-        // Show pop-up message
-        alert(`Product ${formData.name} is created`);
+        toast.success(`Product ${formData.name} created successfully`);
         console.log('Response from server:', response.data);
       })
       .catch(error => {
         setErrorMessage('Failed to create product');
+        toast.error('Failed to create product');
         console.error('Error creating product:', error);
       });
-     
-
-      
   };
-
   return (
     <Layout>
       <form onSubmit={handleSubmit} className='product-f'>

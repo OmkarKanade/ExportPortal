@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './vendorform.css';
 import Layout from '../Layout/Layout';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreateVendorForm = () => {
-  // const[VendorCategory, setVendorCategory] = useState({});
   const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({
     name: '',
@@ -17,9 +18,6 @@ const CreateVendorForm = () => {
     zipcode: '',
     vendorCategoryId: '',
   });
-
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,10 +45,10 @@ const CreateVendorForm = () => {
   const fetchVendorCategory = () => {
     axios.get('https://localhost:7051/api/VendorCategory')
       .then(response => {
-        setCategories(response.data); // Update state with response data
+        setCategories(response.data);
       })
       .catch(error => {
-        setErrorMessage('Failed to fetch vendor category');
+        toast.error('Failed to fetch vendor category');
         console.error('Error fetching vendor category:', error);
       });
   };
@@ -61,20 +59,15 @@ const CreateVendorForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSuccessMessage('');
-    setErrorMessage('');
-
-    console.log("Form Data:", formData);
 
     axios.post('https://localhost:7051/api/Vendor/Register', formData)
       .then(response => {
-        setSuccessMessage('Vendor created successfully');
-        alert(`Vendor ${formData.name} is created`);
+        toast.success('Vendor created successfully');
         console.log('Response from server:', response.data);
-        resetForm(); // Call resetForm after successful submission
+        resetForm();
       })
       .catch(error => {
-        setErrorMessage('Failed to create Vendor');
+        toast.error('Failed to create Vendor');
         console.error('Error creating Vendor:', error.response);
       });
   };
@@ -158,7 +151,6 @@ const CreateVendorForm = () => {
                   onChange={handleChange}
                 />
               </div>
-              {/* https://localhost:7051/api/VendorCategory */}
               <div className="form-group">
                 <label htmlFor="categorySelect">Vendor-Category :</label>
                 <select

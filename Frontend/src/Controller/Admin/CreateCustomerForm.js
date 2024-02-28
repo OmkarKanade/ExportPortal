@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import './customerform.css';
 import Layout from '../Layout/Layout';
-import axios from 'axios'; 
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreateCustomerForm = () => {
   const [formData, setFormData] = useState({
@@ -14,9 +16,6 @@ const CreateCustomerForm = () => {
     address: '',
     zipcode: '',
   });
-
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,23 +40,27 @@ const CreateCustomerForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSuccessMessage('');
-    setErrorMessage('');
-    
-    console.log("Form Data:", formData); // Log form data 
-  
+    console.log("Form Data:", formData);
+
     axios.post('https://localhost:7051/api/Customer/Register', formData)
       .then(response => {
-        setSuccessMessage('Customer created successfully');
-        alert(`Customer ${formData.name} is created`);
+        toast.success('New Customer Created!', {
+          autoClose: 3000, // 3 seconds
+          style: {
+            whiteSpace: 'nowrap', // Prevent text from wrapping
+            overflow: 'hidden', // Hide overflow text
+            textOverflow: 'ellipsis' // Show ellipsis for overflow text
+          }
+        });
         console.log('Response from server:', response.data);
-        resetForm(); // Call resetForm after successful submission
+        resetForm();
       })
       .catch(error => {
-        setErrorMessage('Failed to create customer');
+        toast.error('Failed to create customer');
         console.error('Error creating customer:', error);
       });
   };
+
 
   return (
     <Layout>

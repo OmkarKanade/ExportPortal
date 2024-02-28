@@ -18,11 +18,14 @@ import ProductList from './Controller/Admin/ProductList';
 import CProductList from './Controller/Customer/CProductList';
 import UserList from './Controller/UsersList';
 import AboutUsPage from './Controller/Layout/aboutus';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
+    
     <Router>
+      <ToastContainer />
         <Routes>
 
           {/* //Get All Users// */}

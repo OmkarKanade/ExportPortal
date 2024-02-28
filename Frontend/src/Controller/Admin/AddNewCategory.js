@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import Layout from '../Layout/Layout';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddNewCategory = () => {
   const [categoryData, setCategoryData] = useState({
@@ -33,8 +35,9 @@ const AddNewCategory = () => {
 
       const data = await response.json();
       console.log('New category created:', data);
-      // Add an alert when category is created
-      alert('New category created!');
+      
+      // Show toast notification for success
+      toast.success('New category created!');
 
       // Clear the form data after successful submission
       setCategoryData({
@@ -44,6 +47,9 @@ const AddNewCategory = () => {
       
     } catch (error) {
       console.error('Error creating new category:', error);
+      
+      // Show toast notification for error
+      toast.error('Failed to create new category');
     }
   };
 

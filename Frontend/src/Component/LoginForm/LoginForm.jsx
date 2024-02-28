@@ -4,22 +4,22 @@ import { FaUser, FaLock } from "react-icons/fa";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginForm = () => {
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-
-
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const body = ({
+      const body = {
         username: username,
         password: password
-      });
+      };
       const response = await axios.post(
         "https://localhost:7051/api/Login",
         body
@@ -29,23 +29,25 @@ const LoginForm = () => {
       if (response.data) {
         const authToken = response.data.jwtToken;
         const decodeToken = jwtDecode(authToken);
-        const roles =
-          decodeToken[
-          "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
-          ];
+        const roles = decodeToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
         const sid = decodeToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/sid"];
         sessionStorage.setItem('sid', sid);
         sessionStorage.setItem("authToken", authToken);
         sessionStorage.setItem("roles", roles);
 
-        // Show pop-up message with username
-        alert(`${username} logged in successfully!`);
+        toast.success(`Login Successfull!!!`, {
+          autoClose: 3000, // 3 seconds
+          style: {
+            whiteSpace: 'nowrap', // Prevent text from wrapping
+            overflow: 'hidden', // Hide overflow text
+            textOverflow: 'ellipsis' // Show ellipsis for overflow text
+          }
+        });
 
         console.log(roles);
         console.log(sid);
         console.log(authToken);
-        // navigate("/layout");
-        // Redirect based on role
+
         switch (roles) {
           case 'Admin':
             navigate('/layout');
@@ -63,13 +65,26 @@ const LoginForm = () => {
 
         console.log('Login successful!');
       } else {
-        // Handle unsuccessful login
         console.error('Login failed');
-        alert('Invalid credentials. Please try again.');
+        toast.error('Invalid credentials. Please try again.', {
+          autoClose: 3000, // 3 seconds
+          style: {
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis'
+          }
+        });
       }
     } catch (error) {
       console.error('Login error:', error);
-      alert('An error occurred. Please try again later.');
+      toast.error('An error occurred. Please try again later.', {
+        autoClose: 3000, // 3 seconds
+        style: {
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis'
+        }
+      });
     }
   };
 
