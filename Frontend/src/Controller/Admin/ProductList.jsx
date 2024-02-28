@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './productlist.css'; // Import the CSS file for styling
 import Layout from '../Layout/Layout';
 import axios from 'axios';
-
+import { Link } from 'react-router-dom';
 
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
@@ -30,7 +30,9 @@ const ProductPage = () => {
           {products.map(product => (
             <div className="carddd" key={product.id}>
               <div className="carddd-info">
-                <h5 className="carddd-text">Product ID: {product.id}</h5>
+                <Link to={`/product/${product.id}`}>
+                  <h5 className="carddd-text">Product ID: {product.id}</h5>
+                </Link>
                 <h5 className="carddd-text">Name: {product.name}</h5>
                 <p className="carddd-text">Scientific Name: {product.scientificName}</p>
                 <p className="carddd-text">Total Price: {product.totalRate} Rs</p>

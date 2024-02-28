@@ -20,7 +20,7 @@ import UserList from './Controller/UsersList';
 import AboutUsPage from './Controller/Layout/aboutus';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import SingleProduct from './Controller/Admin/SingleProduct';
+import ProductDetails from './Controller/Admin/ProductDetails';
 
 
 
@@ -40,9 +40,8 @@ const App = () => {
           <Route  path='*' element={<PageNotFound/>} />
           <Route  path='/ProductList' element={<ProductList/>} />
           <Route  path='/cProductList' element={<CProductList/>} />
-          <Route path="/singleProduct/:id" element={<SingleProduct />} />
+          <Route path="/product/:id" component={ProductDetails} />
           <Route  path='/aboutus' element={<AboutUsPage/>} />
-          <Route path='/singleProduct' element={<SingleProduct/>} />
 
           {/* //Admin Routes// */}
           <Route path="/layout" element={<Layout />} />
