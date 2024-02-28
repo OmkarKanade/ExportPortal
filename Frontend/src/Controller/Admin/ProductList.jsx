@@ -44,8 +44,6 @@ const ProductPage = () => {
       </div>
     </Layout>
   );
-    </Layout>
-  );
 };
 
 export default ProductPage;
