@@ -1,22 +1,25 @@
-import React from 'react'
-import { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-const SingleProduct = ({ productId }) => {
+import { useParams } from 'react-router-dom';
+
+const SingleProduct = () => {
   const [product, setProduct] = useState(null);
+  const { id } = useParams();
+
+  const fetchData = () => {
+    axios.get(`https://localhost:7051/api/Product/${id}`)
+      .then(response => {
+        setProduct(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching vendor:', error);
+      });
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`https://localhost:7051/api/Product/${productId}`);
-        setProduct(response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
     fetchData();
-  }, [productId]);
+  }, [id]);
+  
 
   if (!product) {
     return <div>Loading...</div>;
@@ -24,16 +27,16 @@ const SingleProduct = ({ productId }) => {
 
   return (
     <div>
-      <h1>{product.name}</h1>
+      <h1>Name: {product.name}</h1>
       <p>Scientific Name: {product.scientificName}</p>
       <p>Total Price: {product.totalRate} Rs</p>
       <p>Gross Weight: {product.grossWeight} g</p>
       <p>Ingredients: {product.ingredients}</p>
-      <p>Certification ID: {product.certificationId}</p>
-      <p>Vendor Category ID: {product.vendorCategoryId}</p>
-      <p>Vendor ID 1: {product.vendorId1}</p>
-      <p>Vendor ID 2: {product.vendorId2}</p>
-      <p>Vendor ID 3: {product.vendorId3}</p>
+      <p>Certification ID: {product.certification.name}</p>
+      <p>Vendor Category ID: {product.vendorCategory.id}</p>
+      <p>Vendor ID 1: {product.vendorName1}</p>
+      <p>Vendor ID 2: {product.vendorName2}</p>
+      <p>Vendor ID 3: {product.vendorName3}</p>
       <p>HSN Code: {product.hsnCode}</p>
       <p>To Pune Freight: {product.toPuneFreight}</p>
       <p>Inner Package Material: {product.innerPackageMaterial}</p>
@@ -47,11 +50,10 @@ const SingleProduct = ({ productId }) => {
       <p>Bag or Box: {product.bagOrBox}</p>
       <p>Bag or Box Bumpers: {product.bagOrBoxBumpers}</p>
       <p>Manufacturing Process: {product.manufacturingProcess}</p>
-      <p>Dairy Declaration Required: {product.dairyDeclarationRequired ? 'Yes' : 'No'}</p>
-      <p>Is For Human Consumption: {product.isForHumanConsumption ? 'Yes' : 'No'}</p>
-      {/* Add more fields as needed */}
+      {/* <p>Dairy Declaration Required: {product.dairyDeclarationRequired ? 'Yes' : 'No'}</p>
+      <p>Is For Human Consumption: {product.isForHumanConsumption ? 'Yes' : 'No'}</p> */}
+
     </div>
   );
 };
-
-export default SingleProduct
+export default SingleProduct;

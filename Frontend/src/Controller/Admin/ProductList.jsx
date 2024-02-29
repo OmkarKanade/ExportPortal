@@ -12,7 +12,6 @@ const ProductPage = () => {
       try {
         const response = await axios.get('https://localhost:7051/api/Product');
         setProducts(response.data);
-        // console.log(ProductCard);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -20,7 +19,6 @@ const ProductPage = () => {
 
     fetchData();
   }, []);
-
 
   return (
     <Layout>
@@ -39,7 +37,7 @@ const ProductPage = () => {
                 <p className="carddd-text">Gross Weight: {product.grossWeight} g</p>
                 <p className="carddd-text">Ingredients: {product.ingredients}</p>
                 <p className="carddd-text">Certification ID: {product.certification.name}</p>
-              </div>
+                </div>
             </div>
           ))}
         </div>
