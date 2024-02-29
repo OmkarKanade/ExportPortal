@@ -94,7 +94,7 @@ const LoginForm = () => {
         <form onSubmit={handleLogin}>
           <h1>Login</h1>
           <div className='input-box'>
-            <input
+            <input className='username'
               type="text"
               placeholder='Username'
               value={username}
@@ -104,7 +104,7 @@ const LoginForm = () => {
             <FaUser className='icon' />
           </div>
           <div className='input-box'>
-            <input
+            <input className='password'
               type="password"
               placeholder='Password'
               value={password}
@@ -118,7 +118,7 @@ const LoginForm = () => {
             <a href="#">Forgot password?</a>
           </div>
 
-          <button type="submit">Login</button>
+          <button className='submit' type="submit">Login</button>
         </form>
       </div>
     </div>

@@ -1,4 +1,21 @@
 /* productDetails.css */
+.details-table {
+  width: 400px; /* Adjust width as needed */
+  border-collapse: collapse;
+}
+
+.details-table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+/* .details-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+} */
+
+.details-table tr:hover {
+  background-color: #ddd;
+}
 
 .product-details-container {
   padding: 20px;
@@ -29,53 +46,93 @@
   color: red;
 }
 
+
+
+
 /* Styles for the pop-up form */
-.modal {
+/* .modal {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  z-index: 1000;
   padding: 20px;
-  border-radius: 8px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Two columns */
-  grid-column-gap: 20px; /* Gap between columns */
+  border-radius: 10px;
+  max-width: 80%;
+  width: 600px;
+  display: flex;
+  justify-content: center;
 }
 
-.modal form {
+.form-grid {
   display: grid;
-  grid-gap: 10px;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
 
-.modal label {
+.form-left,
+.form-right {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
   color: #fff;
-  grid-column: span 2; /* Span across two columns */
 }
 
-.modal input,
-.modal select {
-  width: 100%;
-  padding: 10px;
+input[type='number'],
+input[type='text'],
+select {
+  padding: 8px;
   border-radius: 5px;
-  border: none;
+  background-color:transparent;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: white;
 }
 
-.modal button {
+input[type='number']:focus,
+input[type='text']:focus,
+select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.form-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+button {
   padding: 10px 20px;
+  margin-left: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #007bff;
-  color: #fff;
   cursor: pointer;
-  grid-column: span 2; /* Span across two columns */
+  transition: background-color 0.3s ease;
 }
 
-.modal button[type="submit"] {
-  background-color: #28a745;
-}
-
-.modal button[type="submit"]:hover,
-.modal button[type="button"]:hover {
+button[type='submit'] {
   background-color: #007bff;
+  color: white;
 }
+
+button[type='submit']:hover {
+  background-color: #0056b3;
+}
+
+button[type='button'] {
+  background-color: #6c757d;
+  color: white;
+}
+
+button[type='button']:hover {
+  background-color: #5a6268;
+} */

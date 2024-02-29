@@ -65,7 +65,7 @@ const CreateCustomerForm = () => {
   return (
     <Layout>
       <div className="form-container">
-        <div className="outer-box">
+        <div className="outer-boxxxx">
           <h1>Create Customer Account</h1>
           <form onSubmit={handleSubmit} className="form">
             <div className="form-group">

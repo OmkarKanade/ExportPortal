@@ -48,7 +48,7 @@ const CreateVendorForm = () => {
         setCategories(response.data);
       })
       .catch(error => {
-        toast.error('Failed to fetch vendor category');
+        // toast.error('Failed to fetch vendor category');
         console.error('Error fetching vendor category:', error);
       });
   };
@@ -75,7 +75,7 @@ const CreateVendorForm = () => {
   return (
     <Layout>
       <div className="form-container">
-        <div className="outer-box">
+        <div className="outer-boxxxxx">
           <div className="form-box">
             <h2>Create Vendor Account</h2>
             <form onSubmit={handleSubmit} className='VForm'>
@@ -154,6 +154,7 @@ const CreateVendorForm = () => {
               <div className="form-group">
                 <label htmlFor="categorySelect">Vendor-Category :</label>
                 <select
+                className='dropdown'
                   required
                   id="categorySelect"
                   name="vendorCategoryId"

@@ -74,40 +74,106 @@ const ProductDetails = () => {
         {loading && <p>Loading...</p>}
         {error && <p className="error-message">Error: {error}</p>}
         {product && (
-          <div className="product-details">
-            <h1>{product.name}</h1>
-            {/* <p>Product ID: {product.id}</p> */}
-            <p>Scientific Name: {product.scientificName}</p>
-            <p>Vendor Category: {product.vendorCategory.name}</p>
-            <p>Vendor ID 1: {product.vendorId1}</p>
-            <p>Vendor Name 1: {product.vendorName1}</p>
-            <p>Vendor ID 2: {product.vendorId2}</p>
-            <p>Vendor Name 2: {product.vendorName2}</p>
-            <p>Vendor ID 3: {product.vendorId3}</p>
-            <p>Vendor Name 3: {product.vendorName3}</p>
-            <p>HSN Code: {product.hsnCode}</p>
-            <p>To Pune Freight: {product.toPuneFreight}</p>
-            <p>Inner Package Material: {product.innerPackageMaterial}</p>
-            <p>Outer Package Material: {product.outerPackageMaterial}</p>
-            <p>Manual Package: {product.manualPackage}</p>
-            <p>Machine Package: {product.machinePackage}</p>
-            <p>Local Transport: {product.localTransport}</p>
-            <p>Fumigation: {product.fumigation}</p>
-            <p>Total Rate: {product.totalRate} Rs</p>
-            <p>Gross Weight: {product.grossWeight} g</p>
-            <p>Pouch Type: {product.pouchType}</p>
-            <p>Bumper is Pouches: {product.bumperisPouches}</p>
-            <p>Bag or Box: {product.bagOrBox}</p>
-            <p>Bag or Box Bumpers: {product.bagOrBoxBumpers}</p>
-            <p>Ingredients: {product.ingredients}</p>
-            <p>Manufacturing Process: {product.manufacturingProcess}</p>
-            <p>Dairy Declaration Required: {product.dairyDeclarationRequired ? 'Yes' : 'No'}</p>
-            <p>For Human Consumption: {product.isForHumanConsumption ? 'Yes' : 'No'}</p>
-            <p>Certification ID: {product.certification.id}</p>
-            <p>Certification Name: {product.certification.name}</p>
-
-            <button onClick={handleEdit}>Edit</button>
-          </div>
+         <div className="product-details">
+         <table className="details-table">
+            <tbody>
+              <tr>
+                <td>Vendor Category:</td>
+                <td>{product.vendorCategory.name}</td>
+              </tr>
+              <tr>
+                <td>Vendor Name 1:</td>
+                <td>{product.vendorName1}</td>
+              </tr>
+              <tr>
+                <td>Vendor Name 2:</td>
+                <td>{product.vendorName2}</td>
+              </tr>
+              <tr>
+                <td>Vendor Name 3:</td>
+                <td>{product.vendorName3}</td>
+              </tr>
+              <tr>
+                <td>HSN Code:</td>
+                <td>{product.hsnCode}</td>
+              </tr>
+              <tr>
+                <td>To Pune Freight:</td>
+                <td>{product.toPuneFreight}</td>
+              </tr>
+              <tr>
+                <td>Inner Package Material:</td>
+                <td>{product.innerPackageMaterial}</td>
+              </tr>
+              <tr>
+                <td>Outer Package Material:</td>
+                <td>{product.outerPackageMaterial}</td>
+              </tr>
+              <tr>
+                <td>Manual Package:</td>
+                <td>{product.manualPackage}</td>
+              </tr>
+              <tr>
+                <td>Machine Package:</td>
+                <td>{product.machinePackage}</td>
+              </tr>
+              <tr>
+                <td>Local Transport:</td>
+                <td>{product.localTransport}</td>
+              </tr>
+              <tr>
+                <td>Fumigation:</td>
+                <td>{product.fumigation}</td>
+              </tr>
+              <tr>
+                <td>Total Rate:</td>
+                <td>{product.totalRate} Rs</td>
+              </tr>
+              <tr>
+                <td>Gross Weight:</td>
+                <td>{product.grossWeight} g</td>
+              </tr>
+              <tr>
+                <td>Pouch Type:</td>
+                <td>{product.pouchType}</td>
+              </tr>
+              <tr>
+                <td>Bumper is Pouches:</td>
+                <td>{product.bumperisPouches}</td>
+              </tr>
+              <tr>
+                <td>Bag or Box:</td>
+                <td>{product.bagOrBox}</td>
+              </tr>
+              <tr>
+                <td>Bag or Box Bumpers:</td>
+                <td>{product.bagOrBoxBumpers}</td>
+              </tr>
+              <tr>
+                <td>Ingredients:</td>
+                <td>{product.ingredients}</td>
+              </tr>
+              <tr>
+                <td>Manufacturing Process:</td>
+                <td>{product.manufacturingProcess}</td>
+              </tr>
+              <tr>
+                <td>Dairy Declaration Required:</td>
+                <td>{product.dairyDeclarationRequired ? 'Yes' : 'No'}</td>
+              </tr>
+              <tr>
+                <td>For Human Consumption:</td>
+                <td>{product.isForHumanConsumption ? 'Yes' : 'No'}</td>
+              </tr>
+              {/* <tr>
+                <td>Certification Name:</td>
+                <td>{product.certification.name}</td>
+              </tr> */}
+            </tbody>
+          </table>
+        
+          <button onClick={handleEdit}>Edit</button>
+        </div>
         )}
 
         {showForm && (
@@ -273,9 +339,11 @@ const ProductDetails = () => {
                 </select>
               </div>
               <div className="form-buttons">
-                <button type="submit">Save</button>
-                <button type="button" onClick={() => setShowForm(false)}>Cancel</button>
-              </div>
+              <button type="submit">Save</button>
+              <button type="button" onClick={() => setShowForm(false)}>
+                Cancel
+              </button>
+            </div>
             </form>
           </div>
         )}

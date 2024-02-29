@@ -7,14 +7,17 @@
   margin-top: -80px;
 }
 
-.outer-box h1 {
+.outer-boxxxx h1 {
+  
   text-align: center;
   color: rgba(255,255,255, .7);
-  font-weight: 600;
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 20px;
+  padding-top: 25px;
+  margin-bottom: 25px;
 }
 
-.outer-box {
+.outer-boxxxx {
   max-width: 600px;
   padding-bottom: 0;
   padding-left: 30px;
@@ -25,7 +28,7 @@
   border: 2px solid rgba(255,255,255, .2);
   border-radius: 10px;
   width: 500px;
-  height: auto;
+  height: 580px;
 }
 
 .form-box {
