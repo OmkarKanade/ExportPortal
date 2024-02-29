@@ -38,7 +38,7 @@ const ProductPage = () => {
                 <p className="carddd-text">Total Price: {product.totalRate} Rs</p>
                 <p className="carddd-text">Gross Weight: {product.grossWeight} g</p>
                 <p className="carddd-text">Ingredients: {product.ingredients}</p>
-                {/* <p className="carddd-text">Certification ID: {product.certificationId}</p> */}
+                <p className="carddd-text">Certification ID: {product.certification.name}</p>
               </div>
             </div>
           ))}
