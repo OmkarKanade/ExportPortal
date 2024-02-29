@@ -1,19 +1,81 @@
 /* productDetails.css */
+
 .product-details-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .product-details {
-    background-color: #f9f9f9;
-    border-radius: 5px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .error-message {
-    color: red;
-    font-weight: bold;
-  }
-  
+  padding: 20px;
+}
+
+.product-details {
+  color: #ccc;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  background: transparent;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  padding: 20px;
+}
+
+.product-details h1 {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.product-details p {
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.error-message {
+  color: red;
+}
+
+/* Styles for the pop-up form */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  grid-column-gap: 20px; /* Gap between columns */
+}
+
+.modal form {
+  display: grid;
+  grid-gap: 10px;
+}
+
+.modal label {
+  color: #fff;
+  grid-column: span 2; /* Span across two columns */
+}
+
+.modal input,
+.modal select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.modal button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  grid-column: span 2; /* Span across two columns */
+}
+
+.modal button[type="submit"] {
+  background-color: #28a745;
+}
+
+.modal button[type="submit"]:hover,
+.modal button[type="button"]:hover {
+  background-color: #007bff;
+}
