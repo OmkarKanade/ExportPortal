@@ -8,6 +8,7 @@ const Sidebar = () => {
     { name: 'Create Vendor Account', path: '/create-vendorForm' },
     { name: 'Create Product', path: '/create-ProductForm'},
     { name: 'Create Category', path: '/create-Category'},
+    { name: 'Add Certification', path: '/addCertificate'},
     { name: 'Product List', path: '/ProductList'}
   ];
 
