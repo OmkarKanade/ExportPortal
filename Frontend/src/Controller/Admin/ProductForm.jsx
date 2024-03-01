@@ -99,6 +99,8 @@ const ProductForm = () => {
   
   return (
     <Layout>
+      <div className='outer-boxx'>
+        <h1>Create New Product</h1>
       {/* /////////////////Tab 1 Starts: Basic Info//////////////////////// */}
       <form onSubmit={handleSubmit} className='product-form'>
         {currentStep === 1 && (
@@ -306,6 +308,7 @@ const ProductForm = () => {
           <button className="prev-button" onClick={prevStep}>Previous</button>
         )}
       </form>
+      </div>
       </Layout>
   );
 };

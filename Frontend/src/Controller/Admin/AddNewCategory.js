@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Layout from '../Layout/Layout';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import 'react-toastify/dist/ReactToastify.css';
+import './createCategory.css';
 
 const AddNewCategory = () => {
   const [categoryData, setCategoryData] = useState({
