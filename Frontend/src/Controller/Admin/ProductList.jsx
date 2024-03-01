@@ -22,11 +22,11 @@ const ProductPage = () => {
 
   return (
     <Layout>
-      <div className="product-page">
+      <div className="Aproduct-page">
         <h1>Products List</h1>
         <div className="product-cards">
           {products.map(product => (
-            <div className="carddd" key={product.id}>
+            <div className="cardd" key={product.id}>
               <div className="carddd-info">
                 <Link to={`/product/${product.id}`}>
                   <h5 className="carddd-text">Product ID: {product.id}</h5>
