@@ -78,6 +78,18 @@ const ProductDetails = () => {
          <table className="details-table">
             <tbody>
               <tr>
+                <td>Product Id:</td>
+                <td>{product.id}</td>
+              </tr>
+              <tr>
+                <td>Product Name:</td>
+                <td>{product.name}</td>
+              </tr>
+              <tr>
+                <td>Product Scientific name:</td>
+                <td>{product.scientificName}</td>
+              </tr>
+              <tr>
                 <td>Vendor Category:</td>
                 <td>{product.vendorCategory.name}</td>
               </tr>
