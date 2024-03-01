@@ -1,123 +1,70 @@
 .containerpage {
-    display: flex;
-}
-.product-page {
-    margin-top: 2%;
-    margin-left: 10%;
-    width:50%;
+  display: flex;
 }
 
-.product-page h1{
-    font-weight: 600;
-    color: white;
-    margin-bottom: 4%;
+.product-page {
+  margin-top: 2%;
+  margin-left: 6%;
+  width: 100%;
+  height: 90vh; /* Set a fixed height for the product list */
+  overflow-y: auto; /* Add vertical scrollbar */
+  padding-right: 20px; /* Adjust for scrollbar width */
+}
+
+.product-page h1 {
+  font-weight: 600;
+  color: white;
+  margin-bottom: 4%;
 }
 
 .carddd {
-    width: 70%;
-    display: flex;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    background: transparent;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 10px rgba(255,255,255, .2);
-  }
-  
-  /* .carddd-img {
-    flex: 1;
-  }
-  
-  .carddd-img img {
-    height: 190px;
-    width:100%;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-  } */
-  
-  /* .carddd-info {
-    flex: 2;
-    padding: 20px;
-  }
-  
-  .carddd-info {
-    flex: 2;
-    padding: 20px;
-  }
-  
-  .carddd-title {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    color: white;
-    font-weight: 400;
-  }
-  
-  
-  
-  /* .carddd-price, .carddd-weight {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: azure;
-  } */
-  /* .carddd-text {
-    color: white;
-    margin-bottom: 10px;
-    color: #ccc;
-    font-weight: 500;
-    font-size: 20px;
-  } 
-  .carddd-info {
-    flex: 2;
-    padding: 20px;
-    line-height: 25px;
-  }
-  
+  width: 90%;
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  background: transparent;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(255,255,255, .2);
+}
 
-  .product-cards{
-    color: white;
-  }
-
-  .psidebar{
-    margin-top: 0px;
-  } */
-  
-
-  .carddd-img {
-    flex: 1;
+.carddd-img {
+  flex: 1;
 }
 
 .carddd-img img {
-    height: 190px;
-    width: 100%;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
+  height: 190px;
+  width: 100%;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
 
 .carddd-info {
-    flex: 2;
-    padding: 20px;
-    line-height: 25px;
+  flex: 2;
+  padding: 20px;
+  line-height: 25px;
+  padding-left: 100px;
 }
 
 .carddd-title {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    color: white;
-    font-weight: 400;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: white;
+  font-weight: 400;
 }
 
 .carddd-text {
-    color: white;
-    margin-bottom: 10px;
-    color: #ccc;
-    font-weight: 500;
-    font-size: 20px;
+  color: white;
+  margin-bottom: 10px;
+  color: #ccc;
+  font-weight: 500;
+  font-size: 20px;
 }
 
 .product-cards {
-    color: white;
+  color: white;
 }
 
 .psidebar {
-    margin-top: 0px;
+  margin-top: 0px;
 }

@@ -3,7 +3,6 @@ import VendorDashboard from './VendorDashboard';
 import './VendorProfileView.css';
 import axios from 'axios';
 
-
 const VendorProfileView = () => {
   const [vendorDetails, setVendorDetails] = useState({
     name: '',
@@ -28,7 +27,6 @@ const VendorProfileView = () => {
     zipcode: '',
     password: ''
   });
-
 
   useEffect(() => {
     fetchVendorDetails();
@@ -84,57 +82,48 @@ const VendorProfileView = () => {
     }
   };
 
-
   return (
     <VendorDashboard>
-      <div className="container-mt-4">
-        <div className="row">
+      <div className="vendor-container-mt-4">
+        <div className="vendor-row">
           <div className="col-md-8 offset-md-2">
-            <div className="cardd">
-              <div className="cardd-body">
-                <h2 className="text-center-mb-4">Vendor Profile</h2>
+            <div className="vendor-card">
+              <div className="vendor-card-body">
+                <h2 className="vendor-text-center-mb-4">Vendor Profile</h2>
                 <table className="table user-view-table">
                   <tbody>
-                    {/* <tr>
-                      <th className="text-light transparent">Username: </th>
-                      <td>{vendorDetails.username}</td>
-                    </tr> */}
                     <tr>
-                      <th className="text-light transparent">Name:</th>
+                      <th className="vendor-transparent">Name:</th>
                       <td>{vendorDetails.name}</td>
                     </tr>
                     <tr>
-                      <th className="text-light transparent">Organization:</th>
+                      <th className="vendor-transparent">Organization:</th>
                       <td>{vendorDetails.organizationName}</td>
                     </tr>
                     <tr>
-                      <th className="text-light transparent">Contact:</th>
+                      <th className="vendor-transparent">Contact:</th>
                       <td>{vendorDetails.phoneNumber}</td>
                     </tr>
                     <tr>
-                      <th className="text-light transparent">Email:</th>
+                      <th className="vendor-transparent">Email:</th>
                       <td>{vendorDetails.email}</td>
                     </tr>
                     <tr>
-                      <th className="text-light transparent">State:</th>
+                      <th className="vendor-transparent">State:</th>
                       <td>{vendorDetails.state}</td>
                     </tr>
                     <tr>
-                      <th className="text-light transparent">City:</th>
+                      <th className="vendor-transparent">City:</th>
                       <td>{vendorDetails.city}</td>
                     </tr>
                     <tr>
-                      <th className="text-light transparent">Address:</th>
+                      <th className="vendor-transparent">Address:</th>
                       <td>{vendorDetails.address}</td>
                     </tr>
                     <tr>
-                      <th className="text-light transparent">Zip Code:</th>
+                      <th className="vendor-transparent">Zip Code:</th>
                       <td>{vendorDetails.zipcode}</td>
                     </tr>
-                    {/* <tr>
-                      <th className="text-light transparent">Password:</th>
-                      <td>{vendorDetails.password}</td>
-                    </tr> */}
                   </tbody>
                 </table>
                 <button className="btn btn-primary" onClick={handleEditModalOpen}>
@@ -146,6 +135,7 @@ const VendorProfileView = () => {
         </div>
       </div>
 
+      
       {/* Edit Profile Modal */}
       {editModalOpen && (
         <div className="edit-modal">

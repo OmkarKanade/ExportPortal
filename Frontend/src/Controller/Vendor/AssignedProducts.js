@@ -17,7 +17,7 @@ const ProductCard = ({ name, scientificName, totalRate, grossWeight, ingredients
         <p className="carddd-text">Total Price:  {totalRate} Rs</p>
         <p className='carddd-text'>Gross Weight:  {grossWeight} g</p>
         <p className='carddd-text'>Ingredients:  {ingredients}</p>
-        <p className='carddd-text'>CertificationId:  {certificationId}</p>
+        {/* <p className='carddd-text'>Certification:  {certificationId}</p> */}
       </div>
     </div>
   );
@@ -76,7 +76,7 @@ const ProductPagee = () => {
                 totalRate={product.totalRate}
                 grossWeight={product.grossWeight}
                 ingredients={product.ingredients}
-                certificationId={product.certificationId}
+                certification={product.certification.name}
                 image={product.image} // Pass the random image path here
               />
             ))}

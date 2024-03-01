@@ -72,7 +72,7 @@ const ProductPagee = () => {
                 totalRate={product.totalRate}
                 grossWeight={product.grossWeight}
                 ingredients={product.ingredients}
-                certificationId={product.certificationId}
+                certificationId={product.certification.name}
                 image={product.image} // Pass the random image path here
               />
             ))}

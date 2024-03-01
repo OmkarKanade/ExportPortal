@@ -69,3 +69,33 @@
     padding-left: 20px;
   }
 }
+
+
+.csidebar {
+  width: 250px; /* Adjust sidebar width as needed */
+}
+
+.cul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.clll {
+  margin-bottom: 10px; /* Adjust margin between list items */
+}
+
+.csidebar a {
+  display: flex;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+  padding: 10px;
+}
+/* 
+.csidebar a:hover {
+  background-color: #f0f0f0; /* Adjust hover background color as needed */
+/* } */
+
+.csidebar-icon {
+  margin-right: 10px; /* Adjust margin between icon and text */
+}
