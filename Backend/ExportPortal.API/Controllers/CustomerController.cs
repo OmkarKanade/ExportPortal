@@ -22,9 +22,20 @@ namespace ExportPortal.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] string? nameVal, [FromQuery] string? orgVal)
         {
-            var customersResult = await userManager.GetUsersInRoleAsync("Customer");
+            var dbCustomerResult = await userManager.GetUsersInRoleAsync("Customer");
+            var customersResult = dbCustomerResult.AsQueryable();
+
+            if (String.IsNullOrWhiteSpace(nameVal) == false)
+            {
+                customersResult = customersResult.Where(x => x.Name.ToLower().Contains(nameVal.ToLower()));
+            }
+
+            if (String.IsNullOrWhiteSpace(orgVal) == false)
+            {
+                customersResult = customersResult.Where(x => x.OrganizationName.ToLower().Contains(orgVal.ToLower()));
+            }
 
             if (customersResult != null)
             {

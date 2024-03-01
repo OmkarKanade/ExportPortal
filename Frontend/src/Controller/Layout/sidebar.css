@@ -11,6 +11,14 @@
   }
   */
 
+  .sidebar-icon {
+    margin-right: 10px; /* Adjust margin as needed */
+  }
+  
+  .sidebar-text {
+    margin-right: 5px; /* Adjust margin as needed */
+  }
+
   .sidebar.show {
     background: transparent;
     backdrop-filter: blur(10px);

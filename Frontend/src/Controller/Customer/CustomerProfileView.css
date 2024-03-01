@@ -1,17 +1,17 @@
 .container-mt-4{
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 15px;
     background: transparent;
     backdrop-filter: blur(10px);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 15px;
+    border-radius: 22px;
     margin-left: 350px;
     margin-right: 350px;
-    margin-top: 90px;
-    height: 75vh;
-    width: 66vh;
+    margin-top: 45px;
+    height: 70vh;
+    width: 64vh;
 }
 
 .text-center-mb-4{
@@ -24,8 +24,8 @@
 }
 
 .row{
-    padding: 15px;
-    border-radius: 15px;
+  padding: 8px;
+  border-radius: 15px
 }
 .transparent {
     background: transparent;

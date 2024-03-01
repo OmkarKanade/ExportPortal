@@ -21,9 +21,26 @@ namespace ExportPortal.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] string? nameVal, [FromQuery] string? orgVal,
+            [FromQuery] string? catVal)
         {
-            var vendorsResult = await userManager.GetUsersInRoleAsync("Vendor");
+            var dbVendorResult = await userManager.GetUsersInRoleAsync("Vendor");
+            var vendorsResult = dbVendorResult.AsQueryable();
+
+            if (String.IsNullOrWhiteSpace(nameVal) == false)
+            {
+                vendorsResult = vendorsResult.Where(x => x.Name.ToLower().Contains(nameVal.ToLower()));
+            }
+
+            if (String.IsNullOrWhiteSpace(orgVal) == false)
+            {
+                vendorsResult = vendorsResult.Where(x => x.OrganizationName.ToLower().Contains(orgVal.ToLower()));
+            }
+
+            if (String.IsNullOrWhiteSpace(catVal) == false)
+            {
+                vendorsResult = vendorsResult.Where(x => x.VendorCategory.Name.ToLower().Contains(catVal.ToLower()));
+            }
 
             if (vendorsResult != null)
             {

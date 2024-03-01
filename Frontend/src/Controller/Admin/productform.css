@@ -1,71 +1,40 @@
-.tabs {
-  display: flex;
-  width:100vh;
-  height:auto;
-}
 
-.tab-box{
- margin-left: 100px;
- margin-top: 50px;
-}
 
-.subbbb {
-  display: flex;
-  justify-content: center;
-}
-
-.tabs button {
-  background-color: rgba(0,0,0,0.3);
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 10px 15px;
-  transition: background-color 0.3s;
-}
-
-.tabs button:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.tabs button.active {
-  background-color: #ccc;
-  color: black;
-}
-
-.tab-content {
+.outer-boxx{
+  margin-left:30%;
+  max-width: 700px;
+  height: auto;
+  max-height: 99vh;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-top: none;
-  width:100vh;
+  padding-left: 30px;
+  padding-right: 30px;
   background: transparent;
   backdrop-filter: blur(10px);
   box-shadow: 0 0 10px rgba(255,255,255, .2);
+  border: 2px solid rgba(255,255,255, .2);
+  border-radius: 10px;
+  width: 500px;
+  margin-top: 28px;
+}
+.outer-boxx h1{
+  text-align: center;
+  color: rgba(255,255,255, .7);
+  font-weight: 500;
+  font-size: 20px;
 }
 
-.product-f .form-group {
-  margin-bottom: 20px;
-}
 
-.productf .form-group label {
-  display: block;
-  margin-bottom: 5px;
-  
-}
 
 .productf .form-group input[type="text"],
 select {
-  width: 77%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
+  width: 55%;
+    padding: 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
 }
 
-input[type="text"] {
-  color:white;
-  /* background-color: rgba(255,255,255,0.1); */
-}
 
 
 
@@ -102,5 +71,4 @@ input[type="text"] {
   background: transparent;
   backdrop-filter: blur(10px);
 }
-
 
