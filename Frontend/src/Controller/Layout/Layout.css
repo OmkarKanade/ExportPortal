@@ -72,10 +72,7 @@
 
 /* Basic styling for the header */
 .headerr {
-  background:transparent;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 10px rgba(255,255,255, .2);
-  border: 2px solid rgba(255,255,255, .2);
+  background: #0865a0;
   color: white;
   padding: 5px;
 }
@@ -89,7 +86,6 @@
 /* Styling for the sidebar */
 .sidebar {
   flex:1;
-  padding: 20px;
   height: 100vh; /* Set the height to 100% of the viewport height */
   width: 250px; /* Set the width of the sidebar */
   transition: transform 0.3s ease;

@@ -17,12 +17,12 @@
     font-size: 2.5rem;
     margin-bottom: 1rem;
     font-weight: bolder;
-    color: azure;
+    color: #0865A0;
   }
 
   .text p {
     font-size: 1.2rem;
-    color: azure;
+    color: #45739E;
     margin-bottom: 1.5rem;
   }
 
@@ -39,7 +39,7 @@
 
 
   .text .menu li a {
-    color:aliceblue;
+    color: #1C2D1F;
     text-decoration: none;
     font-size: 1.1rem;
   }

@@ -2,10 +2,7 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  background: transparent;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid #0865a0;
   border-radius: 25px;
   margin-left: 350px;
   margin-right: 350px;
@@ -19,7 +16,7 @@
   font-size: 25px;
   font-weight: bolder;
   margin-bottom: 15px;
-  color: antiquewhite;
+  color: #0865a0;
 }
 
 .vendor-row {
@@ -30,7 +27,7 @@
 .vendor-transparent {
   background: transparent;
   padding: 10px;
-  color: antiquewhite;
+  color:  #0865a0;
 }
 
 .vendor-edit-modal {
@@ -97,7 +94,7 @@
   background-color: transparent;
   backdrop-filter: blur(10px);
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-  color: #fff;
+  color:  #0865a0;
   border: 0 0 10px rgba(255, 255, 255, 0.2);
   padding: 10px 15px;
   cursor: pointer;
@@ -115,7 +112,7 @@
   right: 15px;
   cursor: pointer;
   font-size: 24px;
-  color: #aaa;
+  color:  #0865a0;
 }
 
 .vendor-edit-modal-content .close:hover,

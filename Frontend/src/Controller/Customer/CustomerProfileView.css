@@ -2,10 +2,7 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 15px;
-    background: transparent;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid #0865A0;
     border-radius: 22px;
     margin-left: 350px;
     margin-right: 350px;
@@ -19,7 +16,7 @@
     font-size: 25px;
     font-weight: bolder;
     margin-bottom: 15px;
-    color: antiquewhite;
+    color: #0865A0;
 
 }
 
@@ -28,9 +25,8 @@
   border-radius: 15px
 }
 .transparent {
-    background: transparent;
     padding: 10px;
-    color: antiquewhite;
+    color: #0865A0;
   }
   
 
@@ -48,9 +44,6 @@
   }
   
   .edit-modal-content {
-    background-color:transparent;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, 0.2);
     padding: 20px;
     border-radius: 5px;
@@ -58,11 +51,12 @@
     max-width: 90%;
     margin-left: 20%;
     margin-top: 10%;
+    background: #fff;
   }
   
   .edit-modal-content h2 {
     margin-top: 0;
-    color:white;
+    color:#0865A0;
     font-size: 20px;
     font-weight: 700;
   }
@@ -78,7 +72,7 @@
   
   .edit-modal-content label {
     font-weight: bold;
-    color: white;
+    color: #0865A0;
   }
   
   .edit-modal-content input[type='text'] {
@@ -87,7 +81,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     transition: border-color 0.15s ease-in-out;
-    color:white;
+    color: black;
   }
   
   .edit-modal-content input[type='text']:focus {
@@ -96,8 +90,7 @@
   }
   
   .edit-modal-content .btn-primary {
-    background-color: transparent;
-    backdrop-filter: blur(10px);
+    background: gray;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     color: #fff;
     border: 0 0 10px rgba(255, 255, 255, 0.2);

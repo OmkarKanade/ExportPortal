@@ -10,18 +10,15 @@
 
 .product-page h1 {
   font-weight: 600;
-  color: white;
+  color:  #0865a0;
   margin-bottom: 4%;
 }
 
 .carddd {
   display: flex;
-  border: 1px solid #ccc;
+  border: 1px solid  #0865a0;
   border-radius: 8px;
   margin-bottom: 20px;
-  background: transparent;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 .carddd-img {
@@ -43,20 +40,19 @@
 .carddd-title {
   font-size: 1.2rem;
   margin-bottom: 10px;
-  color: white;
+  color:  #0865a0;
   font-weight: 400;
 }
 
 .carddd-text {
-  color: #666;
   margin-bottom: 10px;
-  color: #ccc;
+  color: black;
 }
 
 .carddd-price {
   font-size: 1.1rem;
   font-weight: bold;
-  color: azure;
+  color: black;
 }
 
 .vasidebar {

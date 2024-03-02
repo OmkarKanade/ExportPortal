@@ -6,7 +6,7 @@
 
 .details-table td {
   padding: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid gray;
 }
 
 /* .details-table tr:nth-child(even) {
@@ -14,7 +14,7 @@
 } */
 
 .details-table tr:hover {
-  background-color: #ddd;
+  background-color: gray;
 }
 
 .product-details-container {
@@ -22,13 +22,10 @@
 }
 
 .product-details {
-  color: #ccc;
-  border: 1px solid #ccc;
+  color: black;
+  border: 1px solid  #0865a0;
   border-radius: 8px;
   margin-bottom: 20px;
-  background: transparent;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
   padding: 20px;
 }
 

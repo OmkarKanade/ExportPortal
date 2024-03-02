@@ -5,7 +5,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: #1a1b1c; /* Choose your desired background color */
+  background: #0865A0; /* Choose your desired background color */
   color: #fff; /* Text color */
 }
 
@@ -13,7 +13,7 @@
   width: 50px; /* Adjust the width of the logo */
   height: 50px; /* Adjust the height of the logo */
   border-radius: 50%; /* Make the logo circular */
-  border: 2px solid aqua;
+  border: 2px solid black;
 }
 .src:hover{
   width: 60px;

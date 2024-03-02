@@ -1,10 +1,11 @@
 .home-content{
     padding: 16%;
-    color: white;  
+    color: #0865A0; 
     align-items: center;
     text-align: center;
     font-size: large;
 }
 .home-content h1{
     font-size: xx-large;
+    color:#154172;
 }

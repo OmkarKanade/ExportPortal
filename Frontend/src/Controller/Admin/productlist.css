@@ -6,7 +6,7 @@
 
 .Aproduct-page h1 {
   font-weight: 600;
-  color: white;
+  color:  #0865a0;
   margin-bottom: 4%;
   font-size: 20px;
 }
@@ -21,22 +21,15 @@
   display: flex;
   flex-direction: column;
   flex: 1 calc(90% - 20px); /* Each product takes up 50% of the width with some space in between */
-  border: 1px solid #ccc;
+  border: 1px solid  #0865a0;
   border-radius: 8px;
-  background: transparent;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 .cardd{
 width: 50%;
     display: flex;
-    border: 1px solid #ccc;
+    border: 1px solid #0865a0;
     border-radius: 8px;
     margin-bottom: 20px;
-    background: transparent;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 10px rgba(255,255,255, .2);
 }
 
 .carddd-info {
@@ -44,9 +37,8 @@ width: 50%;
 }
 
 .carddd-text {
-  color: #666;
+  color:black;
   margin-bottom: 10px;
-  color: #ccc;
 }
 
 /* Media query for smaller screens */
