@@ -19,11 +19,9 @@
   max-width: 400px; /* Set a max-width for the user categories */
   margin: 10px;
   padding: 40px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background:transparent;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #0865a0;
+  border-radius: 8px ;
+  box-shadow: 0 0 10px #0865a0;
   transition: transform 0.3s ease-in-out;
   margin-right: 40px;
 
@@ -36,7 +34,7 @@
 .user-category h2 {
   margin-top: 0;
   font-size: 2rem;
-  color: white;
+  color: #0865a0;
 }
 
 .user-category ul {
@@ -50,6 +48,7 @@
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border: 2px solid grey;
   display: flex;
   align-items: center;
   justify-content: space-between;

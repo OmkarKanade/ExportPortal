@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './UserList.css'; // Your CSS file for styling
+import Header from './Layout/Header';
 
 function UserList() {
   // const [admins, setAdmins] = useState([]);
@@ -45,6 +46,8 @@ function UserList() {
   };
 
   return (
+  <>
+  <Header/>
     <div className="user-list">
       <div className='backbutton'>
       <Link to="/layout" className="back-button">
@@ -66,6 +69,7 @@ function UserList() {
       </div>
       </div>
     </div>
+    </>
   );
 }
 
