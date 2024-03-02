@@ -22,6 +22,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProductDetails from './Controller/Admin/ProductDetails';
 import AddNewCertificate from './Controller/Admin/AddNewCertificate';
+import ProductCatalog from './Controller/Admin/ProductCatalog';
 
 
 const App = () => {
@@ -50,6 +51,7 @@ const App = () => {
           <Route path='//addCertificate' element={<AddNewCertificate/>} />
           <Route  path='/ProductList' element={<ProductList/>} />
           <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path='/product-catalog' element={< ProductCatalog/>} />
 
 
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faUserTie, faPlus, faListAlt, faCertificate, faList } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faUserTie, faPlus, faListAlt, faCertificate, faList, faBook } from '@fortawesome/free-solid-svg-icons';
 import './sidebar.css';
 
 const Sidebar = () => {
@@ -11,6 +11,7 @@ const Sidebar = () => {
     { name: 'Add new Product', path: '/create-ProductForm', icon: faPlus },
     { name: 'Create Category', path: '/create-Category', icon: faListAlt },
     { name: 'Add Certification', path: '/addCertificate', icon: faCertificate },
+    { name: 'Product Catalog', path: '/product-catalog', icon: faBook },
     { name: 'Product List', path: '/ProductList', icon: faList }
   ];
 
