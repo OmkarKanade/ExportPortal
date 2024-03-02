@@ -86,8 +86,7 @@
 /* Styling for the sidebar */
 .sidebar {
   flex:1;
-  height: 100vh; /* Set the height to 100% of the viewport height */
-  width: 250px; /* Set the width of the sidebar */
+  height: 70vh; /* Set the height to 100% of the viewport height */
   transition: transform 0.3s ease;
 }
 
@@ -112,6 +111,7 @@
     flex: 1;
     order: 0;
     width: 100%;
+    border: 1px solid grey;
   }
 
   .content {

@@ -77,10 +77,10 @@ const ProductDetails = () => {
          <div className="product-details">
          <table className="details-table">
             <tbody>
-              <tr>
+              {/* <tr>
                 <td>Product Id:</td>
                 <td>{product.id}</td>
-              </tr>
+              </tr> */}
               <tr>
                 <td>Product Name:</td>
                 <td>{product.name}</td>
@@ -183,7 +183,11 @@ const ProductDetails = () => {
               </tr> */}
             </tbody>
           </table>
-        
+
+
+        {/* ////////////////////////////////////////////// */}
+
+
           <button onClick={handleEdit}>Edit</button>
         </div>
         )}

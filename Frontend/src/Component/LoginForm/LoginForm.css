@@ -12,13 +12,19 @@
     min-height: 100vh;
 }
 
+
 .wrapper{
-    width: 420px;
+    width:50%;
     border: 2px solid #0865A0;
     color: black;
     border-radius: 10px;
     padding: 30px 40px;
+    display: flex;
+    box-shadow: 0 0 10px #0865A0;
     
+}
+.image-container{
+    margin-right: 30px;
 }
 
 @media screen and (max-width: 544px) {
@@ -47,7 +53,7 @@
     border-radius: 10px;
 }
 
-.input-box .username{
+.login-form .input-box .username{
     width: 100%;
     height: 100%;
     background: transparent;
@@ -70,7 +76,7 @@
     padding: 20px 45px 20px 20px;
 }
 .input-box input::placeholder {
-    color:#fff;
+    color:#333;
 }
 
 .input-box .icon{
@@ -90,7 +96,7 @@
 }
 
 .forgot a{
-    color:#fff;
+    color:#333;
     text-decoration: none;
     margin-top: 2vh;
 }
@@ -103,8 +109,7 @@
     width: 100%;
     height: 45px;
     background: #fff;
-    border: none;
-    outline: none;
+    border: 1px solid #0865A0;
     border-radius: 40px;
     box-shadow: 0 0 10px rgba(0,0,0,.1);
     cursor: pointer;
@@ -116,5 +121,5 @@
 }
 
 .submit button:hover{
-    background: #0865A0;
+    background: #0865A0;
 }

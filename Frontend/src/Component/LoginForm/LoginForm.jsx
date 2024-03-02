@@ -7,6 +7,9 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// Import the image
+import loginImage from './img11.jpeg';
+
 const LoginForm = () => {
   const navigate = useNavigate();
 
@@ -35,12 +38,12 @@ const LoginForm = () => {
         sessionStorage.setItem("authToken", authToken);
         sessionStorage.setItem("roles", roles);
 
-        toast.success(`Login Successfull!!!`, {
-          autoClose: 3000, // 3 seconds
+        toast.success(`Login Successful!!!`, {
+          autoClose: 3000,
           style: {
-            whiteSpace: 'nowrap', // Prevent text from wrapping
-            overflow: 'hidden', // Hide overflow text
-            textOverflow: 'ellipsis' // Show ellipsis for overflow text
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis'
           }
         });
 
@@ -67,7 +70,7 @@ const LoginForm = () => {
       } else {
         console.error('Login failed');
         toast.error('Invalid credentials. Please try again.', {
-          autoClose: 3000, // 3 seconds
+          autoClose: 3000,
           style: {
             whiteSpace: 'nowrap',
             overflow: 'hidden',
@@ -78,7 +81,7 @@ const LoginForm = () => {
     } catch (error) {
       console.error('Login error:', error);
       toast.error('An error occurred. Please try again later.', {
-        autoClose: 3000, // 3 seconds
+        autoClose: 3000,
         style: {
           whiteSpace: 'nowrap',
           overflow: 'hidden',
@@ -91,7 +94,10 @@ const LoginForm = () => {
   return (
     <div className="outer">
       <div className='wrapper'>
-        <form onSubmit={handleLogin}>
+        <div className="image-container">
+          <img src={loginImage} alt="Login" className="login-image" />
+        </div>
+        <form onSubmit={handleLogin} className="login-form">
           <h1>Login</h1>
           <div className='input-box'>
             <input className='username'

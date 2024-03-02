@@ -37,8 +37,8 @@ const App = () => {
           <Route path="/" element={<Home/>} />
           <Route path='/login' element={<LoginForm/>}/>
           <Route  path='*' element={<PageNotFound/>} />
-          <Route  path='/ProductList' element={<ProductList/>} />
-          <Route  path='/cProductList' element={<CProductList/>} />
+          
+         
           <Route  path='/aboutus' element={<AboutUsPage/>} />
 
           {/* //Admin Routes// */}
@@ -48,6 +48,7 @@ const App = () => {
           <Route path="/create-ProductForm" element={<ProductForm />} />
           <Route path="/create-Category" element={<AddNewCategory />} />
           <Route path='//addCertificate' element={<AddNewCertificate/>} />
+          <Route  path='/ProductList' element={<ProductList/>} />
           <Route path="/product/:id" element={<ProductDetails />} />
 
 
@@ -61,6 +62,7 @@ const App = () => {
           <Route path='/customerDashboard' element={<CustomerDashboard/>} />
           <Route path='/customer-id' element={<Customer/>} />
           <Route path='/customer-profile' element={<CustomerProfileView/>} />
+          <Route  path='/cProductList' element={<CProductList/>} />
           
         </Routes>
     </Router>
