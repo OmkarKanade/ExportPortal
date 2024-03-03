@@ -77,7 +77,8 @@
 
 
 .headerr {
-  background:  #0865a0;
+  background: rgb(2,0,36);
+background: linear-gradient(90deg, rgb(3, 2, 13) 0%, rgb(30, 30, 145) 45%, rgb(167, 186, 190) 100%);
   color: white;
   padding: 5px;
   display: flex;

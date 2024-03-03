@@ -4,7 +4,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background: #0865A0;
+    background: rgb(2,0,36);
+background: linear-gradient(45deg, rgb(9, 5, 86), rgb(17, 17, 141), rgb(10, 140, 167) );
   }
   
   .Header h1{

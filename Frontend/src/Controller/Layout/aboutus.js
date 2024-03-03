@@ -39,7 +39,7 @@ const AboutUsPage = () => {
       <h2 class="h2">Contact Us</h2>
 
       <p>
-        Have questions or need assistance? Our support team is here to help. Reach out to us at support@exportvendorportal.com, and we'll get back to you promptly.
+        Have questions or need assistance? Our support team is here to help. Reach out to us at <b>support@exportvendorportal.com</b>, and we'll get back to you promptly.
       </p>
 
       <p>

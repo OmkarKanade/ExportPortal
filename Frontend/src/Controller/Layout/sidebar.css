@@ -11,6 +11,7 @@
   }
   */
 
+ 
   .sidebar-icon {
     margin-right: 10px; /* Adjust margin as needed */
     color: #333;
@@ -53,6 +54,7 @@
   height: 100vh; /* Set the height to 100% of the viewport height */
   width: 250px; /* Set the width of the sidebar */
   transition: transform 0.3s ease; /* Add smooth transition */
+  
   
 }
 
