@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './LoginForm.css';
-import { FaUser, FaLock } from "react-icons/fa";
+import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -15,6 +15,7 @@ const LoginForm = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -91,6 +92,13 @@ const LoginForm = () => {
     }
   };
 
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+
+
   return (
     <div className="outer">
       <div className='wrapper'>
@@ -100,7 +108,7 @@ const LoginForm = () => {
         <form onSubmit={handleLogin} className="login-form">
           <h1>Login</h1>
           <div className='input-box'>
-            <input className='username'
+            <input className='username-L'
               type="text"
               placeholder='Username'
               value={username}
@@ -111,13 +119,27 @@ const LoginForm = () => {
           </div>
           <div className='input-box'>
             <input className='password'
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder='Password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
             <FaLock className='icon' />
+            {showPassword ? (
+              <FaEyeSlash
+                className='icon-R'
+                onClick={togglePasswordVisibility}
+                style={{ fontSize: '24px' }} // Adjust the size as needed
+              />
+            ) : (
+              <FaEye
+                className='icon-R'
+                onClick={togglePasswordVisibility}
+                style={{ fontSize: '20px' }} // Adjust the size as needed
+              />
+            )}
+
           </div>
 
           <div className="forgot">
