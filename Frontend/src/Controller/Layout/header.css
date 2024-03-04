@@ -77,8 +77,6 @@
 
 
 .headerr {
-  background: rgb(2,0,36);
-background: linear-gradient(90deg, rgb(3, 2, 13) 0%, rgb(30, 30, 145) 45%, rgb(167, 186, 190) 100%);
   color: white;
   padding: 5px;
   display: flex;
@@ -105,7 +103,11 @@ background: linear-gradient(90deg, rgb(3, 2, 13) 0%, rgb(30, 30, 145) 45%, rgb(1
   border: 2px solid rgba(255,255,255, .2);
   box-shadow: 0 0 10px rgba(255,255,255, .2);
   margin-bottom: 10px;
+  padding: 2%;
 
+}
+.HeaderButton{
+  margin: auto;
 }
 
 /* Responsive adjustments */

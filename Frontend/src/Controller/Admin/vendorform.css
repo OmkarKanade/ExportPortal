@@ -2,7 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 65vh;
+  margin-top: 10vh;
 }
 
 .form-box h2 {
