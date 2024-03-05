@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faUserTie, faPlus, faListAlt, faCertificate, faList, faBook, faBars, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faUserTie, faPlus, faListAlt, faCertificate, faList, faBook,  faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 const Sidebar = ({ isOpen }) => {
   const location = useLocation();

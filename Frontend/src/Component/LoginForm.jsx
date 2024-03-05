@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './loginform.css'
-import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaUser, FaEye, FaEyeSlash } from "react-icons/fa";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -123,7 +123,7 @@ const LoginForm = () => {
             </div>
             
             <div className="forgot text-right mt-2 md:mt-0">
-              <a href="#" className="text-blue-500 hover:text-blue-700">Forgot password?</a>
+              <a href="/forgot-Password" className="text-blue-500 hover:text-blue-700">Forgot password?</a>
             </div>
 
             <button className='w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600' type="submit">Login</button>
