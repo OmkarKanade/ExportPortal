@@ -1,29 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import './vassinedproducts.css'; // Import the CSS file for styling
-import Header from './Vheader';
-import Sidebar from './VendorSidebar';
+import VendorDashboard from './VendorDashboard';
 import axios from 'axios';
 
 const ProductCard = ({ name, scientificName, totalRate, grossWeight, ingredients, certificationId, image }) => {
   return (
-    <div className="carddd">
-      <div className="carddd-img">
-        <img src={image} alt={name} />
+    <div className="border-2 border-gray-500 mr-3 mb-3 card p-4 md:w-1/2 lg:w-1/3 xl:w-1/4">
+      <div className="card-img">
+        <img src={image} alt={name} className="w-full h-auto" />
       </div>
-      <div className="carddd-info">
-        <h5 className="carddd-text">Name:   {name}</h5>
-        <p className="carddd-text">ScientificName:  {scientificName}</p>
-        {/* <p className='carddd-text'>Vendor Category: {vendorCategory}</p> */}
-        <p className="carddd-text">Total Price:  {totalRate} Rs</p>
-        <p className='carddd-text'>Gross Weight:  {grossWeight} g</p>
-        <p className='carddd-text'>Ingredients:  {ingredients}</p>
-        {/* <p className='carddd-text'>Certification:  {certificationId}</p> */}
+      <div className="card-info">
+        <h5 className="card-text">{name}</h5>
+        <p className="card-text">{scientificName}</p>
+        <p className="card-text">Total Price: {totalRate} Rs</p>
+        <p className="card-text">Gross Weight: {grossWeight} g</p>
+        <p className="card-text">Ingredients: {ingredients}</p>
+        {/* <p className="card-text">Certification: {certificationId}</p> */}
       </div>
     </div>
   );
 };
 
-const ProductPagee = () => {
+const ProductPage = () => {
   const [products, setProducts] = useState([]);
   const images = [
     '/images/1.png',
@@ -59,32 +57,26 @@ const ProductPagee = () => {
   };
 
   return (
-    <div className='mainpage'>
-      <Header/>
-      <div className='containerpage'>
-        <aside className="vasidebar">
-          <Sidebar />
-        </aside>
-        <div className="product-page">
-          <h1>Products List</h1>
-          <div className="product-cards">
-            {products.map(product => (
-              <ProductCard
-                key={product.id} // Assuming product.id is unique
-                name={product.name}
-                scientificName={product.scientificName}
-                totalRate={product.totalRate}
-                grossWeight={product.grossWeight}
-                ingredients={product.ingredients}
-                certification={product.certification.name}
-                image={product.image} // Pass the random image path here
-              />
-            ))}
+    <VendorDashboard>
+          <div className="w-full md:w-3/4 px-4">
+            <h1 className="text-2xl font-bold mt-8 mb-4">Assigned Products</h1>
+            <div className=" flex flex-wrap -mx-4">
+              {products.map(product => (
+                <ProductCard
+                  key={product.id} // Assuming product.id is unique
+                  name={product.name}
+                  scientificName={product.scientificName}
+                  totalRate={product.totalRate}
+                  grossWeight={product.grossWeight}
+                  ingredients={product.ingredients}
+                  certification={product.certification.name}
+                  image={product.image} // Pass the random image path here
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
+          </VendorDashboard>
   );
 };
 
-export default ProductPagee;
+export default ProductPage;

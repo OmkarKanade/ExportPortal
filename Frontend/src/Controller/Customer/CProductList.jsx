@@ -1,28 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import './cproductlist.css'; // Import the CSS file for styling
-import Header from './CustomerHeader';
-import Sidebar from '../Layout/CustomerSidebar';
+import CustomerDashboard from './CustomerDashboard';
 import axios from 'axios';
 
 const ProductCard = ({ name, scientificName, totalRate, grossWeight, ingredients, certificationId, image }) => {
   return (
-    <div className="carddd">
-      <div className="carddd-img">
-        <img src={image} alt={name} />
-      </div>
-      <div className="carddd-info">
-        <h5 className="carddd-text">Name:   {name}</h5>
-        <p className="carddd-text">ScientificName:  {scientificName}</p>
-        <p className="carddd-text">Total Price:  {totalRate} Rs</p>
-        <p className='carddd-text'>Gross Weight:  {grossWeight} g</p>
-        <p className='carddd-text'>Ingredients:  {ingredients}</p>
-        <p className='carddd-text'>CertificationId:  {certificationId}</p>
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+      <div className="px-6 py-4">
+        <img src={image} alt={name} className="w-full h-auto" />
+        <div className="mt-4">
+          <h5 className="text-xl font-semibold mb-2">Name: {name}</h5>
+          <p>Scientific Name: {scientificName}</p>
+          <p>Total Price: {totalRate} Rs</p>
+          <p>Gross Weight: {grossWeight} g</p>
+          <p>Ingredients: {ingredients}</p>
+          <p>CertificationId: {certificationId}</p>
+        </div>
       </div>
     </div>
   );
 };
 
-const ProductPagee = () => {
+const ProductPage = () => {
   const [products, setProducts] = useState([]);
   const images = [
     '/images/1.png',
@@ -55,32 +53,26 @@ const ProductPagee = () => {
   }, []);
 
   return (
-    <div className='mainpage'>
-      <Header/>
-      <div className='containerpage'>
-        <aside className="psidebar">
-          <Sidebar />
-        </aside>
-        <div className="product-page">
-          <h1>Products List</h1>
-          <div className="product-cards">
-            {products.map(product => (
-              <ProductCard
-                key={product.id}
-                name={product.name}
-                scientificName={product.scientificName}
-                totalRate={product.totalRate}
-                grossWeight={product.grossWeight}
-                ingredients={product.ingredients}
-                certificationId={product.certification.name}
-                image={product.image} // Pass the random image path here
-              />
-            ))}
-          </div>
+    <CustomerDashboard>
+      <div className="ml-8">
+        <h1 className="text-3xl font-semibold mb-4">Products List</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {products.map(product => (
+            <ProductCard
+              key={product.id}
+              name={product.name}
+              scientificName={product.scientificName}
+              totalRate={product.totalRate}
+              grossWeight={product.grossWeight}
+              ingredients={product.ingredients}
+              certificationId={product.certification.name}
+              image={product.image}
+            />
+          ))}
         </div>
       </div>
-    </div>
+    </CustomerDashboard>
   );
 };
 
-export default ProductPagee;
+export default ProductPage;

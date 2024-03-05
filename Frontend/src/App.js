@@ -4,7 +4,7 @@ import CreateCustomerForm from './Controller//Admin/CreateCustomerForm';
 import CreateVendorForm from './Controller/Admin/CreateVendorForm';
 import ProductForm from './Controller/Admin/ProductForm';
 import AddNewCategory from './Controller/Admin/AddNewCategory';
-import LoginForm from './Component/LoginForm/LoginForm';
+import LoginForm from './Component/LoginForm';
 import Home from './Controller/Layout/home';
 import Vendord from './Controller/Vendor/VendorDashboard';
 import Layout from './Controller/Layout/Layout'

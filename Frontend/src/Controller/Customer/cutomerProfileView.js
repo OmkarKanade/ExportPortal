@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import CustomerDashboard from './CustomerDashboard';
-import './CustomerProfileView.css';
 import axios from 'axios';
 
 const CustomerProfileView = () => {
@@ -25,8 +24,6 @@ const CustomerProfileView = () => {
     city: '',
     address: '',
     zipcode: '',
-    // newPassword: '',
-    // currentPassword:'',
   });
 
   useEffect(() => {
@@ -53,207 +50,167 @@ const CustomerProfileView = () => {
       city: customerDetails.city,
       address: customerDetails.address,
       zipcode: customerDetails.zipcode,
-      // newPassword: customerDetails.newPassword,
-      // currentPassword: customerDetails.currentPassword,
     });
     setEditModalOpen(true);
   };
 
   const handleEditModalClose = () => {
     setEditModalOpen(false);
-
   };
 
-// In handleInputChange function, ensure Zipcode is converted to an integer:
-const handleInputChange = (e) => {
-  const { name, value } = e.target;
-  setEditedCustomerDetails((prevDetails) => ({
-    ...prevDetails,
-    [name]: name === 'zipcode' ? parseInt(value, 10) : value, // Convert Zipcode to int
-  }));
-};
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditedCustomerDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: name === 'zipcode' ? parseInt(value, 10) : value,
+    }));
+  };
 
-// Ensure Zipcode is passed as an integer in the updatedData object:
-const handleSaveChanges = async () => {
-  try {
-    const confirmUpdate = window.confirm(`Do you really want to update details for ${sid}?`);
-    if (confirmUpdate) {
-      const updatedData = {
-        ...customerDetails,
-        ...editedCustomerDetails,
-      };
-      const response = await axios.put(`https://localhost:7051/api/Customer/${sid}`, updatedData);
-      if (response.status === 200) {
-        setEditModalOpen(false);
-        fetchCustomerDetails(); // Refresh customer details after update
-        alert('Profile updated successfully!');
-      } else {
-        alert('Failed to update profile. Please try again.');
+  const handleSaveChanges = async () => {
+    try {
+      const confirmUpdate = window.confirm(`Do you really want to update details for ${sid}?`);
+      if (confirmUpdate) {
+        const updatedData = {
+          ...customerDetails,
+          ...editedCustomerDetails,
+        };
+        const response = await axios.put(`https://localhost:7051/api/Customer/${sid}`, updatedData);
+        if (response.status === 200) {
+          setEditModalOpen(false);
+          fetchCustomerDetails();
+          alert('Profile updated successfully!');
+        } else {
+          alert('Failed to update profile. Please try again.');
+        }
       }
+    } catch (error) {
+      console.error('Error saving changes:', error);
+      alert('Error saving changes. Please try again.');
     }
-  } catch (error) {
-    console.error('Error saving changes:', error);
-    alert('Error saving changes. Please try again.');
-  }
-};
-  
+  };
 
   return (
     <CustomerDashboard>
-      <div className="container-mt-4">
-        <div className="row">
-          <div className="col-md-8-offset-md-2">
-            <div className="card">
-              <div className="card-body">
-                <h2 className="text-center-mb-4">Customer Profile</h2>
-                <table className="table user-view-table">
-                  <tbody>
-                    <tr>
-                      <th className="text-light transparent">Name:</th>
-                      <td>{customerDetails.name}</td>
-                    </tr>
-                    <tr>
-                      <th className="text-light transparent">Organization:</th>
-                      <td>{customerDetails.organizationName}</td>
-                    </tr>
-                    <tr>
-                      <th className="text-light transparent">Contact:</th>
-                      <td>{customerDetails.phoneNumber}</td>
-                    </tr>
-                    <tr>
-                      <th className="text-light transparent">Email:</th>
-                      <td>{customerDetails.email}</td>
-                    </tr>
-                    <tr>
-                      <th className="text-light transparent">State:</th>
-                      <td>{customerDetails.state}</td>
-                    </tr>
-                    <tr>
-                      <th className="text-light transparent">City:</th>
-                      <td>{customerDetails.city}</td>
-                    </tr>
-                    <tr>
-                      <th className="text-light transparent">Address:</th>
-                      <td>{customerDetails.address}</td>
-                    </tr>
-                    <tr>
-                      <th className="text-light transparent">Zip Code:</th>
-                      <td>{customerDetails.zipcode}</td>
-                    </tr>
-                    {/* <tr>
-                      <th className="text-light transparent">Password:</th>
-                      <td>{customerDetails.password}</td>
-                    </tr> */}
-                  </tbody>
-                </table>
-                <button className="btn btn-primary" onClick={handleEditModalOpen}>
-                  Edit Profile
-                </button>
-              </div>
+      <div className="container mx-auto mt-10 flex items-center justify-center">
+        <div className="mx-auto">
+          <div className="bg-white shadow-md border-2 border-sky-700 shadow-sky-700 rounded-md w-full">
+            <div className="p-6">
+              <h2 className="text-2xl font-bold text-center mb-4">Customer Profile</h2>
+              <table className="table-auto w-full leading-8">
+                <tbody>
+                  <tr>
+                    <th className="text-gray-600 pr-4">Name:</th>
+                    <td>{customerDetails.name}</td>
+                  </tr>
+                  <tr>
+                    <th className="text-gray-600 pr-4">Organization:</th>
+                    <td>{customerDetails.organizationName}</td>
+                  </tr>
+                  <tr>
+                    <th className="text-gray-600 pr-4">Contact:</th>
+                    <td>{customerDetails.phoneNumber}</td>
+                  </tr>
+                  <tr>
+                    <th className="text-gray-600 pr-4">Email:</th>
+                    <td>{customerDetails.email}</td>
+                  </tr>
+                  <tr>
+                    <th className="text-gray-600 pr-4">State:</th>
+                    <td>{customerDetails.state}</td>
+                  </tr>
+                  <tr>
+                    <th className="text-gray-600 pr-4">City:</th>
+                    <td>{customerDetails.city}</td>
+                  </tr>
+                  <tr>
+                    <th className="text-gray-600 pr-4">Address:</th>
+                    <td>{customerDetails.address}</td>
+                  </tr>
+                  <tr>
+                    <th className="text-gray-600 pr-4">Zip Code:</th>
+                    <td>{customerDetails.zipcode}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <button className="block mx-auto mt-10 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleEditModalOpen}>
+                Edit Profile
+              </button>
             </div>
           </div>
         </div>
       </div>
 
       {editModalOpen && (
-        <div className="edit-modal">
-          <div className="edit-modal-content">
-            <span className="close" onClick={handleEditModalClose}>
-              &times;
-            </span>
-            <h2>Edit Profile</h2>
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white rounded-md shadow-md w-80 p-6">
+            <button className="absolute top-0 right-0 mt-2 mr-2 text-gray-500" onClick={handleEditModalClose}>
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <h2 className="text-xl font-bold mb-4">Edit Profile</h2>
             <form>
-              <div className="form-group">
-                <label>Name:</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={customerDetails.name}
-                  disabled
-                />
-              </div>
-              {/* <div className="form-group">
-                <label>Email:</label>
-                <input
-                  type="text"
-                  name="email"
-                  value={customerDetails.email}
-                  disabled
-                />
-              </div> */}
-              {/* <div className="form-group">
-                <label>New Password:</label>
-                <input
-                  type="password"
-                  name="newPassword"
-                  value={customerDetails.newPassword}
-                  onChange={handleInputChange}
-                />
-              </div> */}
-              {/* <div className="form-group">
-                <label>Current Password:</label>
-                <input
-                  type="password"
-                  name="currentPassword"
-                  value={customerDetails.currentPassword}
-                  onChange={handleInputChange}
-                />
-              </div> */}
-              <div className="form-group">
-                <label>Organization:</label>
+              <div className="flex items-center justify-center leading-9">
+                <label className=" text-gray-700 mr-2">Organization:</label>
                 <input
                   type="text"
                   name="organizationName"
                   value={editedCustomerDetails.organizationName}
                   onChange={handleInputChange}
+                  className="form-input mt-1 w-full"
                 />
               </div>
-              <div className="form-group">
-                <label>Contact:</label>
+              <div className="flex items-center justify-center leading-9">
+                <label className="block text-gray-700 mr-10">Contact:</label>
                 <input
                   type="text"
                   name="phoneNumber"
                   value={editedCustomerDetails.phoneNumber}
                   onChange={handleInputChange}
+                  className="form-input mt-1 block w-full"
                 />
               </div>
-              <div className="form-group">
-                <label>State:</label>
+              <div className="flex items-center justify-center leading-9">
+                <label className="block text-gray-700 mr-14">State:</label>
                 <input
                   type="text"
                   name="state"
                   value={editedCustomerDetails.state}
                   onChange={handleInputChange}
+                  className="form-input mt-1 block w-full"
                 />
               </div>
-              <div className="form-group">
-                <label>City:</label>
+              <div className="flex items-center justify-center leading-9">
+                <label className="block text-gray-700 mr-16">City:</label>
                 <input
                   type="text"
                   name="city"
                   value={editedCustomerDetails.city}
                   onChange={handleInputChange}
+                  className="form-input mt-1 block w-full"
                 />
               </div>
-              <div className="form-group">
-                <label>Address:</label>
+              <div className="flex items-center justify-center leading-9">
+                <label className="block text-gray-700 mr-8">Address:</label>
                 <input
                   type="text"
                   name="address"
                   value={editedCustomerDetails.address}
                   onChange={handleInputChange}
+                  className="form-input mt-1 block w-full"
                 />
               </div>
-              <div className="form-group">
-                <label>Zip Code:</label>
+              <div className="flex items-center justify-center leading-9">
+                <label className=" text-gray-700 mr-7">ZipCode:</label>
                 <input
                   type="text"
                   name="zipcode"
                   value={editedCustomerDetails.zipcode}
                   onChange={handleInputChange}
+                  className="form-input mt-1 w-full"
                 />
               </div>
-              <button type="button" className="btn btn-primary" onClick={handleSaveChanges}>
+              <button type="button" className="block mx-auto mt-10 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleSaveChanges}>
                 Save Changes
               </button>
             </form>
@@ -265,243 +222,3 @@ const handleSaveChanges = async () => {
 };
 
 export default CustomerProfileView;
-
-
-
-
-
-
-
-// import React, { useState, useEffect } from 'react';
-// import CustomerDashboard from './CustomerDashboard';
-// import './CustomerProfileView.css';
-// import axios from 'axios';
-
-// const CustomerProfileView = () => {
-//   const [customerDetails, setCustomerDetails] = useState({
-//     username: '',
-//     name: '',
-//     organizationName: '',
-//     phoneNumber: '',
-//     email: '',
-//     state: '',
-//     city: '',
-//     address: '',
-//     zipcode: '',
-//     password: 'Pass@123',
-//   });
-// const [editModalOpen, setEditModalOpen] = useState(false);
-//   const [editedCustomerDetails, setEditedCustomerDetails] = useState({
- 
-//     organizationName: '',
-//     phoneNumber: '',
-//     state: '',
-//     city: '',
-//     address: '',
-//     zipcode: '',
-//     password: '',
-//   });
-//   useEffect(() => {
-//     fetchCustomerDetails();
-//   }
-//   , []);
-//   const sid = sessionStorage.getItem('sid');
-//   const fetchCustomerDetails = async () => {
-//     try {
-//       const response = await axios.get(`https://localhost:7051/api/Customer/${sid}`);
-//       console.log('Response from server:', response.data);
-//       const profileData = response.data;
-//       setCustomerDetails(profileData); // Update state with fetched customer details
-//       console.log(profileData);
-//     } catch (error) {
-//       console.error('Error fetching customer details:', error);
-//     }
-//   };
-
-
-
-
-//   const handleEditModalOpen = () => {
-//     setEditedCustomerDetails({
-//       // name: customerDetails.name,
-//       organizationName: customerDetails.organizationName,
-//       phoneNumber: customerDetails.phoneNumber,
-//       state: customerDetails.state,
-//       city: customerDetails.city,
-//       address: customerDetails.address,
-//       zipcode: customerDetails.zipcode,
-//     });
-//     setEditModalOpen(true);
-//   };
-
-//   const handleEditModalClose = () => {
-//     setEditModalOpen(false);
-//   };
-
-//   const handleInputChange = (e) => {
-//     const { name, value } = e.target;
-//     setEditedCustomerDetails((prevDetails) => ({
-//       ...prevDetails,
-//       [name]: value,
-//     }));
-//   };
-
-//   const handleSaveChanges = async () => {
-//     try {
-//       // Make API call to update customer 
-//       console.log('Saving changes:', editedCustomerDetails);
-
-//       // Close the modal after saving changes
-//       setEditModalOpen(false);
-//     } catch (error) {
-//       console.error('Error saving changes:', error);
-//     }
-//   };
-
-//   return (
-//     <CustomerDashboard>
-     
-//       <div className="container-mt-4">
-//         <div className="row">
-//           <div className="col-md-8-offset-md-2">
-//             <div className="card">
-//               <div className="card-body">
-//                 <h2 className="text-center-mb-4">Customer Profile</h2>
-//                 <table className="table user-view-table">
-//                   <tbody>
-//                     {/* <tr>
-//                       <th className="text-light transparent">Username: </th>
-//                       <td>{customerDetails.username}</td>
-//                     </tr> */}
-//                     <tr>
-//                       <th className="text-light transparent">Name:</th>
-//                       <td>{customerDetails.name}</td>
-//                     </tr>
-//                     <tr>
-//                       <th className="text-light transparent">Organization:</th>
-//                       <td>{customerDetails.organizationName}</td>
-//                     </tr>
-//                     <tr>
-//                       <th className="text-light transparent">Contact:</th>
-//                       <td>{customerDetails.phoneNumber}</td>
-//                     </tr>
-//                     <tr>
-//                       <th className="text-light transparent">Email:</th>
-//                       <td>{customerDetails.email}</td>
-//                     </tr>
-//                     <tr>
-//                       <th className="text-light transparent">State:</th>
-//                       <td>{customerDetails.state}</td>
-//                     </tr>
-//                     <tr>
-//                       <th className="text-light transparent">City:</th>
-//                       <td>{customerDetails.city}</td>
-//                     </tr>
-//                     <tr>
-//                       <th className="text-light transparent">Address:</th>
-//                       <td>{customerDetails.address}</td>
-//                     </tr>
-//                     <tr>
-//                       <th className="text-light transparent">Zip Code:</th>
-//                       <td>{customerDetails.zipcode}</td>
-//                     </tr>
-//                     <tr>
-//                       <th className="text-light transparent">Password:</th>
-//                       <td>{customerDetails.password}</td>
-//                       </tr>
-//                   </tbody>
-//                 </table>
-//                 <button className="btn btn-primary" onClick={handleEditModalOpen}>
-//                   Edit Profile
-//                 </button>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* Edit Profile Modal */}
-//       {editModalOpen && (
-//         <div className="edit-modal">
-//           <div className="edit-modal-content">
-//             <span className="close" onClick={handleEditModalClose}>
-//               &times;
-//             </span>
-//             <h2>Edit Profile</h2>
-//             <form>
-//               {/* <div className="form-group">
-//                 <label>Name:</label>
-//                 <input
-//                   type="text"
-//                   name="name"
-//                   value={editedCustomerDetails.name}
-//                   onChange={handleInputChange}
-//                   readOnly
-//                 />
-//               </div> */}
-//               <div className="form-group">
-//                 <label>Organization:</label>
-//                 <input
-//                   type="text"
-//                   name="organizationName"
-//                   value={editedCustomerDetails.organizationName}
-//                   onChange={handleInputChange}
-//                 />
-//               </div>
-//               <div className="form-group">
-//                 <label>Contact:</label>
-//                 <input
-//                   type="text"
-//                   name="phoneNumber"
-//                   value={editedCustomerDetails.phoneNumber}
-//                   onChange={handleInputChange}
-//                 />
-//               </div>
-//               <div className="form-group">
-//                 <label>State:</label>
-//                 <input
-//                   type="text"
-//                   name="state"
-//                   value={editedCustomerDetails.state}
-//                   onChange={handleInputChange}
-//                 />
-//               </div>
-//               <div className="form-group">
-//                 <label>City:</label>
-//                 <input
-//                   type="text"
-//                   name="city"
-//                   value={editedCustomerDetails.city}
-//                   onChange={handleInputChange}
-//                 />
-//               </div>
-//               <div className="form-group">
-//                 <label>Address:</label>
-//                 <input
-//                   type="text"
-//                   name="address"
-//                   value={editedCustomerDetails.address}
-//                   onChange={handleInputChange}
-//                 />
-//               </div>
-//               <div className="form-group">
-//                 <label>Zip Code:</label>
-//                 <input
-//                   type="text"
-//                   name="zipcode"
-//                   value={editedCustomerDetails.zipcode}
-//                   onChange={handleInputChange}
-//                 />
-//               </div>
-//               <button type="button" className="btn btn-primary" onClick={handleSaveChanges}>
-//                 Save Changes
-//               </button>
-//             </form>
-//           </div>
-//         </div>
-//       )}
-//     </CustomerDashboard>
-//   );
-// };
-
-// export default CustomerProfileView;

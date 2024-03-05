@@ -1,29 +1,28 @@
 import React, { useState } from 'react';
 import Header from './Vheader';
-import './vsidebar.css';
-import VendorSidebar from './VendorSidebar';
+import Sidebar from './VendorSidebar';
 
 
-const VendorDashboard = ({ children }) => {
-  const [showSidebar, setShowSidebar] = useState(true);
+const Layout = ({ children }) => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const toggleSidebar = () => {
-    setShowSidebar(!showSidebar);
+    setIsSidebarOpen(!isSidebarOpen);
   };
+
   return (
-    <div className="layoutt">
-      <Header toggleSidebar={toggleSidebar}/>
-      <div className="containerr">
-        <aside className={`VendorSidebar ${showSidebar ? 'show' : 'hide'}`}>
-          <VendorSidebar />
-        </aside>
-        <main className="content">
-        {children}
-        </main>
+    <div className="flex flex-col h-screen">
+      <Header toggleSidebar={toggleSidebar} />
+      <div className="flex flex-1 overflow-y-hidden">
+        <Sidebar isOpen={isSidebarOpen} />
+        <div className="flex-1 overflow-y-auto">
+          <div className="p-4">{children}</div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default VendorDashboard;
+export default Layout;
+
 

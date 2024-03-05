@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import VendorDashboard from './VendorDashboard';
-import './VendorProfileView.css';
 import axios from 'axios';
 
 const VendorProfileView = () => {
@@ -46,7 +45,7 @@ const VendorProfileView = () => {
 
   const handleEditModalOpen = () => {
     setEditedVendorDetails({
-      ...vendorDetails // Initialize edited details with current vendor details
+      ...vendorDetails
     });
     setEditModalOpen(true);
   };
@@ -84,139 +83,126 @@ const VendorProfileView = () => {
 
   return (
     <VendorDashboard>
-      <div className="vendor-container-mt-4">
-        <div className="vendor-row">
-          <div className="col-md-8 offset-md-2">
-            <div className="vendor-card">
-              <div className="vendor-card-body">
-                <h2 className="vendor-text-center-mb-4">Vendor Profile</h2>
-                <table className="table user-view-table">
-                  <tbody>
-                    <tr>
-                      <th className="vendor-transparent">Name:</th>
-                      <td>{vendorDetails.name}</td>
-                    </tr>
-                    <tr>
-                      <th className="vendor-transparent">Organization:</th>
-                      <td>{vendorDetails.organizationName}</td>
-                    </tr>
-                    <tr>
-                      <th className="vendor-transparent">Contact:</th>
-                      <td>{vendorDetails.phoneNumber}</td>
-                    </tr>
-                    <tr>
-                      <th className="vendor-transparent">Email:</th>
-                      <td>{vendorDetails.email}</td>
-                    </tr>
-                    <tr>
-                      <th className="vendor-transparent">State:</th>
-                      <td>{vendorDetails.state}</td>
-                    </tr>
-                    <tr>
-                      <th className="vendor-transparent">City:</th>
-                      <td>{vendorDetails.city}</td>
-                    </tr>
-                    <tr>
-                      <th className="vendor-transparent">Address:</th>
-                      <td>{vendorDetails.address}</td>
-                    </tr>
-                    <tr>
-                      <th className="vendor-transparent">Zip Code:</th>
-                      <td>{vendorDetails.zipcode}</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <button className="btn btn-primary" onClick={handleEditModalOpen}>
-                  Edit Profile
-                </button>
-              </div>
+      <div className="container mx-auto mt-10 flex items-center justify-center">
+        <div className="mx-auto">
+          <div className="bg-white shadow-md border-2 border-blue-500 shadow-blue-500 rounded-md w-full">
+            <div className="p-6">
+              <h2 className="text-2xl font-bold text-center mb-4">Vendor Profile</h2>
+              <table className="table-auto w-full leading-8">
+                <tbody>
+                  <tr>
+                    <th className="text-gray-600 pr-4">Name:</th>
+                    <td>{vendorDetails.name}</td>
+                  </tr>
+                  <tr>
+                    <th className="text-gray-600 pr-4">Organization:</th>
+                    <td>{vendorDetails.organizationName}</td>
+                  </tr>
+                  <tr>
+                    <th className="text-gray-600 pr-4">Contact:</th>
+                    <td>{vendorDetails.phoneNumber}</td>
+                  </tr>
+                  <tr>
+                    <th className="text-gray-600 pr-4">Email:</th>
+                    <td>{vendorDetails.email}</td>
+                  </tr>
+                  <tr>
+                    <th className="text-gray-600 pr-4">State:</th>
+                    <td>{vendorDetails.state}</td>
+                  </tr>
+                  <tr>
+                    <th className="text-gray-600 pr-4">City:</th>
+                    <td>{vendorDetails.city}</td>
+                  </tr>
+                  <tr>
+                    <th className="text-gray-600 pr-4">Address:</th>
+                    <td>{vendorDetails.address}</td>
+                  </tr>
+                  <tr>
+                    <th className="text-gray-600 pr-4">Zip Code:</th>
+                    <td>{vendorDetails.zipcode}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <button className="block mx-auto mt-10 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleEditModalOpen}>
+                Edit Profile
+              </button>
             </div>
           </div>
         </div>
       </div>
 
-      
-      {/* Edit Profile Modal */}
       {editModalOpen && (
-        <div className="edit-modal">
-          <div className="edit-modal-content">
-            <span className="close" onClick={handleEditModalClose}>&times;
-            </span>
-            <h2>Edit Profile</h2>
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white rounded-md shadow-md w-80 p-6">
+            <button className="absolute top-0 right-0 mt-2 mr-2 text-gray-500" onClick={handleEditModalClose}>
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <h2 className="text-xl font-bold mb-4">Edit Profile</h2>
             <form>
-              {/* <div className="form-group">
-                <label>Name:</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={editedVendorDetails.name}
-                  onChange={handleInputChange}
-                />
-              </div> */}
-              <div className="form-group">
-                <label>Organization:</label>
+              <div className="flex items-center justify-center leading-9">
+                <label className="text-gray-700 mr-1">Organization:</label>
                 <input
                   type="text"
                   name="organizationName"
                   value={editedVendorDetails.organizationName}
                   onChange={handleInputChange}
+                  className="form-input mt-1 w-full"
                 />
               </div>
-              <div className="form-group">
-                <label>Contact:</label>
+              <div className="flex items-center justify-center leading-9">
+                <label className="block text-gray-700 mr-9">Contact:</label>
                 <input
                   type="text"
                   name="phoneNumber"
                   value={editedVendorDetails.phoneNumber}
                   onChange={handleInputChange}
+                  className="form-input mt-1 block w-full"
                 />
               </div>
-              <div className="form-group">
-                <label>State:</label>
+              <div className="flex items-center justify-center leading-9">
+                <label className="block text-gray-700 mr-14">State:</label>
                 <input
                   type="text"
                   name="state"
                   value={editedVendorDetails.state}
                   onChange={handleInputChange}
+                  className="form-input mt-1 block w-full"
                 />
               </div>
-              <div className="form-group">
-                <label>City:</label>
+              <div className="flex items-center justify-center leading-9">
+                <label className="block text-gray-700 mr-16">City:</label>
                 <input
                   type="text"
                   name="city"
                   value={editedVendorDetails.city}
                   onChange={handleInputChange}
+                  className="form-input mt-1 block w-full"
                 />
               </div>
-              <div className="form-group">
-                <label>Address:</label>
+              <div className="flex items-center justify-center leading-9">
+                <label className="block text-gray-700 mr-8">Address:</label>
                 <input
                   type="text"
                   name="address"
                   value={editedVendorDetails.address}
                   onChange={handleInputChange}
+                  className="form-input mt-1 block w-full"
                 />
               </div>
-              <div className="form-group">
-                <label>Zip Code:</label>
+              <div className="flex items-center justify-center leading-9">
+                <label className="block text-gray-700 mr-7">ZipCode:</label>
                 <input
                   type="text"
                   name="zipcode"
                   value={editedVendorDetails.zipcode}
                   onChange={handleInputChange}
+                  className="form-input mt-1 block w-full"
                 />
               </div>
-              {/* <div className="form-group">
-                <label>Password:</label>
-                <input
-                  type="password"
-                  name="password"
-                  value={editedVendorDetails.password}
-                  onChange={handleInputChange}
-                />
-              </div> */}
-              <button type="button" className="btn btn-primary" onClick={handleSaveChanges}>
+              <button type="button" className="block mx-auto mt-10 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleSaveChanges}>
                 Save Changes
               </button>
             </form>

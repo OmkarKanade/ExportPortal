@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import './ProductDetails.css';
+
 import CustomerDashboard from './CustomerDashboard';
 
 const Customer = () => {

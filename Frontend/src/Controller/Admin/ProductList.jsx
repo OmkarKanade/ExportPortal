@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import './productlist.css'; // Import the CSS file for styling
 import Layout from '../Layout/Layout';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+
 
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
@@ -23,13 +23,13 @@ const ProductPage = () => {
   return (
     <Layout>
       <div className="Aproduct-page">
-        <h1>Products List</h1>
-        <div className="product-cards">
+        <h1 className="text-3xl text-gray-700 font-bold mb-4">Products List</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {products.map(product => (
-            <div className="cardd" key={product.id}>
+            <div className="cardd bg-white p-4 rounded-lg shadow-md" key={product.id}>
               <div className="carddd-info">
                 <Link to={`/product/${product.id}`}>
-                  <h5 className="carddd-text">Product ID: {product.id}</h5>
+                  <h5 className="carddd-text font-semibold">Product ID: {product.id}</h5>
                 </Link>
                 <h5 className="carddd-text">Name: {product.name}</h5>
                 <p className="carddd-text">Scientific Name: {product.scientificName}</p>
@@ -37,7 +37,7 @@ const ProductPage = () => {
                 <p className="carddd-text">Gross Weight: {product.grossWeight} g</p>
                 <p className="carddd-text">Ingredients: {product.ingredients}</p>
                 <p className="carddd-text">Certification ID: {product.certification.name}</p>
-                </div>
+              </div>
             </div>
           ))}
         </div>

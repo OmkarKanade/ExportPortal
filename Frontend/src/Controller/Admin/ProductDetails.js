@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../Layout/Layout';
-import axios from 'axios';
-import './productDetails.css'; // Import the CSS file for styling
+import axios from 'axios'; // Import the CSS file for styling
 import { useParams } from 'react-router-dom';
 
 const ProductDetails = () => {

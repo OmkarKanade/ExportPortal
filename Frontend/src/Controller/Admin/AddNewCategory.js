@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import Layout from '../Layout/Layout';
 import { toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
-import './createCategory.css';
 
 const AddNewCategory = () => {
   const [categoryData, setCategoryData] = useState({
@@ -56,31 +54,33 @@ const AddNewCategory = () => {
 
   return (
     <Layout>
-      <div className="form-container">
-        <div className="outer-box">
-          <h1>Create New Category</h1><br></br>
-          <form onSubmit={handleCategorySubmit} className="form">
-            <div className="form-group">
-              <label>Category Name:</label>
+      <div className="flex justify-center items-center h-full">
+        <div className="w-full max-w-md">
+          <h1 className="text-2xl font-bold mb-4 ml-20 text-gray-700">Create New Category</h1>
+          <form onSubmit={handleCategorySubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 border-2 border-sky-700 shadow-sky-700">
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">Category Name:</label>
               <input
                 type="text"
                 name="name"
                 value={categoryData.name}
                 onChange={handleCategoryChange}
-                className="input-field"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
-            <div className="form-group">
-              <label>Category Description:</label><br></br>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">Category Description:</label>
               <input
                 type="text"
                 name="description"
                 value={categoryData.description}
                 onChange={handleCategoryChange}
-                className="input-field"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
-            </div><br></br>
-            <button type="submit" className="submit-btn sbtbtn">Create Category</button>
+            </div>
+            <div className="flex items-center justify-center">
+              <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Create Category</button>
+            </div>
           </form>
         </div>
       </div>

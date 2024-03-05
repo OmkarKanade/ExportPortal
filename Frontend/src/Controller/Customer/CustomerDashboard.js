@@ -1,28 +1,26 @@
 import React, { useState } from 'react';
 import Header from './CustomerHeader';
-import CustomerSidebar from '../Layout/CustomerSidebar';
-import './cdash.css';
+import Sidebar from '../Layout/CustomerSidebar';
 
-const CustomerDashboard = ({ children }) => {
-  const [showSidebar, setShowSidebar] = useState(true);
+const Layout = ({ children }) => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const toggleSidebar = () => {
-    setShowSidebar(!showSidebar);
+    setIsSidebarOpen(!isSidebarOpen);
   };
 
   return (
-    <div className="layoutt">
+    <div className="flex flex-col h-screen">
       <Header toggleSidebar={toggleSidebar} />
-      <div className="containerr">
-        <aside className={`CustomerSidebar ${showSidebar ? 'show' : 'hide'}`}>
-          <CustomerSidebar />
-        </aside>
-        <main className="contentt">
-          {children}
-        </main>
+      <div className="flex flex-1 overflow-y-hidden">
+        <Sidebar isOpen={isSidebarOpen} />
+        <div className="flex-1 overflow-y-auto">
+          <div className="p-4">{children}</div>
+        </div>
       </div>
     </div>
   );
-}
+};
 
-export default CustomerDashboard;
+export default Layout;
+
