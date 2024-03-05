@@ -9,10 +9,10 @@ const Sidebar = ({ isOpen }) => {
 
   const lists = [
     { name: 'Create Account', items: [
-      { name: 'Create Customer Account', path: '/create-customerForm', icon: faUser },
-      { name: 'Create Vendor Account', path: '/create-vendorForm', icon: faUserTie }
+      { name: 'Customer Account', path: '/create-customerForm', icon: faUser },
+      { name: 'Vendor Account', path: '/create-vendorForm', icon: faUserTie }
     ]},
-    { name: 'Create Product', items: [
+    { name: 'Manage Product', items: [
       { name: 'Add new Product', path: '/create-ProductForm', icon: faPlus },
       { name: 'Product Catalog', path: '/product-catalog', icon: faBook },
       { name: 'Product List', path: '/ProductList', icon: faList }
