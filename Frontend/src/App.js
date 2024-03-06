@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CreateCustomerForm from './Controller//Admin/CreateCustomerForm';
 import CreateVendorForm from './Controller/Admin/CreateVendorForm';
 import ProductForm from './Controller/Admin/ProductForm';
+import NewProductForm from './Controller/Admin/NewProductForm';
 import AddNewCategory from './Controller/Admin/AddNewCategory';
 import LoginForm from './Component/LoginForm';
 import Home from './Controller/Layout/home';
@@ -48,7 +49,7 @@ const App = () => {
           <Route path="/layout" element={<Layout />} />
           <Route path="/create-vendorForm" element={<CreateVendorForm />} />
           <Route path="/create-customerForm" element={<CreateCustomerForm />} />
-          <Route path="/create-ProductForm" element={<ProductForm />} />
+          <Route path="/create-ProductForm" element={<NewProductForm />} />
           <Route path="/create-Category" element={<AddNewCategory />} />
           <Route path='//addCertificate' element={<AddNewCertificate/>} />
           <Route  path='/ProductList' element={<ProductList/>} />
