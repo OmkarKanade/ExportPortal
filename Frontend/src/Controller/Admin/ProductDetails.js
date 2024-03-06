@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Layout from '../Layout/Layout';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -10,6 +12,7 @@ const ProductDetails = () => {
   const [error, setError] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
+    id: 0,
     toPuneFreight: 0,
     innerPackageMaterial: 0,
     outerPackageMaterial: 0,
@@ -34,6 +37,7 @@ const ProductDetails = () => {
       try {
         const response = await axios.get(`https://localhost:7051/api/Product/${id}`);
         setProduct(response.data);
+        setFormData(response.data);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -52,18 +56,13 @@ const ProductDetails = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (product) {
-        await axios.put(`https://localhost:7051/api/Product/${id}`, formData);
-        const updatedProduct = { ...product, ...formData };
-        setProduct(updatedProduct);
-      } else {
-        await axios.post('https://localhost:7051/api/Product', formData);
-        // Optionally, fetch the newly created product and set it to the state
-      }
+      await axios.put(`https://localhost:7051/api/Product/${id}`, formData);
+      setProduct(formData);
+      toast.success('Product updated successfully!');
       setShowForm(false);
     } catch (error) {
       console.error('Error updating product:', error);
-      // Handle error, display error message, etc.
+      toast.error('Error updating product. Please try again.');
     }
   };
 
@@ -77,10 +76,14 @@ const ProductDetails = () => {
         {loading && <p>Loading...</p>}
         {error && <p className="error-message">Error: {error}</p>}
         {product && (
-          <div className="border-2 border-sky-700 shadow-sky-700 w-96 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <div className="border-2 border-sky-700 shadow-sky-700 w-full md:w-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             <h2 className="text-lg font-bold mb-4">Product Details</h2>
             <table className="table-auto border border-collapse">
             <tbody>
+            <tr className="border-2 border-sky-700">
+                <td className="font-medium border">Product Id:</td>
+                <td className="ml-2 border-2 border-sky-700">{id}</td>
+              </tr>
               <tr className="border-2 border-sky-700">
                 <td className="font-medium border">Product Name:</td>
                 <td className="ml-2 border-2 border-sky-700">{product.name}</td>
@@ -186,7 +189,7 @@ const ProductDetails = () => {
           </div>
         )}
 
-        {showForm && (
+{showForm && (
           <div className="fixed inset-0 overflow-y-auto flex justify-center items-center z-10">
             <div className="bg-gray-800 opacity-75 fixed inset-0"></div>
             <div className="bg-white rounded-lg p-8 max-w-md w-full z-50">
@@ -381,6 +384,8 @@ const ProductDetails = () => {
           </div>
         )}
       </div>
+      {/* Toast Container */}
+      <ToastContainer position="top-right" autoClose={3000} />
     </Layout>
   );
 };
