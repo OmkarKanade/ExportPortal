@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CreateCustomerForm from './Controller//Admin/CreateCustomerForm';
 import CreateVendorForm from './Controller/Admin/CreateVendorForm';
-import ProductForm from './Controller/Admin/ProductForm';
 import NewProductForm from './Controller/Admin/NewProductForm';
 import AddNewCategory from './Controller/Admin/AddNewCategory';
 import LoginForm from './Component/LoginForm';
@@ -41,8 +40,6 @@ const App = () => {
           <Route path="/" element={<Home/>} />
           <Route path='/login' element={<LoginForm/>}/>
           <Route  path='*' element={<PageNotFound/>} />
-          
-         
           <Route  path='/aboutus' element={<AboutUsPage/>} />
 
           {/* //Admin Routes// */}

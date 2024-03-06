@@ -189,7 +189,7 @@ const ProductDetails = () => {
           </div>
         )}
 
-{showForm && (
+        {showForm && (
           <div className="fixed inset-0 overflow-y-auto flex justify-center items-center z-10">
             <div className="bg-gray-800 opacity-75 fixed inset-0"></div>
             <div className="bg-white rounded-lg p-8 max-w-md w-full z-50">
