@@ -166,7 +166,7 @@ const ProductCatalog = () => {
                                         return (
                                             <tr key={product.id}>
                                                 <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
-                                                <td className="px-6 py-4 whitespace-nowrap">{generateProductId(index)}</td>
+                                                <td className="px-6 py-4 whitespace-nowrap">{product.id}</td>
                                                 <td className="px-6 py-4 whitespace-nowrap">{product.name}</td>
                                                 <td className="px-6 py-4 whitespace-nowrap">{product.hsnCode}</td>
                                                 <td className="px-6 py-4 whitespace-nowrap">{product.totalRate} Rs</td>
