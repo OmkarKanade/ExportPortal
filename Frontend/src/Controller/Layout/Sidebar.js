@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faUserTie, faPlus, faListAlt, faCertificate, faList, faBook,  faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { faDollarSign,faMoneyBill, faUser, faUserTie, faPlus, faListAlt, faCertificate, faList, faBook,  faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 const Sidebar = ({ isOpen }) => {
   const location = useLocation();
@@ -16,6 +16,10 @@ const Sidebar = ({ isOpen }) => {
       { name: 'Add new Product', path: '/create-ProductForm', icon: faPlus },
       { name: 'Product Catalog', path: '/product-catalog', icon: faBook },
       { name: 'Product List', path: '/ProductList', icon: faList }
+    ]},
+    { name: 'Manage Currency', items: [
+      { name: 'Add new Currency', path: '/add-Currency', icon: faDollarSign },
+      { name: 'View All Currencies', path: '/viewAll-currencies', icon: faMoneyBill }
     ]},
     { name: 'Create Category', path: '/create-Category', icon: faListAlt },
     { name: 'Add Certification', path: '/addCertificate', icon: faCertificate }

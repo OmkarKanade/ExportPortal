@@ -23,6 +23,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import ProductDetails from './Controller/Admin/ProductDetails';
 import AddNewCertificate from './Controller/Admin/AddNewCertificate';
 import ProductCatalog from './Controller/Admin/ProductCatalog';
+import AddNewCurrency from './Controller/Admin/AddNewCurrency';
+import ViewAllCurrency from './Controller/Admin/ViewAllCurrency';
 
 
 const App = () => {
@@ -52,7 +54,8 @@ const App = () => {
           <Route  path='/ProductList' element={<ProductList/>} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path='/product-catalog' element={< ProductCatalog/>} />
-
+          <Route path='/add-Currency' element={<AddNewCurrency/>} />
+          <Route path='/viewAll-currencies' element={<ViewAllCurrency/>} />
 
 
           {/* //Vendor Routes// */}
