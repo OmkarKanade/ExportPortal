@@ -12,7 +12,9 @@ const AboutUsPage = () => {
         
         <div className="about-us-container">
           
-          <h1 className="text-xl font-bold mb-4 text-center">About Our Export Vendor Portal</h1>
+        <h1 className="text-3xl font-bold mb-4 text-center bg-gradient-to-r from-purple-500 to-red-500 bg-clip-text text-transparent">
+  About Our Export Vendor Portal
+</h1>
 
           <p className="mb-4">
             Welcome to our Export Vendor Portal – your gateway to streamlined and efficient international trade. We are dedicated to simplifying the export process for vendors, ensuring seamless communication, and fostering strong business relationships around the globe.
@@ -49,17 +51,21 @@ const AboutUsPage = () => {
             Thank you for choosing Export Vendor Portal for your export endeavors. We look forward to being a part of your success story.
           </p>
         </div>
-        <footer className="footer mt-8">
-          <div className="social-icons flex justify-center">
-            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" className="mr-4"><FontAwesomeIcon icon={faInstagram} /></a>
-            <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" className="mr-4"><FontAwesomeIcon icon={faTwitter} /></a>
-            <a href="https://www.google.com/" target="_blank" rel="noopener noreferrer" className="mr-4"><FontAwesomeIcon icon={faGoogle} /></a>
-            <a href="https://github.com/" target="_blank" rel="noopener noreferrer"><FontAwesomeIcon icon={faGithub} /></a>
-          </div>
-          <p className="text-center">&copy; 2024 Export Vendor Portal. All rights reserved.</p>
-        </footer>
+        
       </div>
     </div>
+    <footer className="footer mt-8 bg-black text-white p-4">
+  <div className="social-icons flex justify-center">
+    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" className="mr-4 hover:text-blue-500 text-2xl"><FontAwesomeIcon icon={faInstagram} /></a>
+    <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" className="mr-4 hover:text-blue-500 text-2xl"><FontAwesomeIcon icon={faTwitter} /></a>
+    <a href="https://www.google.com/" target="_blank" rel="noopener noreferrer" className="mr-4 hover:text-blue-500 text-2xl"><FontAwesomeIcon icon={faGoogle} /></a>
+    <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500 text-2xl"><FontAwesomeIcon icon={faGithub} /></a>
+  </div>
+  <p className="text-center">&copy; 2024 Export Vendor Portal. All rights reserved.</p>
+</footer>
+
+
+
     </>
   );
 };

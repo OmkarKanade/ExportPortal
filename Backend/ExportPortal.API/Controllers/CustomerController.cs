@@ -5,6 +5,7 @@ using ExportPortal.API.Models.DTO;
 using ExportPortal.API.Models.Domain;
 using Microsoft.EntityFrameworkCore;
 using ExportPortal.API.Mail;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ExportPortal.API.Controllers
 {
@@ -22,7 +23,7 @@ namespace ExportPortal.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] string? nameVal, [FromQuery] string? orgVal)
+        public async Task<IActionResult> GetAll([FromQuery] string? nameVal, [FromQuery] string? orgVal, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 50)
         {
             var dbCustomerResult = await userManager.GetUsersInRoleAsync("Customer");
             var customersResult = dbCustomerResult.AsQueryable();
@@ -36,6 +37,11 @@ namespace ExportPortal.API.Controllers
             {
                 customersResult = customersResult.Where(x => x.OrganizationName.ToLower().Contains(orgVal.ToLower()));
             }
+
+            // Pagination
+            var skipResults = (pageNumber - 1) * pageSize;
+
+            customersResult = customersResult.Skip(skipResults).Take(pageSize);
 
             if (customersResult != null)
             {
@@ -68,6 +74,7 @@ namespace ExportPortal.API.Controllers
         // POST: /api/Auth/Register
         [HttpPost]
         [Route("Register")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Register([FromBody] CustomerDTO customerDTO)
         {
 

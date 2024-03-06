@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import './sidebar.css';
 import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faUserTie, faPlus, faListAlt, faCertificate, faList, faBook,  faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { faDollarSign,faMoneyBill, faUser, faUserTie, faPlus, faListAlt, faCertificate, faList, faBook,  faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 const Sidebar = ({ isOpen }) => {
   const location = useLocation();
@@ -9,13 +10,17 @@ const Sidebar = ({ isOpen }) => {
 
   const lists = [
     { name: 'Create Account', items: [
-      { name: 'Create Customer Account', path: '/create-customerForm', icon: faUser },
-      { name: 'Create Vendor Account', path: '/create-vendorForm', icon: faUserTie }
+      { name: 'Customer Account', path: '/create-customerForm', icon: faUser },
+      { name: 'Vendor Account', path: '/create-vendorForm', icon: faUserTie }
     ]},
-    { name: 'Create Product', items: [
+    { name: 'Manage Product', items: [
       { name: 'Add new Product', path: '/create-ProductForm', icon: faPlus },
       { name: 'Product Catalog', path: '/product-catalog', icon: faBook },
       { name: 'Product List', path: '/ProductList', icon: faList }
+    ]},
+    { name: 'Manage Currency', items: [
+      { name: 'Add new Currency', path: '/add-Currency', icon: faDollarSign },
+      { name: 'View All Currencies', path: '/viewAll-currencies', icon: faMoneyBill }
     ]},
     { name: 'Create Category', path: '/create-Category', icon: faListAlt },
     { name: 'Add Certification', path: '/addCertificate', icon: faCertificate }
@@ -26,7 +31,7 @@ const Sidebar = ({ isOpen }) => {
   };
 
   return (
-    <div className={`lg:w-64 bg-gray-200 text-gray border-2 leading-9 border-gray-400 ${isOpen ? 'block' : 'hidden'}`}>
+    <div className={`sidebar lg:w-64 bg-gray-200 text-gray border-2 leading-9 border-gray-400 ${isOpen ? 'sidebar-open' : 'sidebar-close'}`}>
       <div className="lg:block hidden">
         <div className="flex justify-between items-center p-4">
           <h1 className="text-2xl font-bold"></h1>

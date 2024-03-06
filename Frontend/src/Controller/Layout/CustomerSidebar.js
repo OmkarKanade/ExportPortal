@@ -17,7 +17,7 @@ const Sidebar = ({ isOpen }) => {
   };
 
   return (
-    <div className={`lg:w-64 bg-gray-200 text-gray border-2 leading-9 border-gray-400 ${isOpen ? 'block' : 'hidden'}`}>
+    <div className={`sidebar lg:w-64 bg-gray-200 text-gray border-2 leading-9 border-gray-400 ${isOpen ? 'sidebar-open' : 'sidebar-close'}`}>
       <div className="lg:block hidden">
         <div className="flex justify-between items-center p-4">
           <h1 className="text-2xl font-bold"></h1>
