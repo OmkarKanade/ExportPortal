@@ -4,7 +4,8 @@ namespace ExportPortal.API.Models.DTO
 {
     public class ProductResponseDTO
     {
-        public String Id { get; set; }
+        public string Id { get; set; } // Change data type to string
+
         public string Name { get; set; }
         public string ImgPath { get; set; }
         public string ScientificName { get; set; }

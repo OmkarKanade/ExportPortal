@@ -3,8 +3,6 @@ using ExportPortal.API.Models.Domain;
 using ExportPortal.API.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
-
 
 namespace ExportPortal.API.Controllers
 {
@@ -33,10 +31,11 @@ namespace ExportPortal.API.Controllers
             if (products != null)
             {
                 List<ProductResponseDTO> productDTO = new List<ProductResponseDTO>();
-                foreach (var productDomain in products) {
+                foreach (var productDomain in products)
+                {
                     var productResponseDTO = new ProductResponseDTO
                     {
-                        Id = productDomain.Id,
+                        Id = productDomain.Id, // Assuming CustomId is a string
                         Name = productDomain.Name,
                         ImgPath = productDomain.ImgPath,
                         ScientificName = productDomain.ScientificName,
@@ -76,6 +75,7 @@ namespace ExportPortal.API.Controllers
         }
 
 
+
         [HttpPost]
         public async Task<ActionResult<Product>> AddProduct([FromForm] ProductDTO productDto)
         {
@@ -103,12 +103,28 @@ namespace ExportPortal.API.Controllers
             var urlFilePath = $"{httpContextAccessor.HttpContext.Request.Scheme}://{httpContextAccessor.HttpContext.Request.Host}{httpContextAccessor.HttpContext.Request.PathBase}/Images/{productDto.File.FileName}{Path.GetExtension(productDto.File.FileName)}";
 
             // Generate string ID in the format "Prod_{auto-increment}"
-            int productCount = await dbContext.Products.CountAsync();
-            string stringId = $"Prod_{productCount + 1}";
+            //int productCount = await dbContext.Products.CountAsync();
+            //string stringId = $"Prod_{productCount + 1}";
+
+            // Get the maximum auto-incremental ID from the database
+            //int productId = await dbContext.Products.MaxAsync(p => p.Id) + 1;
+            // Get the maximum auto-incremental ID from the database
+
+            var maxId = await dbContext.Products.MaxAsync(p => p.Id);
+            int nextId = 1;
+            if (!string.IsNullOrEmpty(maxId))
+            {
+                // Extract the numeric part from the ID and increment it
+                nextId = int.Parse(maxId.Replace("Prod_", "")) + 1;
+            }
+
+            // Generate the custom ID with the prefix "Prod_" and the auto-incremental value
+            string productId = $"Prod_{nextId}";
+
 
             var productDomain = new Product
             {
-                Id = stringId,
+                Id = productId, // Assign the auto-incremental ID
                 Name = productDto.Name,
                 ScientificName = productDto.ScientificName,
                 ImgPath = urlFilePath,
@@ -146,10 +162,16 @@ namespace ExportPortal.API.Controllers
         [Route("{id}")]
         public async Task<IActionResult> GetById([FromRoute] string id)
         {
+            //if (!int.TryParse(id, out int productId))
+            //{
+            //   return BadRequest("Invalid product ID format.");
+            //}
 
+            // In GetById method
             var productDomain = await dbContext.Products.Include("Certification").Include("VendorCategory")
                 .Include(u => u.UserProfile1).Include(u => u.UserProfile2)
                 .Include(u => u.UserProfile3).FirstOrDefaultAsync(x => x.Id == id);
+
             if (productDomain != null)
             {
                 var productResponseDto = new ProductResponseDTO
@@ -193,17 +215,19 @@ namespace ExportPortal.API.Controllers
         public async Task<IActionResult> GetAllProductsAssigned([FromRoute] string id)
         {
             // Convert string ID to Guid for comparison
-            Guid guidId;
-            if (!Guid.TryParse(id, out guidId))
-            {
-                return BadRequest("Invalid vendor ID format.");
-            }
+            //Guid guidId;
+            //if (!Guid.TryParse(id, out guidId))
+            //{
+            //    return BadRequest("Invalid vendor ID format.");
+            //}
 
+            // In GetAllProductsAssigned method
             List<Product> products = await dbContext.Products.Include("Certification")
                 .Include("VendorCategory").Include(u => u.UserProfile1)
                 .Include(u => u.UserProfile2).Include(u => u.UserProfile3)
                 .Where(x => x.VendorId1 == id || x.VendorId2 == id || x.VendorId3 == id)
                 .ToListAsync();
+
 
             if (products != null)
             {
@@ -252,8 +276,13 @@ namespace ExportPortal.API.Controllers
 
         [HttpPut]
         [Route("{id}")]
-        public async Task<IActionResult> Update([FromRoute] String id, [FromBody] ProductUpdateDTO productUpdateDTO)
+        public async Task<IActionResult> Update([FromRoute] string id, [FromBody] ProductUpdateDTO productUpdateDTO)
         {
+            // Parse id as string, since it's a string now
+            if (id == null)
+            {
+                return BadRequest("Invalid product ID format.");
+            }
 
             var updateResult = await dbContext.Products.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -277,12 +306,12 @@ namespace ExportPortal.API.Controllers
                 updateResult.DairyDeclarationRequired = productUpdateDTO.DairyDeclarationRequired;
                 updateResult.IsForHumanConsumption = productUpdateDTO.IsForHumanConsumption;
 
-                dbContext.SaveChangesAsync();
+                await dbContext.SaveChangesAsync();
 
                 return Ok(productUpdateDTO);
             }
 
-            return BadRequest("Something went wrong");
+            return BadRequest("Product not found");
         }
 
     }

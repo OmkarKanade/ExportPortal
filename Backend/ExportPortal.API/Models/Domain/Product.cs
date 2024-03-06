@@ -3,7 +3,7 @@ namespace ExportPortal.API.Models.Domain
 {
     public class Product
     {
-        public string Id { get; set; } // Change type to string
+        public string Id { get; set; } // Change data type to string
 
         public string Name { get; set; }
         public string ImgPath { get; set; }
