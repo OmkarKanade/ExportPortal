@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExportPortal.API.Migrations
 {
     [DbContext(typeof(ExportPortalDbContext))]
-    [Migration("20240229091321_Initial Migration")]
+    [Migration("20240306052857_Initial Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -35,6 +35,25 @@ namespace ExportPortal.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Certifications");
+                });
+
+            modelBuilder.Entity("ExportPortal.API.Models.Domain.Currency", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Currencies");
                 });
 
             modelBuilder.Entity("ExportPortal.API.Models.Domain.Product", b =>
