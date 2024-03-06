@@ -5,6 +5,7 @@ using ExportPortal.API.Models.DTO;
 using ExportPortal.API.Models.Domain;
 using Microsoft.EntityFrameworkCore;
 using ExportPortal.API.Mail;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ExportPortal.API.Controllers
 {
@@ -68,6 +69,7 @@ namespace ExportPortal.API.Controllers
         // POST: /api/Auth/Register
         [HttpPost]
         [Route("Register")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Register([FromBody] CustomerDTO customerDTO)
         {
 
