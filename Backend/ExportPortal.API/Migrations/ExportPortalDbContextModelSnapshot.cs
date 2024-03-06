@@ -55,9 +55,8 @@ namespace ExportPortal.API.Migrations
 
             modelBuilder.Entity("ExportPortal.API.Models.Domain.Product", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("BagOrBox")
                         .IsRequired()

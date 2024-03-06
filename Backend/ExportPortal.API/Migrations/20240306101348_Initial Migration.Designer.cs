@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExportPortal.API.Migrations
 {
     [DbContext(typeof(ExportPortalDbContext))]
-    [Migration("20240306052857_Initial Migration")]
+    [Migration("20240306101348_Initial Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -58,9 +58,8 @@ namespace ExportPortal.API.Migrations
 
             modelBuilder.Entity("ExportPortal.API.Models.Domain.Product", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("BagOrBox")
                         .IsRequired()
