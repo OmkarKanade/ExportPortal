@@ -1,17 +1,13 @@
 ﻿
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExportPortal.API.Models.Domain
 {
     public class Product
     {
-        [Key, Column(Order = 0)]
         public Guid Id { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-
-      
         public int AutoId { get; set; }
         public string ProductId => $"Prod_{AutoId}";
 
