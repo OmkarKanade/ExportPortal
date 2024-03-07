@@ -24,15 +24,36 @@ namespace ExportPortal.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllProducts()
+        public async Task<IActionResult> GetAllProducts([FromQuery] string? filterOn, [FromQuery] string? filterVal)
         {
-            List<Product> products = await dbContext.Products.Include("Certification")
+            var products = dbContext.Products.Include("Certification")
                 .Include("VendorCategory").Include(u => u.UserProfile1)
-                .Include(u => u.UserProfile2).Include(u => u.UserProfile3).ToListAsync();
+                .Include(u => u.UserProfile2).Include(u => u.UserProfile3).AsQueryable();
+
+            if (String.IsNullOrWhiteSpace(filterOn) == false && String.IsNullOrWhiteSpace(filterVal) == false)
+            {
+                if (filterOn.Equals("ProductId", StringComparison.OrdinalIgnoreCase))
+                {
+                    products = products.Where(x => x.ProductId.ToLower().Contains(filterVal.ToLower()));
+
+                }
+                if (filterOn.Equals("Certification", StringComparison.OrdinalIgnoreCase))
+                {
+                    products = products.Where(x => x.Certification.Name.ToLower().Contains(filterVal.ToLower()));
+
+                }
+                if (filterOn.Equals("VendorCategory", StringComparison.OrdinalIgnoreCase))
+                {
+                    products = products.Where(x => x.VendorCategory.Name.ToLower().Contains(filterVal.ToLower()));
+
+                }
+            }
+
             if (products != null)
             {
                 List<ProductResponseDTO> productDTO = new List<ProductResponseDTO>();
-                foreach (var productDomain in products) {
+                foreach (var productDomain in products)
+                {
                     var productResponseDTO = new ProductResponseDTO
                     {
                         Id = productDomain.Id,
@@ -189,13 +210,31 @@ namespace ExportPortal.API.Controllers
 
         [HttpGet]
         [Route("Vendor/{id:Guid}")]
-        public async Task<IActionResult> GetAllProductsAssigned([FromRoute] string id)
+        public async Task<IActionResult> GetAllProductsAssigned([FromRoute] string id, [FromQuery] string? filterOn, [FromQuery] string? filterVal)
         {
-            List<Product> products = await dbContext.Products.Include("Certification")
+            var products = dbContext.Products.Include("Certification")
                 .Include("VendorCategory").Include(u => u.UserProfile1)
                 .Include(u => u.UserProfile2).Include(u => u.UserProfile3)
-                .Where(x => x.VendorId1 == id || x.VendorId2 == id || x.VendorId3 == id)
-                .ToListAsync();
+                .Where(x => x.VendorId1 == id || x.VendorId2 == id || x.VendorId3 == id).AsQueryable();
+
+            if (String.IsNullOrWhiteSpace(filterOn) == false && String.IsNullOrWhiteSpace(filterVal) == false)
+            {
+                if (filterOn.Equals("ProductId", StringComparison.OrdinalIgnoreCase))
+                {
+                    products = products.Where(x => x.ProductId.ToLower().Contains(filterVal.ToLower()));
+
+                }
+                if (filterOn.Equals("Certification", StringComparison.OrdinalIgnoreCase))
+                {
+                    products = products.Where(x => x.Certification.Name.ToLower().Contains(filterVal.ToLower()));
+
+                }
+                if (filterOn.Equals("VendorCategory", StringComparison.OrdinalIgnoreCase))
+                {
+                    products = products.Where(x => x.VendorCategory.Name.ToLower().Contains(filterVal.ToLower()));
+
+                }
+            }
 
             if (products != null)
             {
