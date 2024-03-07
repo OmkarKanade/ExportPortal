@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import Layout from '../Layout/Layout';
+import CustomerDashboard from './CustomerDashboard';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -105,7 +105,7 @@ const CProductCatalog = () => {
 
     return (
         <Fragment>
-            <Layout>
+          <CustomerDashboard>
                 {/* Search Input, Filter Options, and Sorting */}
                 <h1 className="text-3xl text-gray-700 font-bold mb-4">Products Catalog</h1>
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
@@ -156,7 +156,7 @@ const CProductCatalog = () => {
                                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Product Name</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">HSN Code</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Total Price</th>
-                                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">View</th>
+                                {/* <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">View</th> */}
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
@@ -170,11 +170,11 @@ const CProductCatalog = () => {
                                                 <td className="px-6 py-4 whitespace-nowrap">{product.name}</td>
                                                 <td className="px-6 py-4 whitespace-nowrap">{product.hsnCode}</td>
                                                 <td className="px-6 py-4 whitespace-nowrap">{product.totalRate} Rs</td>
-                                                <td className="px-6 py-4 whitespace-nowrap">
+                                                {/* <td className="px-6 py-4 whitespace-nowrap">
                                                     <Link to={`/product/${product.id}`}>
                                                         <FontAwesomeIcon icon={faEye} />
                                                     </Link>
-                                                </td>
+                                                </td> */}
                                             </tr>
                                         )
                                     })
@@ -186,7 +186,7 @@ const CProductCatalog = () => {
                         </tbody>
                     </table>
                 </div>
-            </Layout>
+                </CustomerDashboard>
         </Fragment>
     )
 }

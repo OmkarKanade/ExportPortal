@@ -12,7 +12,7 @@ const ProductDetails = () => {
   const [error, setError] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
-    id: 0,
+    productId: 0,
     toPuneFreight: 0,
     innerPackageMaterial: 0,
     outerPackageMaterial: 0,
@@ -81,9 +81,9 @@ const ProductDetails = () => {
             <table className="table-auto border border-collapse">
             <tbody>
             <tr className="border-2 border-sky-700">
-                <td className="font-medium border">Product Id:</td>
-                <td className="ml-2 border-2 border-sky-700">{id}</td>
-              </tr>
+                  <td className="font-medium border">Product Id:</td>
+                  <td className="ml-2 border-2 border-sky-700">{product.productId}</td>
+                </tr>
               <tr className="border-2 border-sky-700">
                 <td className="font-medium border">Product Name:</td>
                 <td className="ml-2 border-2 border-sky-700">{product.name}</td>

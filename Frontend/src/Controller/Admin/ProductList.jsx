@@ -29,7 +29,7 @@ const ProductPage = () => {
             <div className="cardd bg-white p-4 rounded-lg shadow-md" key={product.id}>
               <div className="carddd-info">
                 <Link to={`/product/${product.id}`}>
-                  <h5 className="carddd-text font-semibold">Product ID: {product.id}</h5>
+                  <h5 className="carddd-text font-semibold">Product ID: {product.productId}</h5>
                 </Link>
                 <h5 className="carddd-text">Name: {product.name}</h5>
                 <p className="carddd-text">Scientific Name: {product.scientificName}</p>
