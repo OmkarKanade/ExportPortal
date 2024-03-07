@@ -87,7 +87,7 @@ const ProductForm = () => {
   
     const productData = {
       name: formData.name,
-      //file: formData.file, // Make sure to include the file if needed
+      file: formData.file, // Make sure to include the file if needed
       scientificName: formData.scientificName,
       vendorCategoryId: formData.vendorCategoryId,
       vendorId1: formData.vendorId1,
