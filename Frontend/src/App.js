@@ -25,6 +25,7 @@ import AddNewCertificate from './Controller/Admin/AddNewCertificate';
 import ProductCatalog from './Controller/Admin/ProductCatalog';
 import AddNewCurrency from './Controller/Admin/AddNewCurrency';
 import ViewAllCurrency from './Controller/Admin/ViewAllCurrency';
+import CProductCatalog from './Controller/Customer/CProdductCatlog';
 
 
 const App = () => {
@@ -66,6 +67,7 @@ const App = () => {
           <Route path='/customer-id' element={<Customer/>} />
           <Route path='/customer-profile' element={<CustomerProfileView/>} />
           <Route  path='/cProductList' element={<CProductList/>} />
+          <Route path='/Cproduct-Catalog' element={<CProductCatalog/>} />
           
         </Routes>
     </Router>
