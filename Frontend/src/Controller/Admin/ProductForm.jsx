@@ -7,7 +7,9 @@ import { toast } from 'react-toastify';
 const ProductForm = () => {
   const [formData, setFormData] = useState({
     dairyDeclarationRequired: false,
-    isForHumanConsumption: false
+    isForHumanConsumption: false,
+    //newly added for file
+    file: null // Add file property
   });
   const [categories, setCategories] = useState([]);
   const [certifications, setCertifications] = useState([]);
@@ -64,11 +66,55 @@ const ProductForm = () => {
     }));
   };
 
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   console.log("Form Data:", formData);
+    
+  //   axios.post('https://localhost:7051/api/Product', formData)
+  //     .then(response => {
+  //       toast.success(`Product ${formData.name} created successfully`);
+  //       console.log('Response from server:', response.data);
+  //     })
+  //     .catch(error => {
+  //       toast.error('Failed to create product');
+  //       console.error('Error creating product:', error);
+  //     });
+  // };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("Form Data:", formData);
-    
-    axios.post('https://localhost:7051/api/Product', formData)
+  
+    const productData = {
+      name: formData.name,
+      //file: formData.file, // Make sure to include the file if needed
+      scientificName: formData.scientificName,
+      vendorCategoryId: formData.vendorCategoryId,
+      vendorId1: formData.vendorId1,
+      vendorId2: formData.vendorId2,
+      vendorId3: formData.vendorId3,
+      hsnCode: formData.hsnCode,
+      toPuneFreight: formData.toPuneFreight,
+      innerPackageMaterial: formData.innerPackageMaterial,
+      outerPackageMaterial: formData.outerPackageMaterial,
+      manualPackage: formData.manualPackage,
+      machinePackage: formData.machinePackage,
+      localTransport: formData.localTransport,
+      fumigation: formData.fumigation,
+      totalRate: formData.totalRate,
+      grossWeight: formData.grossWeight,
+      pouchType: formData.pouchType,
+      bumperisPouches: formData.bumperisPouches,
+      bagOrBox: formData.bagOrBox,
+      bagOrBoxBumpers: formData.bagOrBoxBumpers,
+      ingredients: formData.ingredients,
+      manufacturingProcess: formData.manufacturingProcess,
+      dairyDeclarationRequired: formData.dairyDeclarationRequired,
+      isForHumanConsumption: formData.isForHumanConsumption,
+      certificationId: formData.certificationId,
+    };
+  
+    axios.post('https://localhost:7051/api/Product', productData)
       .then(response => {
         toast.success(`Product ${formData.name} created successfully`);
         console.log('Response from server:', response.data);
@@ -78,6 +124,7 @@ const ProductForm = () => {
         console.error('Error creating product:', error);
       });
   };
+  
 
   const nextStep = () => {
     setCurrentStep(currentStep + 1);
