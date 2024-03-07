@@ -8,8 +8,7 @@ const ProductForm = () => {
   const [formData, setFormData] = useState({
     dairyDeclarationRequired: false,
     isForHumanConsumption: false,
-    //newly added for file
-    file: null // Add file property
+    file: null  // Added file state
   });
   const [categories, setCategories] = useState([]);
   const [certifications, setCertifications] = useState([]);
@@ -58,63 +57,25 @@ const ProductForm = () => {
   }, []);
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    const inputValue = type === 'checkbox' ? checked : value;
+    const { name, value, type, checked, files } = e.target;
+    const inputValue = type === 'checkbox' ? checked : type === 'file' ? files[0] : value;
     setFormData(prevState => ({
       ...prevState,
       [name]: inputValue
     }));
   };
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   console.log("Form Data:", formData);
-    
-  //   axios.post('https://localhost:7051/api/Product', formData)
-  //     .then(response => {
-  //       toast.success(`Product ${formData.name} created successfully`);
-  //       console.log('Response from server:', response.data);
-  //     })
-  //     .catch(error => {
-  //       toast.error('Failed to create product');
-  //       console.error('Error creating product:', error);
-  //     });
-  // };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("Form Data:", formData);
-  
-    const productData = {
-      name: formData.name,
-      file: formData.file, // Make sure to include the file if needed
-      scientificName: formData.scientificName,
-      vendorCategoryId: formData.vendorCategoryId,
-      vendorId1: formData.vendorId1,
-      vendorId2: formData.vendorId2,
-      vendorId3: formData.vendorId3,
-      hsnCode: formData.hsnCode,
-      toPuneFreight: formData.toPuneFreight,
-      innerPackageMaterial: formData.innerPackageMaterial,
-      outerPackageMaterial: formData.outerPackageMaterial,
-      manualPackage: formData.manualPackage,
-      machinePackage: formData.machinePackage,
-      localTransport: formData.localTransport,
-      fumigation: formData.fumigation,
-      totalRate: formData.totalRate,
-      grossWeight: formData.grossWeight,
-      pouchType: formData.pouchType,
-      bumperisPouches: formData.bumperisPouches,
-      bagOrBox: formData.bagOrBox,
-      bagOrBoxBumpers: formData.bagOrBoxBumpers,
-      ingredients: formData.ingredients,
-      manufacturingProcess: formData.manufacturingProcess,
-      dairyDeclarationRequired: formData.dairyDeclarationRequired,
-      isForHumanConsumption: formData.isForHumanConsumption,
-      certificationId: formData.certificationId,
-    };
-  
-    axios.post('https://localhost:7051/api/Product', productData)
+    
+    const formDataToSend = new FormData();
+    formDataToSend.append('dairyDeclarationRequired', formData.dairyDeclarationRequired);
+    formDataToSend.append('isForHumanConsumption', formData.isForHumanConsumption);
+    formDataToSend.append('file', formData.file);
+    // Add other form data fields as needed
+
+    axios.post('https://localhost:7051/api/Product', formDataToSend)
       .then(response => {
         toast.success(`Product ${formData.name} created successfully`);
         console.log('Response from server:', response.data);
@@ -124,7 +85,6 @@ const ProductForm = () => {
         console.error('Error creating product:', error);
       });
   };
-  
 
   const nextStep = () => {
     setCurrentStep(currentStep + 1);
@@ -213,6 +173,10 @@ const ProductForm = () => {
                   <label htmlFor="hsnCode" className="block text-gray-700 text-sm font-bold mb-2">HSN Code (unique)</label>
                   <input type="text" id="hsnCode" name="hsnCode" value={formData.hsnCode} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                 </div>
+                <div className="mb-4">
+                  <label htmlFor="file" className="block text-gray-700 text-sm font-bold mb-2">Upload File:</label>
+                  <input type="file" id="file" name="file" onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                </div>
                 {renderNextButton()}
               </>
             )}
@@ -258,33 +222,33 @@ const ProductForm = () => {
 
             {currentStep === 3 && (
               <>
-               <div className="mb-4">
-      <label htmlFor="grossWeight" className="block text-gray-700 text-sm font-bold mb-2">Gross Weight (per pack in grams)</label>
-      <input type="number" id="grossWeight" name="grossWeight" value={formData.grossWeight} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-    </div>
-    <div className="mb-4">
-      <label htmlFor="pouchType" className="block text-gray-700 text-sm font-bold mb-2">Select Pouch Type</label>
-      <select required id="pouchType" name="pouchType" value={formData.pouchType} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-        <option value="" disabled>Select an option</option>
-        <option value="Type1">Type 1</option>
-        <option value="Type2">Type 2</option>
-      </select>
-    </div>
-    <div className="mb-4">
-      <label htmlFor="bumperisPouches" className="block text-gray-700 text-sm font-bold mb-2">1 Bumper is ____ Pouches (number)</label>
-      <input type="number" id="bumperisPouches" name="bumperisPouches" value={formData.bumperisPouches} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-    </div>
-    <div className="mb-4">
-      <label className="block text-gray-700 text-sm font-bold mb-2">Select Bag/Box</label><br />
-      <input type="radio" id="bag" name="bagOrBox" value="Bag" onChange={handleChange} className="mr-2 leading-tight" />
-      <label htmlFor="bag" className="text-sm">Bag</label>
-      <input type="radio" id="box" name="bagOrBox" value="Box" onChange={handleChange} className="mr-2 ml-4 leading-tight" />
-      <label htmlFor="box" className="text-sm">Box</label>
-    </div>
-    <div className="mb-4">
-      <label htmlFor="bagOrBoxBumpers" className="block text-gray-700 text-sm font-bold mb-2">1 Bag/Box = _____ Bumpers (number)</label>
-      <input type="number" id="bagOrBoxBumpers" name="bagOrBoxBumpers" value={formData.bagOrBoxBumpers} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-    </div>
+              <div className="mb-4">
+                <label htmlFor="grossWeight" className="block text-gray-700 text-sm font-bold mb-2">Gross Weight (per pack in grams)</label>
+                <input type="number" id="grossWeight" name="grossWeight" value={formData.grossWeight} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+              </div>
+              <div className="mb-4">
+                <label htmlFor="pouchType" className="block text-gray-700 text-sm font-bold mb-2">Select Pouch Type</label>
+                <select required id="pouchType" name="pouchType" value={formData.pouchType} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                  <option value="" disabled>Select an option</option>
+                  <option value="Type1">Type 1</option>
+                  <option value="Type2">Type 2</option>
+                </select>
+              </div>
+              <div className="mb-4">
+                <label htmlFor="bumperisPouches" className="block text-gray-700 text-sm font-bold mb-2">1 Bumper is ____ Pouches (number)</label>
+                <input type="number" id="bumperisPouches" name="bumperisPouches" value={formData.bumperisPouches} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2">Select Bag/Box</label><br />
+                <input type="radio" id="bag" name="bagOrBox" value="Bag" onChange={handleChange} className="mr-2 leading-tight" />
+                <label htmlFor="bag" className="text-sm">Bag</label>
+                <input type="radio" id="box" name="bagOrBox" value="Box" onChange={handleChange} className="mr-2 ml-4 leading-tight" />
+                <label htmlFor="box" className="text-sm">Box</label>
+              </div>
+              <div className="mb-4">
+                <label htmlFor="bagOrBoxBumpers" className="block text-gray-700 text-sm font-bold mb-2">1 Bag/Box = _____ Bumpers (number)</label>
+                <input type="number" id="bagOrBoxBumpers" name="bagOrBoxBumpers" value={formData.bagOrBoxBumpers} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+              </div>
 
                 {renderPreviousButton()}
                 {renderNextButton()}
