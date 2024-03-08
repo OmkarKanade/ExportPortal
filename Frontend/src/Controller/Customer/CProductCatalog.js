@@ -1,9 +1,8 @@
 import React, { useState, useEffect, Fragment } from "react";
 import CustomerDashboard from "./CustomerDashboard";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CProductCatalog = () => {
   const [products, setProducts] = useState([]);
@@ -12,6 +11,7 @@ const CProductCatalog = () => {
   const [filterBy, setFilterBy] = useState("name");
   const [filterValue, setFilterValue] = useState("");
   const [sortOrder, setSortOrder] = useState("asc"); // Default sorting order
+  const [customerId, setCustomerId] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,6 +25,9 @@ const CProductCatalog = () => {
     };
 
     fetchData();
+    // Fetch customerId from sessionStorage
+    const sid = sessionStorage.getItem("sid");
+    setCustomerId(sid);
   }, []);
 
   // Function to handle search input change
@@ -97,44 +100,54 @@ const CProductCatalog = () => {
     setFilteredProducts(sortedProducts);
   };
 
-  // Function to add a product to cart
-  const addToCart = (productId, quantity) => {
-    // Implement your addToCart logic here
-  };
-
-  // Function to generate custom product ID
-  const generateProductId = (index) => {
-    return `000${index + 1}`.slice(-4);
-  };
-
-  // Function to handle quantity change
+  // Function to handle quantity change and calculate total quantity
   const handleQuantityChange = (productId, newQuantity) => {
     const updatedProducts = filteredProducts.map((product) => {
       if (product.id === productId) {
-        return { ...product, quantity: newQuantity };
+        const totalQuantity = newQuantity * product.bagOrBoxBumpers;
+        return {
+          ...product,
+          quantity: newQuantity,
+          totalQuantity: totalQuantity,
+        };
       }
       return product;
     });
     setFilteredProducts(updatedProducts);
   };
 
+  // Function to post quotation
+  const postQuotation = async (productId, totalQuantity, customerId) => {
+    try {
+      const response = await axios.post(
+        "https://localhost:7051/api/Quotation",
+        {
+          productId: productId,
+          totalQuantity: totalQuantity,
+          customerId: customerId,
+        }
+      );
+
+      console.log("Quotation posted successfully:", response.data);
+      toast.success("Added to Quotation successfully!");
+      // Add any success message or redirection logic after successful post
+    } catch (error) {
+      console.error("Error posting quotation:", error);
+      toast.error("Failed to add to Quotation. Please try again.");
+      // Handle error scenarios
+    }
+  };
+
   return (
     <Fragment>
       <CustomerDashboard>
+        <ToastContainer />
         {/* Search Input, Filter Options, and Sorting */}
         <h1 className="text-3xl text-gray-700 font-bold mb-4">
           Products Catalog
         </h1>
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
           {/* Search Input */}
-          {/* <input
-            type="text"
-            placeholder="Search products..."
-            value={searchTerm}
-            onChange={handleSearchChange}
-            className="border border-gray-300 px-3 py-2 rounded-md mb-2 md:mb-0"
-          /> */}
-
           <div className="flex items-center">
             {/* Filter By Dropdown */}
             <select
@@ -192,7 +205,6 @@ const CProductCatalog = () => {
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Bag or Box
                 </th>
-                {/* <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Total Price</th> */}
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Quantity
                 </th>
@@ -244,16 +256,20 @@ const CProductCatalog = () => {
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        
+                        {product.totalQuantity || 0}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <button
                           className="bg-sky-700 hover:bg-sky-900 text-white font-bold py-2 px-4 rounded"
                           onClick={() =>
-                            addToCart(product.id, product.quantity)
+                            postQuotation(
+                              product.id,
+                              product.totalQuantity,
+                              customerId // Replace 'customerId' with the actual ID
+                            )
                           }
                         >
-                          Add to Quatation
+                          Add to Quotation
                         </button>
                       </td>
                     </tr>

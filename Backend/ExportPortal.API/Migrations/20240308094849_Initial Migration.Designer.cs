@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExportPortal.API.Migrations
 {
     [DbContext(typeof(ExportPortalDbContext))]
-    [Migration("20240308091805_Initial Migration")]
+    [Migration("20240308094849_Initial Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
