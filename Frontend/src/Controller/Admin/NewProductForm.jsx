@@ -15,8 +15,13 @@ const ProductForm = () => {
         machinePackage: 0,
         localTransport: 0,
         fumigation: 0,
-        totalRate: 0
+        totalRate: 0,
+        //file: null // New property for file upload
     });
+
+    // Separate state for file data
+    const [fileData, setFileData] = useState(null);
+
     const [categories, setCategories] = useState([]);
     const [certifications, setCertifications] = useState([]);
     const [vendors, setVendors] = useState([]);
@@ -67,9 +72,37 @@ const ProductForm = () => {
         calculateTotalRate();
     }, [formData.toPuneFreight, formData.innerPackageMaterial, formData.outerPackageMaterial, formData.manualPackage, formData.machinePackage, formData.localTransport, formData.fumigation]);
 
+    // const handleChange = (e) => {
+    //     const { name, value, type, checked } = e.target;
+    //     const inputValue = type === 'checkbox' ? checked : value;
+    //     setFormData(prevState => ({
+    //         ...prevState,
+    //         [name]: inputValue
+    //     }));
+    // };
+
+    // Function to handle file upload
+    const handleFileUpload = (event) => {
+        const file = event.target.files[0];
+        setFileData(file);
+        // Save the file to local storage
+        localStorage.setItem('productImage', JSON.stringify(file));
+    };
+    
+
+    useEffect(() => {
+        // Load file data from local storage
+        const storedFile = localStorage.getItem('productImage');
+        if (storedFile) {
+            setFileData(JSON.parse(storedFile));
+        }
+    }, []);
+    
+
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
         const inputValue = type === 'checkbox' ? checked : value;
+
         setFormData(prevState => ({
             ...prevState,
             [name]: inputValue
@@ -85,11 +118,40 @@ const ProductForm = () => {
         }));
     };
 
+
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log("Form Data:", formData);
 
-        axios.post('https://localhost:7051/api/Product', formData)
+        const formDataToSend = new FormData();
+        formDataToSend.append('name', formData.name);
+        formDataToSend.append('scientificName', formData.scientificName);
+        formDataToSend.append('vendorCategoryId', formData.vendorCategoryId);
+        formDataToSend.append('vendorId1', formData.vendorId1);
+        formDataToSend.append('vendorId2', formData.vendorId2);
+        formDataToSend.append('vendorId3', formData.vendorId3);
+        formDataToSend.append('hsnCode', formData.hsnCode);
+        formDataToSend.append('toPuneFreight', formData.toPuneFreight);
+        formDataToSend.append('innerPackageMaterial', formData.innerPackageMaterial);
+        formDataToSend.append('outerPackageMaterial', formData.outerPackageMaterial);
+        formDataToSend.append('manualPackage', formData.manualPackage);
+        formDataToSend.append('machinePackage', formData.machinePackage);
+        formDataToSend.append('localTransport', formData.localTransport);
+        formDataToSend.append('fumigation', formData.fumigation);
+        formDataToSend.append('totalRate', formData.totalRate);
+        formDataToSend.append('grossWeight', formData.grossWeight);
+        formDataToSend.append('pouchType', formData.pouchType);
+        formDataToSend.append('bumperisPouches', formData.bumperisPouches);
+        formDataToSend.append('bagOrBox', formData.bagOrBox);
+        formDataToSend.append('bagOrBoxBumpers', formData.bagOrBoxBumpers);
+        formDataToSend.append('ingredients', formData.ingredients);
+        formDataToSend.append('manufacturingProcess', formData.manufacturingProcess);
+        formDataToSend.append('dairyDeclarationRequired', formData.dairyDeclarationRequired);
+        formDataToSend.append('isForHumanConsumption', formData.isForHumanConsumption);
+        formDataToSend.append('certificationId', formData.certificationId);
+
+        formDataToSend.append('file', fileData);
+
+        axios.post('https://localhost:7051/api/Product', formDataToSend)
             .then(response => {
                 toast.success(`Product ${formData.name} created successfully`);
                 console.log('Response from server:', response.data);
@@ -99,6 +161,9 @@ const ProductForm = () => {
                 console.error('Error creating product:', error);
             });
     };
+
+
+
 
     const nextStep = () => {
         setCurrentStep(currentStep + 1);
@@ -186,6 +251,11 @@ const ProductForm = () => {
                                 <div className="mb-4">
                                     <label htmlFor="hsnCode" className="block text-gray-700 text-sm font-bold mb-2">HSN Code (unique)</label>
                                     <input type="text" id="hsnCode" name="hsnCode" value={formData.hsnCode} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                                </div>
+                                {/* New file upload field */}
+                                <div className="mb-4">
+                                    <label htmlFor="fileUpload" className="block text-gray-700 text-sm font-bold mb-2">Upload File</label>
+                                    <input type="file" id="fileUpload" name="file" onChange={handleFileUpload} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                                 </div>
                                 {renderNextButton()}
                             </>
