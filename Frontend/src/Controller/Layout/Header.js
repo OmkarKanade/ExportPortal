@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faEllipsisV } from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 
 const Header = ({ toggleSidebar }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,13 +12,13 @@ const Header = ({ toggleSidebar }) => {
 
   return (
     <div className="headerr flex justify-between items-center px-4 py-2 h-19 bg-sky-700 text-white">
-      <div className="flex items-center">
+      <div className='flex items-center'>
         <button onClick={toggleSidebar} className="mr-4">
           <FontAwesomeIcon icon={faBars} className="text-2xl" />
         </button>
         <h1 className="text-3xl font-bold">Admin</h1>
       </div>
-      <div className="hidden md:flex">
+      <div className='hidden md:flex'>
         <div className="HeaderButtons">
           <Link
             to="/getAll-users"
@@ -34,23 +34,13 @@ const Header = ({ toggleSidebar }) => {
           </Link>
         </div>
       </div>
-      <div className="md:hidden">
+      <div className='md:hidden'>
         <div className="relative">
-          <button
-            className="HeaderButton"
-            onClick={toggleMenu}
-            aria-haspopup="true"
-            aria-expanded={isMenuOpen}
-          >
+          <button className="HeaderButton" onClick={toggleMenu} aria-haspopup="true" aria-expanded={isMenuOpen}>
             <FontAwesomeIcon icon={faEllipsisV} className="text-2xl" />
           </button>
           {isMenuOpen && (
-            <div
-              className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
-              role="menu"
-              aria-orientation="vertical"
-              aria-labelledby="options-menu"
-            >
+            <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
               <div className="py-1" role="none">
                 <Link
                   to="/getAll-users"
