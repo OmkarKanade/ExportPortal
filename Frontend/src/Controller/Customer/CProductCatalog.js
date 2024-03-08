@@ -197,6 +197,9 @@ const CProductCatalog = () => {
                   Quantity
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  Total Quantity
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Action
                 </th>
               </tr>
@@ -239,6 +242,9 @@ const CProductCatalog = () => {
                             className="border border-gray-300 px-3 py-1 w-16 text-center"
                           />
                         </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <button
