@@ -26,7 +26,7 @@ import ProductCatalog from './Controller/Admin/ProductCatalog';
 import AddNewCurrency from './Controller/Admin/AddNewCurrency';
 import ViewAllCurrency from './Controller/Admin/ViewAllCurrency';
 import CProductCatalog from './Controller/Customer/CProdductCatlog';
-
+import Mykart from './Controller/Customer/mykart';
 
 const App = () => {
   return (
@@ -68,6 +68,7 @@ const App = () => {
           <Route path='/customer-profile' element={<CustomerProfileView/>} />
           <Route  path='/cProductList' element={<CProductList/>} />
           <Route path='/Cproduct-Catalog' element={<CProductCatalog/>} />
+          <Route path='/mycart' element={<Mykart/>} />
           
         </Routes>
     </Router>
