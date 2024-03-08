@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ExportPortal.API.Migrations
 {
     /// <inheritdoc />
-    public partial class QuotationMigration : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -343,18 +343,19 @@ namespace ExportPortal.API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CustomerId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CustomerId1 = table.Column<string>(type: "varchar(255)", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    CustomerId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Status = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Quotations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Quotations_AspNetUsers_CustomerId1",
-                        column: x => x.CustomerId1,
+                        name: "FK_Quotations_AspNetUsers_CustomerId",
+                        column: x => x.CustomerId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -473,9 +474,9 @@ namespace ExportPortal.API.Migrations
                 column: "QuotationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Quotations_CustomerId1",
+                name: "IX_Quotations_CustomerId",
                 table: "Quotations",
-                column: "CustomerId1");
+                column: "CustomerId");
         }
 
         /// <inheritdoc />
