@@ -1,11 +1,11 @@
 import React, { useState, useEffect, Fragment } from "react";
-import Layout from "../Layout/Layout";
+import CustomerDashboard from "./CustomerDashboard";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
-const ProductCatalog = () => {
+const CProductCatalog = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -97,20 +97,43 @@ const ProductCatalog = () => {
     setFilteredProducts(sortedProducts);
   };
 
+  // Function to add a product to cart
+  const addToCart = (productId, quantity) => {
+    // Implement your addToCart logic here
+  };
+
   // Function to generate custom product ID
   const generateProductId = (index) => {
     return `000${index + 1}`.slice(-4);
   };
 
+  // Function to handle quantity change
+  const handleQuantityChange = (productId, newQuantity) => {
+    const updatedProducts = filteredProducts.map((product) => {
+      if (product.id === productId) {
+        return { ...product, quantity: newQuantity };
+      }
+      return product;
+    });
+    setFilteredProducts(updatedProducts);
+  };
+
   return (
     <Fragment>
-      <Layout>
+      <CustomerDashboard>
         {/* Search Input, Filter Options, and Sorting */}
         <h1 className="text-3xl text-gray-700 font-bold mb-4">
           Products Catalog
         </h1>
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
           {/* Search Input */}
+          {/* <input
+            type="text"
+            placeholder="Search products..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className="border border-gray-300 px-3 py-2 rounded-md mb-2 md:mb-0"
+          /> */}
 
           <div className="flex items-center">
             {/* Filter By Dropdown */}
@@ -167,7 +190,17 @@ const ProductCatalog = () => {
                   Total Price
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                  View
+                  Bag or Box
+                </th>
+                {/* <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">Total Price</th> */}
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  Quantity
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  Total Quantity
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  Action
                 </th>
               </tr>
             </thead>
@@ -192,16 +225,43 @@ const ProductCatalog = () => {
                         {product.totalRate} Rs
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <Link to={`/product/${product.id}`}>
-                          <FontAwesomeIcon icon={faEye} />
-                        </Link>
+                        {product.bagOrBoxBumpers}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center">
+                          <input
+                            type="number"
+                            min="0"
+                            value={product.quantity || 0}
+                            onChange={(e) =>
+                              handleQuantityChange(
+                                product.id,
+                                parseInt(e.target.value)
+                              )
+                            }
+                            className="border border-gray-300 px-3 py-1 w-16 text-center"
+                          />
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <button
+                          className="bg-sky-700 hover:bg-sky-900 text-white font-bold py-2 px-4 rounded"
+                          onClick={() =>
+                            addToCart(product.id, product.quantity)
+                          }
+                        >
+                          Add to Quatation
+                        </button>
                       </td>
                     </tr>
                   );
                 })
               ) : (
                 <tr>
-                  <td colSpan="6" className="px-6 py-4 whitespace-nowrap">
+                  <td colSpan="7" className="px-6 py-4 whitespace-nowrap">
                     No products found.
                   </td>
                 </tr>
@@ -209,9 +269,9 @@ const ProductCatalog = () => {
             </tbody>
           </table>
         </div>
-      </Layout>
+      </CustomerDashboard>
     </Fragment>
   );
 };
 
-export default ProductCatalog;
+export default CProductCatalog;
