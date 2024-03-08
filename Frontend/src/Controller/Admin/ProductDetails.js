@@ -82,7 +82,7 @@ const ProductDetails = () => {
             <tbody>
             <tr className="border-2 border-sky-700">
                   <td className="font-medium border">Product Id:</td>
-                  <td className="ml-2 border-2 border-sky-700">{product.productId}</td>
+                  <td className="ml-2 border-2 border-sky-700">{id}</td>
                 </tr>
               <tr className="border-2 border-sky-700">
                 <td className="font-medium border">Product Name:</td>
