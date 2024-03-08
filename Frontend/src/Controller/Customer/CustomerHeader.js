@@ -21,7 +21,7 @@ const Header = ({ toggleSidebar }) => {
       <div className='hidden md:flex'>
         <div className="HeaderButtons">
           <Link
-            to="/mycart"
+            to="#"
             className="HeaderButton py-1 px-3 mr-5 bg-gray-600 hover:bg-gray-700 rounded-md"
           >
             My Cart
