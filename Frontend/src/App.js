@@ -25,7 +25,7 @@ import ProductCatalog from "./Controller/Admin/ProductCatalog";
 import AddNewCurrency from "./Controller/Admin/AddNewCurrency";
 import ViewAllCurrency from "./Controller/Admin/ViewAllCurrency";
 import CProductCatalog from './Controller/Customer/CProductCatalog';
-import customerProfileView from './Controller/Customer/cutomerProfileView';
+import CustomerProfileView from './Controller/Customer/CustomerProfileView';
 
 const App = () => {
   return (
@@ -61,7 +61,7 @@ const App = () => {
         {/* Customer Routes */}
         <Route path="/customerDashboard" element={<CustomerDashboard />} />
         <Route path="/customer-id" element={<Customer />} />
-        <Route path="/customer-profile" element={<customerProfileView />} />
+        <Route path="/customer-profile" element={<CustomerProfileView />} />
         <Route path="/cProductList" element={<CProductList />} />
         <Route path="/Cproduct-Catalog" element={<CProductCatalog />} />
       </Routes>
