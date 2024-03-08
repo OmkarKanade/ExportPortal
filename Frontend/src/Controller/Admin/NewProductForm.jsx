@@ -151,6 +151,8 @@ const ProductForm = () => {
 
         formDataToSend.append('file', fileData);
 
+        console.log(formData)
+
         axios.post('https://localhost:7051/api/Product', formDataToSend)
             .then(response => {
                 toast.success(`Product ${formData.name} created successfully`);
