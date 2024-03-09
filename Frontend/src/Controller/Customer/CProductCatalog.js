@@ -39,13 +39,13 @@ const CProductCatalog = () => {
     setProducts(updatedProducts);
   };
 
-  const postQuotation = async (productId, quantity, customerId) => {
+  const postQuotation = async (productId, totalQuantity, customerId) => {
     try {
       const response = await axios.post(
         "https://localhost:7051/api/Quotation",
         {
           productId: productId,
-          totalQuantity: quantity,
+          quantity: totalQuantity, // Corrected to use totalQuantity
           customerId: customerId,
         }
       );
@@ -149,7 +149,7 @@ const CProductCatalog = () => {
                           onClick={() =>
                             postQuotation(
                               product.id,
-                              product.netquantity,
+                              product.totalQuantity, // Use totalQuantity here
                               customerId
                             )
                           }
