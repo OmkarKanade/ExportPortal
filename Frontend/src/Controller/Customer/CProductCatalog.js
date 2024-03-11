@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 const CProductCatalog = () => {
   const [products, setProducts] = useState([]);
   const [customerId, setCustomerId] = useState("");
+  const [addedToQuotation, setAddedToQuotation] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,7 +23,16 @@ const CProductCatalog = () => {
 
     const sid = sessionStorage.getItem("sid");
     setCustomerId(sid || ""); // Set default value to empty string if sid is null
+
+    // Retrieve added products from sessionStorage
+    const addedProducts = JSON.parse(sessionStorage.getItem("addedToQuotation")) || {};
+    setAddedToQuotation(addedProducts);
   }, []);
+
+  useEffect(() => {
+    // Save added products to sessionStorage whenever it changes
+    sessionStorage.setItem("addedToQuotation", JSON.stringify(addedToQuotation));
+  }, [addedToQuotation]);
 
   const handleQuantityChange = (productId, newQuantity) => {
     const updatedProducts = products.map((product) => {
@@ -45,18 +55,20 @@ const CProductCatalog = () => {
         "https://localhost:7051/api/Quotation",
         {
           productId: productId,
-          quantity: totalQuantity, // Corrected to use totalQuantity
+          quantity: totalQuantity,
           customerId: customerId,
         }
       );
 
       console.log("Quotation posted successfully:", response.data);
       toast.success("Added to Quotation successfully!");
-      // Add any success message or redirection logic after successful post
+      setAddedToQuotation((prev) => ({
+        ...prev,
+        [productId]: true,
+      }));
     } catch (error) {
       console.error("Error posting quotation:", error);
       toast.error("Failed to add to Quotation. Please try again.");
-      // Handle error scenarios
     }
   };
 
@@ -104,6 +116,7 @@ const CProductCatalog = () => {
             <tbody className="bg-white divide-y divide-gray-200">
               {products && products.length > 0 ? (
                 products.map((product, index) => {
+                  const isAdded = addedToQuotation[product.id];
                   return (
                     <tr key={product.id}>
                       <td className="px-6 py-4 whitespace-nowrap">
@@ -145,16 +158,21 @@ const CProductCatalog = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <button
-                          className="bg-sky-700 hover:bg-sky-900 text-white font-bold py-2 px-4 rounded"
+                          className={`${
+                            isAdded
+                              ? "bg-gray-300 cursor-not-allowed"
+                              : "bg-sky-700 hover:bg-sky-900"
+                          } text-white font-bold py-2 px-4 rounded`}
                           onClick={() =>
                             postQuotation(
                               product.id,
-                              product.totalQuantity, // Use totalQuantity here
+                              product.totalQuantity,
                               customerId
                             )
                           }
+                          disabled={isAdded}
                         >
-                          Add to Quotation
+                          {isAdded ? "Added to Quotation" : "Add to Quotation"}
                         </button>
                       </td>
                     </tr>
