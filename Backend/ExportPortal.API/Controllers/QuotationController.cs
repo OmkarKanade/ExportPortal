@@ -2,7 +2,6 @@
 using ExportPortal.API.Models.Domain;
 using ExportPortal.API.Models.DTO;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -53,7 +52,7 @@ namespace ExportPortal.API.Controllers
         {
             var customerId = quotationDTO.CustomerId;
 
-            var quotation = await dbContext.Quotations.FirstOrDefaultAsync(x => x.CustomerId == customerId);
+            var quotation = await dbContext.Quotations.Include(i => i.Items).FirstOrDefaultAsync(x => x.CustomerId == customerId);
 
             if (quotation == null)
             {
@@ -75,15 +74,26 @@ namespace ExportPortal.API.Controllers
                 return Ok("Product added to Quotation");
             }
 
-            var quotationItem = new QuotationItem
+            var existingItem = quotation.Items.FirstOrDefault(qi => qi.ProductId == quotationDTO.ProductId);
+
+            if (existingItem == null)
             {
-                QuotationId = quotation.Id,
-                ProductId = quotationDTO.ProductId,
-                Quantity = quotationDTO.Quantity
-            };
-            await dbContext.QuotationItems.AddAsync(quotationItem);
-            await dbContext.SaveChangesAsync();
-            return Ok("Product added to Quotation");
+                var quotationItem = new QuotationItem
+                {
+                    QuotationId = quotation.Id,
+                    ProductId = quotationDTO.ProductId,
+                    Quantity = quotationDTO.Quantity
+                };
+                await dbContext.QuotationItems.AddAsync(quotationItem);
+                await dbContext.SaveChangesAsync();
+                return Ok("Product added to Quotation");
+            }
+            else
+            {
+                existingItem.Quantity = quotationDTO.Quantity;
+                await dbContext.SaveChangesAsync();
+                return Ok("Quantity updated in Quotation");
+            }
         }
 
         [HttpGet]
@@ -115,5 +125,32 @@ namespace ExportPortal.API.Controllers
 
             return Ok(quotationResponseDTO);
         }
+
+        [HttpPost]
+        [Route("UpdateItem")]
+        public async Task<IActionResult> UpdateQuotationItem([FromBody] QuotationItemUpdateDTO updateDTO)
+        {
+            var quotationItemDomain = await dbContext.QuotationItems.Include(p => p.Product).FirstOrDefaultAsync(x => x.Id == updateDTO.Id);
+
+            if (quotationItemDomain == null)
+            {
+                return NotFound();
+            }
+
+            quotationItemDomain.Quantity = updateDTO.Quantity;
+
+            await dbContext.SaveChangesAsync();
+
+            var updatedItem = new QuotationItemDTO
+            {
+                Id = quotationItemDomain.Id,
+                ProductId = quotationItemDomain.Product.Id,
+                ProductName = quotationItemDomain.Product.Name,
+                Quantity = quotationItemDomain.Quantity
+            };
+
+            return Ok(updatedItem);
+        }
+
     }
 }
