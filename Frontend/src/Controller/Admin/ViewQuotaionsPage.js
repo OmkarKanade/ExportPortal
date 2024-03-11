@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Layout from "../Layout/Layout";
 
-const ViewQuotaionsPage = () => {
+const ViewQuotationsPage = () => {
   // State to hold the fetched quotations
   const [quotations, setQuotations] = useState([]);
 
@@ -27,65 +27,58 @@ const ViewQuotaionsPage = () => {
         <h1 className="text-3xl text-gray-700 font-bold mb-4">
           View Quotations
         </h1>
+
+        <div className="mb-4">
+          <h2 className="text-lg font-semibold mb-2">Quotations List:</h2>
+          <ul>
+            {quotations.map((quotation) => (
+              <li key={quotation.id}>
+                <strong>Quotation ID:</strong> {quotation.id}
+                <br />
+                <strong>Customer Name:</strong> {quotation.customerName}
+                <br />
+                <strong>Status:</strong>{" "}
+                {quotation.status ? "Active" : "Inactive"}
+              </li>
+            ))}
+            {quotations.length === 0 && <li>No quotations found.</li>}
+          </ul>
+        </div>
+
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-sky-700">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                  Quotation ID
-                </th>
-                {/* <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                  Customer ID
-                </th> */}
-                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                  Customer Name
+                  Product Name
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                  Status
+                  Product ID
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                  Products
+                  Quantity
                 </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {quotations.map((quotation) => (
-                <tr key={quotation.id}>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {quotation.id}
-                  </td>
-                  {/* <td className="px-6 py-4 whitespace-nowrap">
-                    {quotation.customerId}
-                  </td> */}
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {quotation.customerName}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {quotation.status ? "Active" : "Inactive"}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <ul>
-                      {quotation.items.map((item) => (
-                        <li key={item.id} className="py-2">
-                          <div>
-                            <strong>Product Name:</strong> {item.productName}
-                          </div>
-                          <div className="mt-1">
-                            <strong>Product ID:</strong> {item.productId}
-                          </div>
-                          <div className="mt-1">
-                            <strong>Quantity:</strong> {item.quantity}
-                          </div>
-                          {/* Add more item details as needed */}
-                        </li>
-                      ))}
-                    </ul>
-                  </td>
-                </tr>
-              ))}
+              {quotations.map((quotation) =>
+                quotation.items.map((item) => (
+                  <tr key={item.id}>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {item.productName}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {item.productId}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      {item.quantity}
+                    </td>
+                  </tr>
+                ))
+              )}
               {quotations.length === 0 && (
                 <tr>
-                  <td colSpan="4" className="px-6 py-4 whitespace-nowrap">
+                  <td colSpan="3" className="px-6 py-4 whitespace-nowrap">
                     No quotations found.
                   </td>
                 </tr>
@@ -98,4 +91,5 @@ const ViewQuotaionsPage = () => {
   );
 };
 
-export default ViewQuotaionsPage;
+export default ViewQuotationsPage;
+  
