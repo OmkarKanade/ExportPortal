@@ -27,6 +27,7 @@ import ViewAllCurrency from "./Controller/Admin/ViewAllCurrency";
 import CProductCatalog from './Controller/Customer/CProductCatalog';
 import CustomerProfileView from './Controller/Customer/CustomerProfileView';
 import ViewQuotaionsPage from "./Controller/Admin/ViewQuotaionsPage";
+import VProductCatalog from "./Controller/Vendor/VProductCatalog";
 
 const App = () => {
   return (
@@ -58,6 +59,8 @@ const App = () => {
         <Route path="/vendorDashboard" element={<Vendord />} />
         <Route path="/vendor-Profile" element={<VendorProfileView />} />
         <Route path="/vendor-assignedProducts" element={<AssignedProducts />} />
+        <Route path="/vendor-productCatalog" element={<VProductCatalog />} />
+
 
         {/* Customer Routes */}
         <Route path="/customerDashboard" element={<CustomerDashboard />} />
