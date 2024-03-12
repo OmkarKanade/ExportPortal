@@ -128,6 +128,20 @@ const ViewAllQuotationsPage = () => {
     }
   };
 
+  // Function to handle sending quotations to admin
+  const handleSendQuotations = async () => {
+    try {
+      // Here you can implement the logic to send quotations to the admin
+      // This could involve making a POST request to an endpoint with the list of quotations to send
+
+      // For demonstration purposes, let's assume a successful "send"
+      toast.success("Quotations sent to admin successfully");
+    } catch (error) {
+      console.error("Error sending quotations to admin:", error);
+      toast.error("Failed to send quotations to admin");
+    }
+  };
+
   return (
     <Fragment>
       <CustomerDashboard>
@@ -208,6 +222,17 @@ const ViewAllQuotationsPage = () => {
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Send Quotations to Admin Button */}
+        <div className="flex justify-end mt-4">
+          <button
+            // onClick={handleSendQuotations}
+            className="bg-sky-700 hover:bg-green-600 text-white px-4 py-2 rounded-md"
+            style={{ marginRight: 0 }}
+          >
+            Send Quotations to Admin
+          </button>
         </div>
 
         {/* Edit Modal */}

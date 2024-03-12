@@ -105,6 +105,9 @@ const ViewQuotationsPage = () => {
                     <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                       Quantity
                     </th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                      Vendors
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -115,6 +118,9 @@ const ViewQuotationsPage = () => {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {item.productId}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {item.quantity}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {item.quantity}
