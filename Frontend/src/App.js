@@ -27,6 +27,7 @@ import ViewAllCurrency from "./Controller/Admin/ViewAllCurrency";
 import CProductCatalog from './Controller/Customer/CProductCatalog';
 import CustomerProfileView from './Controller/Customer/CustomerProfileView';
 import ViewQuotaionsPage from "./Controller/Admin/ViewQuotaionsPage";
+import ViewAllQuotationsPage from "./Controller/Customer/ViewAllQuotationsPage";
 
 const App = () => {
   return (
@@ -66,6 +67,7 @@ const App = () => {
         <Route path="/cProductList" element={<CProductList />} />
         <Route path="/Cproduct-Catalog" element={<CProductCatalog />} />
         <Route path="/customer-Quotaions" element={<ViewQuotaionsPage/>}/>
+        <Route path="/viewsent-Quotations" element={<ViewAllQuotationsPage/>} />
       </Routes>
     </Router>
   );

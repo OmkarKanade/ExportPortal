@@ -25,13 +25,17 @@ const CProductCatalog = () => {
     setCustomerId(sid || ""); // Set default value to empty string if sid is null
 
     // Retrieve added products from sessionStorage
-    const addedProducts = JSON.parse(sessionStorage.getItem("addedToQuotation")) || {};
+    const addedProducts =
+      JSON.parse(sessionStorage.getItem("addedToQuotation")) || {};
     setAddedToQuotation(addedProducts);
   }, []);
 
   useEffect(() => {
     // Save added products to sessionStorage whenever it changes
-    sessionStorage.setItem("addedToQuotation", JSON.stringify(addedToQuotation));
+    sessionStorage.setItem(
+      "addedToQuotation",
+      JSON.stringify(addedToQuotation)
+    );
   }, [addedToQuotation]);
 
   const handleQuantityChange = (productId, newQuantity) => {
@@ -94,7 +98,7 @@ const CProductCatalog = () => {
                   Product Name
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                  HSN Code
+                  Category
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Total Price
@@ -129,7 +133,7 @@ const CProductCatalog = () => {
                         {product.name}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {product.hsnCode}
+                        {product.vendorCategory.name}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {product.totalRate} Rs

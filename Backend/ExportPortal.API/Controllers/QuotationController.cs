@@ -151,6 +151,22 @@ namespace ExportPortal.API.Controllers
 
             return Ok(updatedItem);
         }
+        [HttpDelete("DeleteItems/{itemId:Guid}")]
+        public async Task<IActionResult> DeleteQuotationItem([FromRoute] Guid quotationId, [FromRoute] Guid itemId)
+        {
+            var itemToDelete = await dbContext.QuotationItems.Include(p => p.Product).FirstOrDefaultAsync(qi => qi.Id == itemId);
+
+            if (itemToDelete == null)
+            {
+                return NotFound();
+            }
+
+            dbContext.QuotationItems.Remove(itemToDelete);
+            await dbContext.SaveChangesAsync();
+
+            return Ok("Quotation item deleted successfully");
+        }
+
 
     }
 }

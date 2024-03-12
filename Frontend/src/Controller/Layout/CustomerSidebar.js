@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faBoxOpen, faBook, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faBoxOpen, faBook, faChevronDown, faChevronUp, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 const Sidebar = ({ isOpen }) => {
   const location = useLocation();
@@ -10,7 +10,8 @@ const Sidebar = ({ isOpen }) => {
   const lists = [
     { name: 'View Profile', path: '/customer-profile', icon: faUser },
     { name: 'Products List', path: '/cProductList', icon: faBoxOpen},
-    {name: "Product Catalog", path:'/Cproduct-Catalog', icon: faBook}
+    {name: "Product Catalog", path:'/Cproduct-Catalog', icon: faBook},
+    {name: "View Sent Quotations",path:'/viewsent-Quotations',  icon: faEnvelope}
   ];
 
   const toggleSubMenu = (menuName) => {
