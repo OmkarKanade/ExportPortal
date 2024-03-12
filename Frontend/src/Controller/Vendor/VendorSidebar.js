@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faBoxOpen, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faBook, faBoxOpen, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 const Sidebar = ({ isOpen }) => {
   const location = useLocation();
@@ -10,7 +10,8 @@ const Sidebar = ({ isOpen }) => {
 
   const lists = [
     { name: 'View Profile', path: '/vendor-Profile', icon: faUser },
-    { name: 'View Assigned Products', path: '/vendor-assignedProducts', icon: faBoxOpen}
+    { name: 'View Assigned Products', path: '/vendor-assignedProducts', icon: faBoxOpen},
+    {name: 'Product Catalog', path: '/vendor-productCatalog', icon: faBook}
   ];
 
   const toggleSubMenu = (menuName) => {
