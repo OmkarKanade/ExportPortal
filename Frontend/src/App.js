@@ -24,9 +24,11 @@ import AddNewCertificate from "./Controller/Admin/AddNewCertificate";
 import ProductCatalog from "./Controller/Admin/ProductCatalog";
 import AddNewCurrency from "./Controller/Admin/AddNewCurrency";
 import ViewAllCurrency from "./Controller/Admin/ViewAllCurrency";
-import CProductCatalog from './Controller/Customer/CProductCatalog';
-import CustomerProfileView from './Controller/Customer/CustomerProfileView';
+import CProductCatalog from "./Controller/Customer/CProductCatalog";
+import CustomerProfileView from "./Controller/Customer/CustomerProfileView";
 import ViewQuotaionsPage from "./Controller/Admin/ViewQuotaionsPage";
+import VProductCatalog from "./Controller/Vendor/VProductCatalog";
+import ViewAllQuotationsPage from "./Controller/Customer/ViewAllQuotationsPage";
 
 const App = () => {
   return (
@@ -59,7 +61,7 @@ const App = () => {
         <Route path="/vendor-Profile" element={<VendorProfileView />} />
         <Route path="/vendor-assignedProducts" element={<AssignedProducts />} />
         <Route path="/vendor-productCatalog" element={<VProductCatalog />} />
-
+        <Route path="/viewsent-quotations" element={<ViewAllQuotationsPage />} />
 
         {/* Customer Routes */}
         <Route path="/customerDashboard" element={<CustomerDashboard />} />
@@ -67,8 +69,11 @@ const App = () => {
         <Route path="/customer-profile" element={<CustomerProfileView />} />
         <Route path="/cProductList" element={<CProductList />} />
         <Route path="/Cproduct-Catalog" element={<CProductCatalog />} />
-        <Route path="/customer-Quotaions" element={<ViewQuotaionsPage/>}/>
-        <Route path="/viewsent-Quotations" element={<ViewAllQuotationsPage/>} />
+        <Route path="/customer-Quotaions" element={<ViewQuotaionsPage />} />
+        <Route
+          path="/viewsent-Quotations"
+          element={<ViewAllQuotationsPage />}
+        />
       </Routes>
     </Router>
   );

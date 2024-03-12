@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
-const ProductCatalog = () => {
+const VProductCatalog = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -212,4 +212,4 @@ const ProductCatalog = () => {
   );
 };
 
-export default ProductCatalog;
+export default VProductCatalog;
