@@ -125,6 +125,35 @@ namespace ExportPortal.API.Controllers
 
             return Ok(quotationResponseDTO);
         }
+        [HttpGet]
+        [Route("Customer/{id}")]
+        public async Task<IActionResult> GetByCustomerId([FromRoute] string id)
+        {
+            var quotationDomain = await dbContext.Quotations.Include(u => u.Customer)
+                .Include(q => q.Items).ThenInclude(qi => qi.Product).FirstOrDefaultAsync(x => x.CustomerId == id);
+
+            if (quotationDomain == null)
+            {
+                return NotFound();
+            }
+
+            var quotationResponseDTO = new QuotationResponseDTO
+            {
+                Id = quotationDomain.Id,
+                CustomerId = quotationDomain.CustomerId,
+                CustomerName = quotationDomain.Customer.Name,
+                Status = quotationDomain.Status,
+                Items = quotationDomain.Items.Select(qi => new QuotationItemDTO
+                {
+                    Id = qi.Id,
+                    ProductId = qi.Product.Id,
+                    ProductName = qi.Product.Name,
+                    Quantity = qi.Quantity
+                }).ToList()
+            };
+
+            return Ok(quotationResponseDTO);
+        }
 
         [HttpPost]
         [Route("UpdateItem")]
@@ -152,7 +181,7 @@ namespace ExportPortal.API.Controllers
             return Ok(updatedItem);
         }
         [HttpDelete("DeleteItems/{itemId:Guid}")]
-        public async Task<IActionResult> DeleteQuotationItem([FromRoute] Guid quotationId, [FromRoute] Guid itemId)
+        public async Task<IActionResult> DeleteQuotationItem([FromRoute] Guid itemId)
         {
             var itemToDelete = await dbContext.QuotationItems.Include(p => p.Product).FirstOrDefaultAsync(qi => qi.Id == itemId);
 
