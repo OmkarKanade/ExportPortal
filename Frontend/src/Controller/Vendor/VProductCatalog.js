@@ -192,7 +192,7 @@ const ProductCatalog = () => {
                         {product.totalRate} Rs
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {product.category}
+                        {product.vendorCategory.name}
                       </td>
                     </tr>
                   );
