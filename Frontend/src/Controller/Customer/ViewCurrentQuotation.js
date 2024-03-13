@@ -11,6 +11,7 @@ const ViewCurrentQuotation = () => {
   const [filteredQuotations, setFilteredQuotations] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [editModalOpen, setEditModalOpen] = useState(false);
+  const [quotationId, setQuotationId] = useState("");
   const [editQuotation, setEditQuotation] = useState({
     id: null,
     productId: "",
@@ -20,21 +21,24 @@ const ViewCurrentQuotation = () => {
   const sid = sessionStorage.getItem('sid');
 
   useEffect(() => {
+    console.log(sid)
     const fetchQuotations = async () => {
       try {
         const response = await axios.get(
-          `https://localhost:7051/api/Quotation/Customer/${sid}`
+          `https://localhost:7051/api/Quotation/CustomerActive/${sid}`
         );
         setQuotations(response.data.items);
+        setQuotationId(response.data.id);
         setFilteredQuotations(response.data.items);
       } catch (error) {
         console.error("Error fetching quotations:", error);
         // toast.error("Failed to fetch quotations");
       }
     };
-
+  
     fetchQuotations();
-  }, []);
+  }, [sid]);
+  
 
   const handleSearchChange = (event) => {
     const searchTerm = event.target.value;
@@ -64,19 +68,20 @@ const ViewCurrentQuotation = () => {
     setEditModalOpen(true);
   };
 
-  const handleDeleteClick = async (itemId) => {
+  const handleDeleteClick = async (quotationId) => {
+    console.log(quotationId)
     try {
       await axios.delete(
-        `https://localhost:7051/api/Quotation/DeleteItems/${itemId}`
+        `https://localhost:7051/api/Quotation/DeleteItem/${quotationId}`
       );
 
       const updatedQuotations = quotations.filter(
-        (quotation) => quotation.id !== itemId
+        (quotation) => quotation.id !== quotationId
       );
       setQuotations(updatedQuotations);
 
       const updatedFilteredQuotations = filteredQuotations.filter(
-        (quotation) => quotation.id !== itemId
+        (quotation) => quotation.id !== quotationId
       );
       setFilteredQuotations(updatedFilteredQuotations);
 
@@ -87,52 +92,62 @@ const ViewCurrentQuotation = () => {
     }
   };
 
+
   const handleSaveChanges = async () => {
     try {
-      const updatedQuotation = {
-        id: editQuotation.id,
-        productId: editQuotation.productId,
-        productName: editQuotation.productName,
-        quantity: editQuotation.quantity,
-      };
-
       const response = await axios.put(
         `https://localhost:7051/api/Quotation/UpdateItem/${editQuotation.id}`,
-        { quantity: editQuotation.quantity }
+        {
+          id: editQuotation.id,
+          quantity: editQuotation.quantity
+        }
       );
-
+  
       if (response.status === 200) {
         const updatedQuotations = quotations.map((quotation) =>
-          quotation.id === updatedQuotation.id ? updatedQuotation : quotation
+          quotation.id === editQuotation.id ? editQuotation : quotation
         );
         setQuotations(updatedQuotations);
-
+  
         const updatedFilteredQuotations = filteredQuotations.map((quotation) =>
-          quotation.id === updatedQuotation.id ? updatedQuotation : quotation
+          quotation.id === editQuotation.id ? editQuotation : quotation
         );
         setFilteredQuotations(updatedFilteredQuotations);
-
+  
         toast.success("Quotation updated successfully");
       } else {
         toast.error("Failed to update quotation");
       }
-
+  
       setEditModalOpen(false);
     } catch (error) {
       console.error("Error updating quotation:", error);
       toast.error("Failed to update quotation");
     }
   };
+  
 
   const handleSendQuotations = async () => {
+    console.log(quotationId)
     try {
-      // Implement logic to send quotations to admin
-      toast.success("Quotations sent to admin successfully");
+      const response = await axios.put(
+        `https://localhost:7051/api/Quotation/SendQuotation/${quotationId}`
+      );
+  
+      if (response.status === 200) {
+        // Optional: Update UI or perform any other actions upon successful sending
+        toast.success("Quotations sent to admin successfully");
+      } else {
+        toast.error("Failed to send quotations to admin");
+      }
     } catch (error) {
       console.error("Error sending quotations to admin:", error);
       toast.error("Failed to send quotations to admin");
     }
   };
+  
+  
+  
 
   return (
     <Fragment>
@@ -200,6 +215,7 @@ const ViewCurrentQuotation = () => {
                       >
                         <FontAwesomeIcon icon={faTrash} />
                       </button>
+
                     </td>
                   </tr>
                 ))
