@@ -53,13 +53,14 @@
 
         public Product()
         {
-            ProductId = GenerateProductId();
+            ProductId = GenerateSequentialId();
         }
 
-        public static string GenerateProductId()
+        private string GenerateSequentialId()
         {
-            int nextId = Interlocked.Increment(ref Product.productCounter);
-            return $"Prod_{nextId}";
+            string sequentialId = $"Prod_{productCounter}";
+            productCounter++;
+            return sequentialId;
         }
 
     }

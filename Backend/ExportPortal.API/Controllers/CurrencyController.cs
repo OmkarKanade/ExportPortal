@@ -53,8 +53,9 @@ namespace ExportPortal.API.Controllers
                 return NotFound();
             }
 
-            var currencyDTO = new CurrencyDTO
+            var currencyDTO = new CurrencyResponseDTO
             {
+                Id = currencyDomain.Id,
                 Name = currencyDomain.Name,
                 Code = currencyDomain.Code
             };
@@ -79,7 +80,7 @@ namespace ExportPortal.API.Controllers
 
             await dbContext.SaveChangesAsync();
 
-            return Ok(currencyDTO);
+            return Ok(currencyDomain);
         }
     }
 }

@@ -52,8 +52,9 @@ namespace ExportPortal.API.Controllers
                 return NotFound();
             }
 
-            var certificateDTO = new CertificationDTO
+            var certificateDTO = new CertificationResponseDTO
             {
+                Id = certificateDomain.Id,
                 Name = certificateDomain.Name
             };
 
@@ -76,7 +77,7 @@ namespace ExportPortal.API.Controllers
 
             await dbContext.SaveChangesAsync();
 
-            return Ok(certificateDTO);
+            return Ok(certificateDomain);
         }
     }
 }
