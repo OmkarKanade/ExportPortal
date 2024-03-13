@@ -12,10 +12,5 @@ namespace ExportPortal.API.Models.Domain
         public Guid ProductId { get; set; }
         public Product Product { get; set; }
         public int Quantity { get; set; }
-
-        public static implicit operator QuotationItem(QuotationItemDTO v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
