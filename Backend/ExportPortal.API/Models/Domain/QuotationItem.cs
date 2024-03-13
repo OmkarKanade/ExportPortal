@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using ExportPortal.API.Models.DTO;
+using System.Text.Json.Serialization;
 
 namespace ExportPortal.API.Models.Domain
 {
@@ -12,5 +13,9 @@ namespace ExportPortal.API.Models.Domain
         public Product Product { get; set; }
         public int Quantity { get; set; }
 
+        public static implicit operator QuotationItem(QuotationItemDTO v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
