@@ -10,18 +10,14 @@ const ViewAllQuotationsPage = () => {
   const [quotations, setQuotations] = useState([]);
   const [filteredQuotations, setFilteredQuotations] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [editModalOpen, setEditModalOpen] = useState(false);
-  const [editQuotation, setEditQuotation] = useState({
-    id: null,
-    productId: "",
-    productName: "",
-    quantity: 0,
-  });
 
   useEffect(() => {
-    const sid = sessionStorage.getItem("sid");
     const fetchQuotations = async () => {
       try {
+        const sid = sessionStorage.getItem("sid");
+        if (!sid) {
+          throw new Error("Session ID is missing.");
+        }
         const response = await axios.get(
           `https://localhost:7051/api/Quotation/Customer/${sid}`
         );
@@ -29,7 +25,7 @@ const ViewAllQuotationsPage = () => {
         setFilteredQuotations(response.data.items);
       } catch (error) {
         console.error("Error fetching quotations:", error);
-        // toast.error("Failed to fetch quotations");
+        toast.error("Failed to fetch quotations");
       }
     };
 
@@ -40,7 +36,6 @@ const ViewAllQuotationsPage = () => {
   const handleSearchChange = (event) => {
     const searchTerm = event.target.value;
     setSearchTerm(searchTerm);
-
     applyFilters(searchTerm);
   };
 
@@ -58,96 +53,12 @@ const ViewAllQuotationsPage = () => {
     setFilteredQuotations(filtered);
   };
 
-  // Function to handle edit icon click
-  const handleEditClick = (quotation) => {
-    setEditQuotation(quotation);
-    setEditModalOpen(true);
-  };
-
-  // Function to handle delete icon click
-  const handleDeleteClick = async (itemId) => {
-    try {
-      await axios.delete(
-        `https://localhost:7051/api/Quotation/DeleteItems/${itemId}`
-      );
-
-      const updatedQuotations = quotations.filter(
-        (quotation) => quotation.id !== itemId
-      );
-      setQuotations(updatedQuotations);
-
-      const updatedFilteredQuotations = filteredQuotations.filter(
-        (quotation) => quotation.id !== itemId
-      );
-      setFilteredQuotations(updatedFilteredQuotations);
-
-      toast.success("Quotation deleted successfully");
-    } catch (error) {
-      console.error("Error deleting quotation:", error);
-      toast.error("Failed to delete quotation");
-    }
-  };
-
-  // Function to handle save changes
-  const handleSaveChanges = async () => {
-    try {
-      const updatedQuotation = {
-        id: editQuotation.id,
-        productId: editQuotation.productId,
-        productName: editQuotation.productName,
-        quantity: editQuotation.quantity,
-      };
-
-      const response = await axios.put(
-        `https://localhost:7051/api/Quotation/UpdateItem/${editQuotation.id}`,
-        { quantity: editQuotation.quantity }
-      );
-
-      if (response.status === 200) {
-        const updatedQuotations = quotations.map((quotation) =>
-          quotation.id === updatedQuotation.id ? updatedQuotation : quotation
-        );
-        setQuotations(updatedQuotations);
-
-        // Update filteredQuotations state for displaying updated data in the table
-        const updatedFilteredQuotations = filteredQuotations.map((quotation) =>
-          quotation.id === updatedQuotation.id ? updatedQuotation : quotation
-        );
-        setFilteredQuotations(updatedFilteredQuotations);
-
-        toast.success("Quotation updated successfully");
-      } else {
-        toast.error("Failed to update quotation");
-      }
-
-      // Close the edit modal
-      setEditModalOpen(false);
-    } catch (error) {
-      console.error("Error updating quotation:", error);
-      toast.error("Failed to update quotation");
-    }
-  };
-
-  // Function to handle sending quotations to admin
-  const handleSendQuotations = async () => {
-    try {
-      // Here you can implement the logic to send quotations to the admin
-      // This could involve making a POST request to an endpoint with the list of quotations to send
-
-      // For demonstration purposes, let's assume a successful "send"
-      toast.success("Quotations sent to admin successfully");
-    } catch (error) {
-      console.error("Error sending quotations to admin:", error);
-      toast.error("Failed to send quotations to admin");
-    }
-  };
-
   return (
     <Fragment>
       <CustomerDashboard>
         {/* Search Input */}
         <h1 className="text-3xl text-gray-700 font-bold mb-4">
-          View All Quotations: {quotations.customerName}
+          View All Sent Quotations
         </h1>
         <div className="flex items-center mb-4">
           <input
@@ -179,7 +90,7 @@ const ViewAllQuotationsPage = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {filteredQuotations.length > 0 ? (
+              {filteredQuotations && filteredQuotations.length > 0 ? (
                 filteredQuotations.map((quotation) => (
                   <tr key={quotation.id}>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -198,7 +109,7 @@ const ViewAllQuotationsPage = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="5" className="px-6 py-4 whitespace-nowrap">
+                  <td colSpan="4" className="px-6 py-4 whitespace-nowrap">
                     No quotations found.
                   </td>
                 </tr>

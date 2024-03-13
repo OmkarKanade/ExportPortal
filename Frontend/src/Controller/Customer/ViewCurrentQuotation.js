@@ -6,7 +6,7 @@ import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const ViewAllQuotationsPage = () => {
+const ViewCurrentQuotation = () => {
   const [quotations, setQuotations] = useState([]);
   const [filteredQuotations, setFilteredQuotations] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -17,9 +17,9 @@ const ViewAllQuotationsPage = () => {
     productName: "",
     quantity: 0,
   });
+  const sid = sessionStorage.getItem('sid');
 
   useEffect(() => {
-    const sid = sessionStorage.getItem("sid");
     const fetchQuotations = async () => {
       try {
         const response = await axios.get(
@@ -36,7 +36,6 @@ const ViewAllQuotationsPage = () => {
     fetchQuotations();
   }, []);
 
-  // Function to handle search input change
   const handleSearchChange = (event) => {
     const searchTerm = event.target.value;
     setSearchTerm(searchTerm);
@@ -44,27 +43,27 @@ const ViewAllQuotationsPage = () => {
     applyFilters(searchTerm);
   };
 
-  // Function to apply filters
   const applyFilters = (searchTerm) => {
     let filtered = quotations;
 
-    // Filter by search term
-    filtered = filtered.filter(
-      (quotation) =>
-        quotation.productId.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        quotation.productName.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    if (searchTerm) {
+      filtered = filtered.filter(
+        (quotation) =>
+          quotation.productId
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+          quotation.productName.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
 
     setFilteredQuotations(filtered);
   };
 
-  // Function to handle edit icon click
   const handleEditClick = (quotation) => {
     setEditQuotation(quotation);
     setEditModalOpen(true);
   };
 
-  // Function to handle delete icon click
   const handleDeleteClick = async (itemId) => {
     try {
       await axios.delete(
@@ -88,7 +87,6 @@ const ViewAllQuotationsPage = () => {
     }
   };
 
-  // Function to handle save changes
   const handleSaveChanges = async () => {
     try {
       const updatedQuotation = {
@@ -109,7 +107,6 @@ const ViewAllQuotationsPage = () => {
         );
         setQuotations(updatedQuotations);
 
-        // Update filteredQuotations state for displaying updated data in the table
         const updatedFilteredQuotations = filteredQuotations.map((quotation) =>
           quotation.id === updatedQuotation.id ? updatedQuotation : quotation
         );
@@ -120,7 +117,6 @@ const ViewAllQuotationsPage = () => {
         toast.error("Failed to update quotation");
       }
 
-      // Close the edit modal
       setEditModalOpen(false);
     } catch (error) {
       console.error("Error updating quotation:", error);
@@ -128,13 +124,9 @@ const ViewAllQuotationsPage = () => {
     }
   };
 
-  // Function to handle sending quotations to admin
   const handleSendQuotations = async () => {
     try {
-      // Here you can implement the logic to send quotations to the admin
-      // This could involve making a POST request to an endpoint with the list of quotations to send
-
-      // For demonstration purposes, let's assume a successful "send"
+      // Implement logic to send quotations to admin
       toast.success("Quotations sent to admin successfully");
     } catch (error) {
       console.error("Error sending quotations to admin:", error);
@@ -145,9 +137,8 @@ const ViewAllQuotationsPage = () => {
   return (
     <Fragment>
       <CustomerDashboard>
-        {/* Search Input */}
         <h1 className="text-3xl text-gray-700 font-bold mb-4">
-          View All Quotations: {quotations.customerName}
+          View Current Quotations
         </h1>
         <div className="flex items-center mb-4">
           <input
@@ -159,7 +150,6 @@ const ViewAllQuotationsPage = () => {
           />
         </div>
 
-        {/* Quotation Table */}
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-sky-700">
@@ -182,7 +172,7 @@ const ViewAllQuotationsPage = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {filteredQuotations.length > 0 ? (
+              {filteredQuotations && filteredQuotations.length > 0 ? (
                 filteredQuotations.map((quotation) => (
                   <tr key={quotation.id}>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -224,18 +214,15 @@ const ViewAllQuotationsPage = () => {
           </table>
         </div>
 
-        {/* Send Quotations to Admin Button */}
         <div className="flex justify-end mt-4">
           <button
-            // onClick={handleSendQuotations}
+            onClick={handleSendQuotations}
             className="bg-sky-700 hover:bg-green-600 text-white px-4 py-2 rounded-md"
-            style={{ marginRight: 0 }}
           >
             Send Quotations to Admin
           </button>
         </div>
 
-        {/* Edit Modal */}
         {editModalOpen && (
           <div className="fixed z-10 inset-0 overflow-y-auto">
             <div className="flex items-center justify-center min-h-screen">
@@ -282,10 +269,9 @@ const ViewAllQuotationsPage = () => {
           </div>
         )}
       </CustomerDashboard>
-      {/* Toast Container */}
       <ToastContainer position="top-right" autoClose={3000} />
     </Fragment>
   );
 };
 
-export default ViewAllQuotationsPage;
+export default ViewCurrentQuotation;
