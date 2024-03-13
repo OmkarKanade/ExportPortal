@@ -3,6 +3,7 @@ using System;
 using ExportPortal.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExportPortal.API.Migrations
 {
     [DbContext(typeof(ExportPortalDbContext))]
-    partial class ExportPortalDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240313071315_quotations")]
+    partial class quotations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

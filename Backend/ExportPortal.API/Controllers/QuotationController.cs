@@ -53,7 +53,7 @@ namespace ExportPortal.API.Controllers
         {
             var customerId = quotationDTO.CustomerId;
 
-            var activeQuotation = await dbContext.Quotations.FirstOrDefaultAsync(q => q.CustomerId == customerId && q.Status);
+            var activeQuotation = await dbContext.Quotations.Include(i => i.Items).FirstOrDefaultAsync(q => q.CustomerId == customerId && q.Status);
 
             if (activeQuotation == null)
             {
