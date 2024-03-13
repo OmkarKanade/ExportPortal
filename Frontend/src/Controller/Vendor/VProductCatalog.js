@@ -16,7 +16,7 @@ const VProductCatalog = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://localhost:7051/api/Product");
+        const response = await axios.get("https://localhost:7051/api/VendorQuotation/Vendor/{id}");
         setProducts(response.data);
         setFilteredProducts(response.data); // Initialize filtered products with all products
       } catch (error) {
