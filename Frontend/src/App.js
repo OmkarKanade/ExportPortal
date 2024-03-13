@@ -29,6 +29,7 @@ import CustomerProfileView from "./Controller/Customer/CustomerProfileView";
 import ViewQuotaionsPage from "./Controller/Admin/ViewQuotaionsPage";
 import VProductCatalog from "./Controller/Vendor/VProductCatalog";
 import ViewAllQuotationsPage from "./Controller/Customer/ViewAllQuotationsPage";
+import ViewCurrentQuotation from "./Controller/Customer/ViewCurrentQuotation";
 
 const App = () => {
   return (
@@ -61,7 +62,10 @@ const App = () => {
         <Route path="/vendor-Profile" element={<VendorProfileView />} />
         <Route path="/vendor-assignedProducts" element={<AssignedProducts />} />
         <Route path="/vendor-productCatalog" element={<VProductCatalog />} />
-        <Route path="/viewsent-quotations" element={<ViewAllQuotationsPage />} />
+        <Route
+          path="/viewsent-quotations"
+          element={<ViewAllQuotationsPage />}
+        />
 
         {/* Customer Routes */}
         <Route path="/customerDashboard" element={<CustomerDashboard />} />
@@ -73,6 +77,10 @@ const App = () => {
         <Route
           path="/viewsent-Quotations"
           element={<ViewAllQuotationsPage />}
+        />
+        <Route
+          path="/viewCurrent-Quotation"
+          element={<ViewCurrentQuotation />}
         />
       </Routes>
     </Router>

@@ -176,6 +176,9 @@ const ViewAllQuotationsPage = () => {
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Quantity
                 </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -194,6 +197,20 @@ const ViewAllQuotationsPage = () => {
                     <td className="px-6 py-4 whitespace-nowrap">
                       {quotation.quantity}
                     </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <button
+                        onClick={() => handleEditClick(quotation)}
+                        className="text-blue-600 hover:text-blue-900 mr-2"
+                      >
+                        <FontAwesomeIcon icon={faEdit} />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteClick(quotation.id)}
+                        className="text-red-600 hover:text-red-900"
+                      >
+                        <FontAwesomeIcon icon={faTrash} />
+                      </button>
+                    </td>
                   </tr>
                 ))
               ) : (
@@ -206,6 +223,64 @@ const ViewAllQuotationsPage = () => {
             </tbody>
           </table>
         </div>
+
+        {/* Send Quotations to Admin Button */}
+        <div className="flex justify-end mt-4">
+          <button
+            // onClick={handleSendQuotations}
+            className="bg-sky-700 hover:bg-green-600 text-white px-4 py-2 rounded-md"
+            style={{ marginRight: 0 }}
+          >
+            Send Quotations to Admin
+          </button>
+        </div>
+
+        {/* Edit Modal */}
+        {editModalOpen && (
+          <div className="fixed z-10 inset-0 overflow-y-auto">
+            <div className="flex items-center justify-center min-h-screen">
+              <div className="bg-white p-4 shadow-lg rounded-md w-80">
+                <h2 className="text-lg font-semibold mb-4">
+                  Edit Quotation Quantity
+                </h2>
+                <div className="mb-4">
+                  <label
+                    htmlFor="editQuantity"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Quantity:
+                  </label>
+                  <input
+                    type="number"
+                    id="editQuantity"
+                    value={editQuotation.quantity}
+                    onChange={(e) =>
+                      setEditQuotation({
+                        ...editQuotation,
+                        quantity: e.target.value,
+                      })
+                    }
+                    className="border border-gray-300 px-3 py-2 rounded-md w-full"
+                  />
+                </div>
+                <div className="flex justify-end">
+                  <button
+                    onClick={handleSaveChanges}
+                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md"
+                  >
+                    Save Changes
+                  </button>
+                  <button
+                    onClick={() => setEditModalOpen(false)}
+                    className="ml-2 bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-md"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </CustomerDashboard>
       {/* Toast Container */}
       <ToastContainer position="top-right" autoClose={3000} />
