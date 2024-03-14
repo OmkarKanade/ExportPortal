@@ -9,8 +9,7 @@ const ProductCatalog = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterBy, setFilterBy] = useState("name");
-  const [filterValue, setFilterValue] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [sortOrder, setSortOrder] = useState("asc"); // Default sorting order
 
   useEffect(() => {
@@ -32,23 +31,15 @@ const ProductCatalog = () => {
     const searchTerm = event.target.value;
     setSearchTerm(searchTerm);
 
-    applyFilters(searchTerm, filterBy, filterValue);
+    applyFilters(searchTerm, selectedCategory);
   };
 
-  // Function to handle filter by change
-  const handleFilterByChange = (event) => {
-    const selectedFilter = event.target.value;
-    setFilterBy(selectedFilter);
+  // Function to handle category selection change
+  const handleCategoryChange = (event) => {
+    const category = event.target.value;
+    setSelectedCategory(category);
 
-    applyFilters(searchTerm, selectedFilter, filterValue);
-  };
-
-  // Function to handle filter value change
-  const handleFilterValueChange = (event) => {
-    const value = event.target.value;
-    setFilterValue(value);
-
-    applyFilters(searchTerm, filterBy, value);
+    applyFilters(searchTerm, category);
   };
 
   // Function to handle sort order change
@@ -60,18 +51,20 @@ const ProductCatalog = () => {
   };
 
   // Function to apply filters
-  const applyFilters = (searchTerm, filterBy, value) => {
+  const applyFilters = (searchTerm, category) => {
     let filtered = products;
 
     // Filter by search term
     filtered = filtered.filter((product) =>
-      product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.vendorCategory.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      String(product.totalRate).toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    // Filter by selected filter
-    if (value !== "") {
+    // Filter by category
+    if (category !== "") {
       filtered = filtered.filter((product) =>
-        String(product[filterBy]).toLowerCase().includes(value.toLowerCase())
+        product.vendorCategory.name.toLowerCase() === category.toLowerCase()
       );
     }
 
@@ -109,41 +102,38 @@ const ProductCatalog = () => {
         <h1 className="text-3xl text-gray-700 font-bold mb-4">
           Products Catalog
         </h1>
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+        <div className="flex flex-col md:flex-row md:items-center  mb-4">
           {/* Search Input */}
+          <input
+            type="text"
+            placeholder="Search by name, category, or total price"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className="border border-gray-300 px-3 py-2 rounded-md mr-2"
+          />
 
-          <div className="flex items-center">
-            {/* Filter By Dropdown */}
-            <select
-              value={filterBy}
-              onChange={handleFilterByChange}
-              className="border border-gray-300 px-3 py-2 rounded-md mr-2"
-            >
-              <option value="name">Name</option>
-              <option value="hsnCode">Category</option>
-              <option value="totalRate">Total Price</option>
-              {/* Add more options for other filters */}
-            </select>
+          {/* Category Dropdown */}
+          <select
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+            className="border border-gray-300 px-3 py-2 rounded-md mr-2"
+          >
+            <option value="">All Categories</option>
+            {/* Populate categories dynamically */}
+            {products.map((product) => (
+              <option key={product.vendorCategory.id} value={product.vendorCategory.name}>{product.vendorCategory.name}</option>
+            ))}
+          </select>
 
-            {/* Filter Value Input */}
-            <input
-              type="text"
-              placeholder={`Filter by ${filterBy}`}
-              value={filterValue}
-              onChange={handleFilterValueChange}
-              className="border border-gray-300 px-3 py-2 rounded-md mr-2"
-            />
-
-            {/* Sort Order Dropdown */}
-            <select
-              value={sortOrder}
-              onChange={handleSortOrderChange}
-              className="border border-gray-300 px-3 py-2 rounded-md"
-            >
-              <option value="asc">Price Low to High</option>
-              <option value="desc">Price High to Low</option>
-            </select>
-          </div>
+          {/* Sort Order Dropdown */}
+          <select
+            value={sortOrder}
+            onChange={handleSortOrderChange}
+            className="border border-gray-300 px-3 py-2 rounded-md"
+          >
+            <option value="asc">Price Low to High</option>
+            <option value="desc">Price High to Low</option>
+          </select>
         </div>
 
         {/* Product Table */}
@@ -180,7 +170,7 @@ const ProductCatalog = () => {
                         {index + 1}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {product.productId}
+                        {generateProductId(index)}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {product.name}
