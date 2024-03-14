@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Layout from "../Layout/Layout";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const ViewQuotationsPage = () => {
   const [quotations, setQuotations] = useState([]);
@@ -10,7 +14,7 @@ const ViewQuotationsPage = () => {
     const fetchQuotations = async () => {
       try {
         const response = await axios.get(
-          "https://localhost:7051/api/Quotation"
+          "https://localhost:7051/api/Quotation/Admin"
         );
         setQuotations(response.data);
       } catch (error) {
@@ -27,6 +31,25 @@ const ViewQuotationsPage = () => {
 
   const closeProductsModal = () => {
     setSelectedQuotation(null);
+  };
+
+  const sendQuotationToVendor = async () => {
+    if (!selectedQuotation) return;
+
+    const { id } = selectedQuotation;
+
+    try {
+      await axios.get(
+        `https://localhost:7051/api/Quotation/AssignItemsToVendors/${id}`
+      );
+      toast.success('Quotation sent successfully');
+      console.log("Quotation sent to vendor successfully!");
+      // You can add any success message or additional logic here
+    } catch (error) {
+      toast.error('Failed to send Quotation');
+      console.error("Error sending quotation to vendor:", error);
+      // You can add error handling logic here
+    }
   };
 
   return (
@@ -123,7 +146,7 @@ const ViewQuotationsPage = () => {
                         {item.quantity}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {item.quantity}
+                        {item.vendor}
                       </td>
                     </tr>
                   ))}
@@ -131,17 +154,17 @@ const ViewQuotationsPage = () => {
               </table>
             </div>
             <button
-                onClick={closeProductsModal}
-                className="mt-4 mr-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              >
-                Close
-              </button>
-              <button
-                className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              >
-                Send Quotation to vendor
+              onClick={closeProductsModal}
+              className="mt-4 mr-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Close
             </button>
-
+            <button
+              onClick={sendQuotationToVendor} // Call the function to send quotation to vendor
+              className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Send Quotation to vendor
+            </button>
           </div>
         </div>
       )}

@@ -5,12 +5,13 @@ import axios from "axios";
 const VProductCatalog = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const sid = sessionStorage.getItem("sid");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://localhost:7051/api/VendorQuotation/Vendor/{id}"
+          `https://localhost:7051/api/VendorQuotation/Vendor/${sid}`
         );
         setProducts(response.data);
         setFilteredProducts(response.data); // Initialize filtered products with all products
@@ -19,13 +20,15 @@ const VProductCatalog = () => {
       }
     };
 
-    fetchData();
-  }, []);
+    if (sid) {
+      fetchData();
+    }
+  }, [sid]);
 
   return (
     <Fragment>
       <VendorDashboard>
-      <h1 className="text-3xl text-gray-700 font-bold mb-4">
+        <h1 className="text-3xl text-gray-700 font-bold mb-4">
           View Quotations
         </h1>
         {/* Product Table */}
@@ -39,21 +42,19 @@ const VProductCatalog = () => {
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Quotation ID
                 </th>
+
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                  Product Id
+                  Customer Name
                 </th>
+                {/* <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  Product Id
+                </th> */}
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Product Name
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Quantity
                 </th>
-                {/* <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-          
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                   Category
-                </th> */}
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -65,26 +66,27 @@ const VProductCatalog = () => {
                         {index + 1}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {product.productId}
+                        {product.id}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {product.name}
+                        {product.customerName}
+                      </td>
+
+                      {/* <td className="px-6 py-4 whitespace-nowrap">
+                        {product.item.productId}
+                      </td> */}
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {product.item.productName}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {product.hsnCode}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        {product.totalRate} Rs
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        {product.vendorCategory.name}
+                        {product.item.quantity}
                       </td>
                     </tr>
                   );
                 })
               ) : (
                 <tr>
-                  <td colSpan="6" className="px-6 py-4 whitespace-nowrap">
+                  <td colSpan="5" className="px-6 py-4 whitespace-nowrap">
                     No products found.
                   </td>
                 </tr>

@@ -5,14 +5,15 @@ import CustomerDashboard from "./CustomerDashboard";
 const ViewSentQuotations = () => {
   const [quotations, setQuotations] = useState([]);
   const [selectedQuotation, setSelectedQuotation] = useState(null); // State to manage selected quotation for modal
-  const sid = sessionStorage.getItem('sid');
+  const sid = sessionStorage.getItem("sid");
 
   useEffect(() => {
     const fetchQuotations = async () => {
       try {
         const response = await axios.get(
-          `https://localhost:7051/api/Quotation/customer/${sid}`
+          `https://localhost:7051/api/Quotation/Customer/${sid}`
         );
+        console.log(response.data);
         setQuotations(response.data);
       } catch (error) {
         console.error("Error fetching quotations:", error);
@@ -132,11 +133,11 @@ const ViewSentQuotations = () => {
               </table>
             </div>
             <button
-                onClick={closeProductsModal}
-                className="mt-4 mr-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              >
-                Close
-              </button>
+              onClick={closeProductsModal}
+              className="mt-4 mr-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Close
+            </button>
           </div>
         </div>
       )}
