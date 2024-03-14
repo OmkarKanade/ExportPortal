@@ -1,0 +1,14 @@
+﻿namespace ExportPortal.API.Models.DTO
+{
+    public class QuotationItemAdminDTO
+    {
+        public Guid Id { get; set; }
+        public Guid ProductId { get; set; }
+        public String ProductName { get; set; }
+        public String? Vendor1 { get; set; }
+        public String? Vendor2 { get; set; }
+        public String? Vendor3 { get; set; }
+        public int Quantity { get; set; }
+
+    }
+}

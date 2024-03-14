@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Layout from "../Layout/Layout";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ViewQuotationsPage = () => {
   const [quotations, setQuotations] = useState([]);
@@ -42,11 +40,11 @@ const ViewQuotationsPage = () => {
       await axios.get(
         `https://localhost:7051/api/Quotation/AssignItemsToVendors/${id}`
       );
-      toast.success('Quotation sent successfully');
+      toast.success("Quotation sent successfully");
       console.log("Quotation sent to vendor successfully!");
       // You can add any success message or additional logic here
     } catch (error) {
-      toast.error('Failed to send Quotation');
+      toast.error("Failed to send Quotation");
       console.error("Error sending quotation to vendor:", error);
       // You can add error handling logic here
     }
@@ -146,7 +144,9 @@ const ViewQuotationsPage = () => {
                         {item.quantity}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {item.vendor}
+                        {`${item.vendor1 ? item.vendor1 : ""}${
+                          item.vendor2 ? `, ${item.vendor2}` : ""
+                        }${item.vendor3 ? `, ${item.vendor3}` : ""}`}
                       </td>
                     </tr>
                   ))}

@@ -52,23 +52,29 @@ namespace ExportPortal.API.Controllers
         public async Task<IActionResult> GetAllQuotationsForAdmin()
         {
             var quotationDomain = await dbContext.Quotations.Include(u => u.Customer)
-                .Include(q => q.Items).ThenInclude(qi => qi.Product).Where(x => !x.Status).ToListAsync();
+                .Include(q => q.Items).ThenInclude(qi => qi.Product).ThenInclude(u => u.UserProfile1)
+                .Include(q => q.Items).ThenInclude(qi => qi.Product).ThenInclude(u => u.UserProfile2)
+                .Include(q => q.Items).ThenInclude(qi => qi.Product).ThenInclude(u => u.UserProfile3)
+                .Where(x => !x.Status).ToListAsync();
 
-            List<QuotationResponseDTO> allQuotations = new List<QuotationResponseDTO>();
+            List<QuotationResponseAdminDTO> allQuotations = new List<QuotationResponseAdminDTO>();
 
             foreach (var item in quotationDomain)
             {
-                var quotationResponseDTO = new QuotationResponseDTO
+                var quotationResponseDTO = new QuotationResponseAdminDTO
                 {
                     Id = item.Id,
                     CustomerId = item.CustomerId,
                     CustomerName = item.Customer.Name,
                     Status = item.Status,
-                    Items = item.Items.Select(qi => new QuotationItemDTO
+                    Items = item.Items.Select(qi => new QuotationItemAdminDTO
                     {
                         Id = qi.Id,
                         ProductId = qi.Product.Id,
                         ProductName = qi.Product.Name,
+                        Vendor1 = qi.Product.UserProfile1?.Name,
+                        Vendor2 = qi.Product.UserProfile2?.Name,
+                        Vendor3 = qi.Product.UserProfile3?.Name,
                         Quantity = qi.Quantity
                     }).ToList()
                 };
@@ -76,6 +82,7 @@ namespace ExportPortal.API.Controllers
             }
             return Ok(allQuotations);
         }
+
 
         [HttpPost]
         [Route("AddItem")]
