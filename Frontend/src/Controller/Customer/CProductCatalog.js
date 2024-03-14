@@ -56,7 +56,7 @@ const CProductCatalog = () => {
   const postQuotation = async (productId, totalQuantity, customerId) => {
     try {
       const response = await axios.post(
-        "https://localhost:7051/api/Quotation",
+        "https://localhost:7051/api/Quotation/AddItem",
         {
           productId: productId,
           quantity: totalQuantity,

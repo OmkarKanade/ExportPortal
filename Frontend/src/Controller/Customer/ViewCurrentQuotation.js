@@ -18,32 +18,35 @@ const ViewCurrentQuotation = () => {
     productName: "",
     quantity: 0,
   });
-  const sid = sessionStorage.getItem('sid');
+  const sid = sessionStorage.getItem("sid");
 
   useEffect(() => {
-    console.log(sid)
     const fetchQuotations = async () => {
       try {
         const response = await axios.get(
           `https://localhost:7051/api/Quotation/CustomerActive/${sid}`
         );
-        setQuotations(response.data.items);
-        setQuotationId(response.data.id);
-        setFilteredQuotations(response.data.items);
+
+        if (response.data && response.data.length > 0) {
+          const quotationsData = response.data[0];
+          setQuotations(quotationsData.items);
+          setQuotationId(quotationsData.id);
+          setFilteredQuotations(quotationsData.items);
+        } else {
+          console.error("No data found in response");
+        }
       } catch (error) {
         console.error("Error fetching quotations:", error);
-        // toast.error("Failed to fetch quotations");
+        toast.error("Failed to fetch quotations");
       }
     };
-  
+
     fetchQuotations();
   }, [sid]);
-  
 
   const handleSearchChange = (event) => {
     const searchTerm = event.target.value;
     setSearchTerm(searchTerm);
-
     applyFilters(searchTerm);
   };
 
@@ -69,7 +72,6 @@ const ViewCurrentQuotation = () => {
   };
 
   const handleDeleteClick = async (quotationId) => {
-    console.log(quotationId)
     try {
       await axios.delete(
         `https://localhost:7051/api/Quotation/DeleteItem/${quotationId}`
@@ -92,48 +94,45 @@ const ViewCurrentQuotation = () => {
     }
   };
 
-
   const handleSaveChanges = async () => {
     try {
       const response = await axios.put(
         `https://localhost:7051/api/Quotation/UpdateItem/${editQuotation.id}`,
         {
           id: editQuotation.id,
-          quantity: editQuotation.quantity
+          quantity: editQuotation.quantity,
         }
       );
-  
+
       if (response.status === 200) {
         const updatedQuotations = quotations.map((quotation) =>
           quotation.id === editQuotation.id ? editQuotation : quotation
         );
         setQuotations(updatedQuotations);
-  
+
         const updatedFilteredQuotations = filteredQuotations.map((quotation) =>
           quotation.id === editQuotation.id ? editQuotation : quotation
         );
         setFilteredQuotations(updatedFilteredQuotations);
-  
+
         toast.success("Quotation updated successfully");
       } else {
         toast.error("Failed to update quotation");
       }
-  
+
       setEditModalOpen(false);
     } catch (error) {
       console.error("Error updating quotation:", error);
       toast.error("Failed to update quotation");
     }
   };
-  
 
   const handleSendQuotations = async () => {
-    console.log(quotationId)
     try {
       const response = await axios.put(
         `https://localhost:7051/api/Quotation/SendQuotation/${quotationId}`
       );
-  
+
       if (response.status === 200) {
         // Optional: Update UI or perform any other actions upon successful sending
         toast.success("Quotations sent to admin successfully");
@@ -145,9 +144,6 @@ const ViewCurrentQuotation = () => {
       toast.error("Failed to send quotations to admin");
     }
   };
-  
-  
-  
 
   return (
     <Fragment>
@@ -215,7 +211,6 @@ const ViewCurrentQuotation = () => {
                       >
                         <FontAwesomeIcon icon={faTrash} />
                       </button>
-
                     </td>
                   </tr>
                 ))

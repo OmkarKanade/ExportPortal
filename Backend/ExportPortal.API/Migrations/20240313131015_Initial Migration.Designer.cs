@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExportPortal.API.Migrations
 {
     [DbContext(typeof(ExportPortalDbContext))]
-    [Migration("20240313102909_quotation")]
-    partial class quotation
+    [Migration("20240313131015_Initial Migration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
