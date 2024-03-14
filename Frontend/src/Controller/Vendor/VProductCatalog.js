@@ -5,6 +5,8 @@ import axios from "axios";
 const VProductCatalog = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
   const sid = sessionStorage.getItem("sid");
 
   useEffect(() => {
@@ -25,12 +27,47 @@ const VProductCatalog = () => {
     }
   }, [sid]);
 
+  // Function to handle search input change
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  useEffect(() => {
+    applyFilters(searchTerm);
+  }, [searchTerm, products]);
+
+  // Function to apply filters
+  const applyFilters = (searchTerm) => {
+    if (!searchTerm) {
+      setFilteredProducts(products);
+    } else {
+      const filtered = products.filter((product) =>
+        Object.values(product).some(
+          (value) =>
+            typeof value === "string" &&
+            value.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      );
+      setFilteredProducts(filtered);
+    }
+  };
+
   return (
     <Fragment>
       <VendorDashboard>
         <h1 className="text-3xl text-gray-700 font-bold mb-4">
           View Quotations
         </h1>
+        <div className="mb-4">
+          <input
+            type="text"
+            placeholder="Search by Customer Name or Product Name"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className="border border-gray-300 px-3 py-2 rounded-md mr-2"
+          />
+        </div>
+        
         {/* Product Table */}
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">

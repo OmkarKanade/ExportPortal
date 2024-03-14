@@ -8,12 +8,17 @@ const CProductCatalog = () => {
   const [products, setProducts] = useState([]);
   const [customerId, setCustomerId] = useState("");
   const [addedToQuotation, setAddedToQuotation] = useState({});
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [sortOrder, setSortOrder] = useState("asc"); // Default sorting order
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("https://localhost:7051/api/Product");
         setProducts(response.data);
+        setFilteredProducts(response.data); // Initialize filtered products with all products
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -36,7 +41,70 @@ const CProductCatalog = () => {
       "addedToQuotation",
       JSON.stringify(addedToQuotation)
     );
-  }, [addedToQuotation]);
+
+    // Apply filters whenever products or filter criteria change
+    applyFilters(searchTerm, selectedCategory);
+  }, [searchTerm, selectedCategory, products, addedToQuotation]);
+
+  // Function to handle search input change
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  // Function to handle category selection change
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
+  };
+
+  // Function to handle sort order change
+  const handleSortOrderChange = (event) => {
+    setSortOrder(event.target.value);
+  };
+
+  // Function to apply filters
+  const applyFilters = (searchTerm, category) => {
+    let filtered = products;
+
+    // Filter by search term
+    if (searchTerm) {
+      filtered = filtered.filter((product) =>
+        Object.entries(product).some(([key, value]) =>
+          key === "totalRate"
+            ? parseFloat(value) === parseFloat(searchTerm)
+            : typeof value === "string" &&
+              value.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      );
+    }
+
+    // Filter by category
+    if (category) {
+      filtered = filtered.filter((product) =>
+        product.vendorCategory.name.toLowerCase() === category.toLowerCase()
+      );
+    }
+
+    // Apply sorting
+    sortProducts(sortOrder, filtered);
+  };
+
+  // Function to sort products
+  const sortProducts = (order, productsList) => {
+    const sortedProducts = [...productsList];
+
+    sortedProducts.sort((a, b) => {
+      const rateA = parseFloat(a.totalRate);
+      const rateB = parseFloat(b.totalRate);
+
+      if (order === "asc") {
+        return rateA - rateB;
+      } else {
+        return rateB - rateA;
+      }
+    });
+
+    setFilteredProducts(sortedProducts);
+  };
 
   const handleQuantityChange = (productId, newQuantity) => {
     const updatedProducts = products.map((product) => {
@@ -80,10 +148,21 @@ const CProductCatalog = () => {
     <Fragment>
       <CustomerDashboard>
         <ToastContainer />
-        {/* Product Table */}
         <h1 className="text-3xl text-gray-700 font-bold mb-4">
           Products Catalog
         </h1>
+        {/* Search Box */}
+        <div className="mb-4">
+          <input
+            type="text"
+            placeholder="Search by name, category, or total price"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className="border border-gray-300 px-3 py-2 rounded-md mr-2"
+          />
+        </div>
+        
+        {/* Product Table */}
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-sky-700">
@@ -118,8 +197,8 @@ const CProductCatalog = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {products && products.length > 0 ? (
-                products.map((product, index) => {
+              {filteredProducts && filteredProducts.length > 0 ? (
+                filteredProducts.map((product, index) => {
                   const isAdded = addedToQuotation[product.id];
                   return (
                     <tr key={product.id}>
