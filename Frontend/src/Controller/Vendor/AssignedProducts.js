@@ -5,23 +5,23 @@ import axios from 'axios';
 
 const ProductCard = ({ name, scientificName, totalRate, grossWeight, ingredients, certificationId, image }) => {
   return (
-    <div className="border-2 border-gray-500 mr-3 mb-3 card p-4 md:w-1/2 lg:w-1/3 xl:w-1/4">
-      <div className="card-img">
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden ">
+      <div className="px-6 py-4">
         <img src={image} alt={name} className="w-full h-auto" />
-      </div>
-      <div className="card-info">
-        <h5 className="card-text">{name}</h5>
-        <p className="card-text">{scientificName}</p>
-        <p className="card-text">Total Price: {totalRate} Rs</p>
-        <p className="card-text">Gross Weight: {grossWeight} g</p>
-        <p className="card-text">Ingredients: {ingredients}</p>
-        {/* <p className="card-text">Certification: {certificationId}</p> */}
+        <div className="mt-4">
+          <h5 className="text-xl font-semibold mb-2">{name}</h5>
+          <p>Scientific Name: {scientificName}</p>
+          <p>Total Price: {totalRate} Rs</p>
+          <p>Gross Weight: {grossWeight} g</p>
+          <p>Ingredients: {ingredients}</p>
+          {/* <p>Certification: {certificationId}</p> */}
+        </div>
       </div>
     </div>
   );
 };
 
-const ProductPage = () => {
+const AssignedProducts = () => {
   const [products, setProducts] = useState([]);
   const images = [
     '/images/1.png',
@@ -43,7 +43,6 @@ const ProductPage = () => {
   const sid = sessionStorage.getItem('sid');
   
   const fetchData = async () => {
-    console.log(products);
     try {
       const response = await axios.get(`https://localhost:7051/api/Product/Vendor/${sid}`);
       const updatedProducts = response.data.map(product => {
@@ -58,25 +57,25 @@ const ProductPage = () => {
 
   return (
     <VendorDashboard>
-          <div className="w-full md:w-3/4 px-4">
-            <h1 className="text-2xl font-bold mt-8 mb-4">Assigned Products</h1>
-            <div className=" flex flex-wrap -mx-4">
-              {products.map(product => (
-                <ProductCard
-                  key={product.id} // Assuming product.id is unique
-                  name={product.name}
-                  scientificName={product.scientificName}
-                  totalRate={product.totalRate}
-                  grossWeight={product.grossWeight}
-                  ingredients={product.ingredients}
-                  certification={product.certification.name}
-                  image={product.image} // Pass the random image path here
-                />
-              ))}
-            </div>
-          </div>
-          </VendorDashboard>
+      <div className="ml-8">
+        <h1 className="text-3xl font-semibold mb-4">Assigned Products</h1>
+        <div className="flex flex-wrap -mx-4 gap-10">
+          {products.map(product => (
+            <ProductCard
+              key={product.id} // Assuming product.id is unique
+              name={product.name}
+              scientificName={product.scientificName}
+              totalRate={product.totalRate}
+              grossWeight={product.grossWeight}
+              ingredients={product.ingredients}
+              certificationId={product.certification.name}
+              image={product.image} // Pass the random image path here
+            />
+          ))}
+        </div>
+      </div>
+    </VendorDashboard>
   );
 };
 
-export default ProductPage;
+export default AssignedProducts;
