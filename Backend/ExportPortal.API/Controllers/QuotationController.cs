@@ -1,5 +1,4 @@
 ﻿using ExportPortal.API.Data;
-
 using ExportPortal.API.Models.Domain;
 using ExportPortal.API.Models.DTO;
 using Microsoft.AspNetCore.Http;
@@ -75,6 +74,9 @@ namespace ExportPortal.API.Controllers
                         Vendor1 = qi.Product.UserProfile1?.Name,
                         Vendor2 = qi.Product.UserProfile2?.Name,
                         Vendor3 = qi.Product.UserProfile3?.Name,
+                        Vendor1Price = qi.Product.UserProfile1 != null ? qi.Product.Vendor1Price : null,
+                        Vendor2Price = qi.Product.UserProfile2 != null ? qi.Product.Vendor2Price : null,
+                        Vendor3Price = qi.Product.UserProfile3 != null ? qi.Product.Vendor3Price : null,
                         Quantity = qi.Quantity
                     }).ToList()
                 };
@@ -82,7 +84,6 @@ namespace ExportPortal.API.Controllers
             }
             return Ok(allQuotations);
         }
-
 
         [HttpPost]
         [Route("AddItem")]
@@ -338,7 +339,7 @@ namespace ExportPortal.API.Controllers
                         {
                             var assignment = new QuotationItemAssignment
                             {
-                                CustomerId = quotation.CustomerId,
+                                QuotationId = quotation.Id,
                                 ItemId = item.Id,
                                 VendorId = vendorId
                             };
@@ -349,7 +350,6 @@ namespace ExportPortal.API.Controllers
                 }
 
                 await dbContext.SaveChangesAsync();
-
                 return Ok("Quotation items assigned to vendors successfully");
             }
             return BadRequest("Something went wrong");

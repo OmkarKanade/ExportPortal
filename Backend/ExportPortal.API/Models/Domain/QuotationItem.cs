@@ -1,5 +1,4 @@
-﻿using ExportPortal.API.Models.DTO;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace ExportPortal.API.Models.Domain
 {
@@ -12,5 +11,6 @@ namespace ExportPortal.API.Models.Domain
         public Guid ProductId { get; set; }
         public Product Product { get; set; }
         public int Quantity { get; set; }
+
     }
 }
