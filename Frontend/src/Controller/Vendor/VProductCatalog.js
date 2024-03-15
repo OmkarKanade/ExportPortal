@@ -93,7 +93,7 @@ const VProductCatalog = () => {
     <Fragment>
       <VendorDashboard>
         <h1 className="text-3xl text-gray-700 font-bold mb-4">
-          View Quotations
+          Set Quotation Pricing
         </h1>
         <div className="mb-4">
           <input
