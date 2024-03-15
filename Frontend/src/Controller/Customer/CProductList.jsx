@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const ProductCard = ({ name, scientificName, totalRate, grossWeight, ingredients, certificationId, image }) => {
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden w-full md:w-80">
       <div className="px-6 py-4">
         <img src={image} alt={name} className="w-full h-auto" />
         <div className="mt-4">

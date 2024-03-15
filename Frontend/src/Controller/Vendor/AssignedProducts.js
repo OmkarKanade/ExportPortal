@@ -5,9 +5,9 @@ import axios from 'axios';
 
 const ProductCard = ({ name, scientificName, totalRate, grossWeight, ingredients, certificationId, image }) => {
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden ">
+    <div className="bg-white shadow-lg rounded-lg overflow-hidden w-64">
       <div className="px-6 py-4">
-        <img src={image} alt={name} className="w-full h-auto" />
+        <img src={image} alt={name} className="w-full h-40 object-cover" />
         <div className="mt-4">
           <h5 className="text-xl font-semibold mb-2">{name}</h5>
           <p>Scientific Name: {scientificName}</p>
@@ -59,7 +59,7 @@ const AssignedProducts = () => {
     <VendorDashboard>
       <div className="ml-8">
         <h1 className="text-3xl font-semibold mb-4">Assigned Products</h1>
-        <div className="flex flex-wrap -mx-4 gap-10">
+        <div className="flex flex-wrap -mx-4">
           {products.map(product => (
             <ProductCard
               key={product.id} // Assuming product.id is unique
