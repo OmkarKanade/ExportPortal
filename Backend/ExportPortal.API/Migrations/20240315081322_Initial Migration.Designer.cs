@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExportPortal.API.Migrations
 {
     [DbContext(typeof(ExportPortalDbContext))]
-    [Migration("20240313131015_Initial Migration")]
+    [Migration("20240315081322_Initial Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -140,6 +140,15 @@ namespace ExportPortal.API.Migrations
                     b.Property<decimal>("TotalRate")
                         .HasColumnType("decimal(65,30)");
 
+                    b.Property<decimal?>("Vendor1Price")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<decimal?>("Vendor2Price")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<decimal?>("Vendor3Price")
+                        .HasColumnType("decimal(65,30)");
+
                     b.Property<Guid>("VendorCategoryId")
                         .HasColumnType("char(36)");
 
@@ -223,11 +232,10 @@ namespace ExportPortal.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("CustomerId")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
                     b.Property<Guid>("ItemId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("QuotationId")
                         .HasColumnType("char(36)");
 
                     b.Property<string>("VendorId")
@@ -236,9 +244,9 @@ namespace ExportPortal.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
-
                     b.HasIndex("ItemId");
+
+                    b.HasIndex("QuotationId");
 
                     b.HasIndex("VendorId");
 
@@ -577,15 +585,15 @@ namespace ExportPortal.API.Migrations
 
             modelBuilder.Entity("ExportPortal.API.Models.Domain.QuotationItemAssignment", b =>
                 {
-                    b.HasOne("ExportPortal.API.Models.Domain.UserProfile", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ExportPortal.API.Models.Domain.QuotationItem", "Item")
                         .WithMany()
                         .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ExportPortal.API.Models.Domain.Quotation", "Quotation")
+                        .WithMany()
+                        .HasForeignKey("QuotationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -595,9 +603,9 @@ namespace ExportPortal.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Customer");
-
                     b.Navigation("Item");
+
+                    b.Navigation("Quotation");
 
                     b.Navigation("Vendor");
                 });

@@ -305,7 +305,10 @@ namespace ExportPortal.API.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DairyDeclarationRequired = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     IsForHumanConsumption = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    CertificationId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci")
+                    CertificationId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
+                    Vendor1Price = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
+                    Vendor2Price = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
+                    Vendor3Price = table.Column<decimal>(type: "decimal(65,30)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -394,8 +397,7 @@ namespace ExportPortal.API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
-                    CustomerId = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    QuotationId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     ItemId = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     VendorId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
@@ -403,12 +405,6 @@ namespace ExportPortal.API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_QuotationItemAssignments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_QuotationItemAssignments_AspNetUsers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_QuotationItemAssignments_AspNetUsers_VendorId",
                         column: x => x.VendorId,
@@ -419,6 +415,12 @@ namespace ExportPortal.API.Migrations
                         name: "FK_QuotationItemAssignments_QuotationItems_ItemId",
                         column: x => x.ItemId,
                         principalTable: "QuotationItems",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_QuotationItemAssignments_Quotations_QuotationId",
+                        column: x => x.QuotationId,
+                        principalTable: "Quotations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -502,14 +504,14 @@ namespace ExportPortal.API.Migrations
                 column: "VendorId3");
 
             migrationBuilder.CreateIndex(
-                name: "IX_QuotationItemAssignments_CustomerId",
-                table: "QuotationItemAssignments",
-                column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_QuotationItemAssignments_ItemId",
                 table: "QuotationItemAssignments",
                 column: "ItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_QuotationItemAssignments_QuotationId",
+                table: "QuotationItemAssignments",
+                column: "QuotationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_QuotationItemAssignments_VendorId",

@@ -51,9 +51,18 @@ const ViewQuotationsPage = () => {
   };
 
   // Function to generate random demo pricing
-  const getRandomPricing = (vendor) => {
-    if (!vendor) return null;
-    return Math.floor(Math.random() * 100) + 1; // Generates a random number between 1 and 100
+  const getVendorPricing = (item, vendor) => {
+    if (!item) return null;
+    switch (vendor) {
+      case "Vendor1":
+        return item.vendor1Price;
+      case "Vendor2":
+        return item.vendor2Price;
+      case "Vendor3":
+        return item.vendor3Price;
+      default:
+        return null;
+    }
   };
 
   return (
@@ -142,21 +151,6 @@ const ViewQuotationsPage = () => {
                       Vendor Pricing Amount
                     </th>
                   </tr>
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"></th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"></th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"></th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"></th>
-                    <th className="px-2 py-2 text-left text-xs font-medium text-white uppercase tracking-wider">
-                      Vendor 1
-                    </th>
-                    <th className="px-2 py-2 text-left text-xs font-medium text-white uppercase tracking-wider">
-                      Vendor 2
-                    </th>
-                    <th className="px-2 py-2 text-left text-xs font-medium text-white uppercase tracking-wider">
-                      Vendor 3
-                    </th>
-                  </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {selectedQuotation.items.map((item) => (
@@ -176,13 +170,19 @@ const ViewQuotationsPage = () => {
                         }${item.vendor3 ? `, Vendor 3` : ""}`}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {item.vendor1 ? getRandomPricing("Vendor 1") : null}
+                        {item.vendor1
+                          ? getVendorPricing(item, "Vendor1")
+                          : null}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {item.vendor2 ? getRandomPricing("Vendor 2") : null}
+                        {item.vendor2
+                          ? getVendorPricing(item, "Vendor2")
+                          : null}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {item.vendor3 ? getRandomPricing("Vendor 3") : null}
+                        {item.vendor3
+                          ? getVendorPricing(item, "Vendor3")
+                          : null}
                       </td>
                     </tr>
                   ))}

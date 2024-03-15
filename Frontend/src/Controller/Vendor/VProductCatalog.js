@@ -1,11 +1,14 @@
 import React, { useState, useEffect, Fragment } from "react";
 import VendorDashboard from "./VendorDashboard";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const VProductCatalog = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [newPrices, setNewPrices] = useState({}); // Store new prices for each product
 
   const sid = sessionStorage.getItem("sid");
 
@@ -17,6 +20,14 @@ const VProductCatalog = () => {
         );
         setProducts(response.data);
         setFilteredProducts(response.data); // Initialize filtered products with all products
+        // Initialize newPrices with default values (0 for each product)
+        const initialNewPrices = {};
+        response.data.forEach((product) => {
+          product.items.forEach((item) => {
+            initialNewPrices[item.productId] = 0;
+          });
+        });
+        setNewPrices(initialNewPrices);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -52,10 +63,30 @@ const VProductCatalog = () => {
     }
   };
 
-  // Function to handle sending to admin
-  const handleSendToAdmin = () => {
-    // Logic to send data to admin
-    alert("Sending to admin...");
+  // Function to handle price input change for a specific product
+  const handlePriceChange = (event, productId) => {
+    const updatedPrices = { ...newPrices, [productId]: event.target.value };
+    setNewPrices(updatedPrices);
+  };
+
+  // Function to handle submitting the updated prices for a specific product
+  const handleSubmitPrice = async (productId) => {
+    try {
+      await axios.put(
+        `https://localhost:7051/api/Product/UpdatePrice/${productId}`,
+        {
+          vendorId: sid,
+          price: newPrices[productId],
+        }
+      );
+      // Assuming the request is successful
+      toast.success("Price updated successfully");
+      console.log(`Price for Product ID ${productId} updated successfully`);
+      // You might want to refetch the products after updating the prices
+    } catch (error) {
+      toast.error("Error updating price");
+      console.error(`Error updating price for Product ID ${productId}:`, error);
+    }
   };
 
   return (
@@ -80,13 +111,7 @@ const VProductCatalog = () => {
             <thead className="bg-sky-700">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                  Sr
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Quotation ID
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                  Customer Name
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Product Name
@@ -94,27 +119,23 @@ const VProductCatalog = () => {
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Set Amount
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                  Action
-                </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {filteredProducts && filteredProducts.length > 0 ? (
-                filteredProducts.map((product, index) => {
-                  return (
-                    <tr key={product.id}>
+                filteredProducts.map((product) => {
+                  return product.items.map((item, index) => (
+                    <tr key={item.id}>
+                      {index === 0 && (
+                        <td
+                          rowSpan={product.items.length}
+                          className="px-6 py-4 whitespace-nowrap"
+                        >
+                          {product.quotationId}
+                        </td>
+                      )}
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {index + 1}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        {product.id}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        {product.customerName}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        {product.item.productName}
+                        {item.productName}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <input
@@ -122,23 +143,25 @@ const VProductCatalog = () => {
                           pattern="[0-9]*"
                           inputMode="numeric"
                           placeholder="Enter Amount"
+                          value={newPrices[item.productId]}
+                          onChange={(event) =>
+                            handlePriceChange(event, item.productId)
+                          }
                           className="border border-gray-300 rounded-md px-3 py-2 w-32"
                         />
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
                         <button
-                          onClick={handleSendToAdmin}
-                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                          onClick={() => handleSubmitPrice(item.productId)}
+                          className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                         >
-                          Send to Admin
+                          Update
                         </button>
                       </td>
                     </tr>
-                  );
+                  ));
                 })
               ) : (
                 <tr>
-                  <td colSpan="6" className="px-6 py-4 whitespace-nowrap">
+                  <td colSpan="3" className="px-6 py-4 whitespace-nowrap">
                     No products found.
                   </td>
                 </tr>
@@ -147,6 +170,7 @@ const VProductCatalog = () => {
           </table>
         </div>
       </VendorDashboard>
+      <ToastContainer />
     </Fragment>
   );
 };
