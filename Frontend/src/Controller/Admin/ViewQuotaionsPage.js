@@ -50,6 +50,12 @@ const ViewQuotationsPage = () => {
     }
   };
 
+  // Function to generate random demo pricing
+  const getRandomPricing = (vendor) => {
+    if (!vendor) return null;
+    return Math.floor(Math.random() * 100) + 1; // Generates a random number between 1 and 100
+  };
+
   return (
     <Layout>
       <div>
@@ -114,7 +120,7 @@ const ViewQuotationsPage = () => {
           <div className="bg-white rounded-lg p-8 max-w-3xl w-full">
             <h2 className="text-xl font-bold mb-4">Products</h2>
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
+              <table className="md:w-auto divide-y divide-gray-200">
                 <thead className="bg-sky-700">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
@@ -128,6 +134,27 @@ const ViewQuotationsPage = () => {
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                       Vendors
+                    </th>
+                    <th
+                      className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
+                      colSpan="3"
+                    >
+                      Vendor Pricing Amount
+                    </th>
+                  </tr>
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"></th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"></th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"></th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"></th>
+                    <th className="px-2 py-2 text-left text-xs font-medium text-white uppercase tracking-wider">
+                      Vendor 1
+                    </th>
+                    <th className="px-2 py-2 text-left text-xs font-medium text-white uppercase tracking-wider">
+                      Vendor 2
+                    </th>
+                    <th className="px-2 py-2 text-left text-xs font-medium text-white uppercase tracking-wider">
+                      Vendor 3
                     </th>
                   </tr>
                 </thead>
@@ -144,9 +171,18 @@ const ViewQuotationsPage = () => {
                         {item.quantity}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {`${item.vendor1 ? item.vendor1 : ""}${
-                          item.vendor2 ? `, ${item.vendor2}` : ""
-                        }${item.vendor3 ? `, ${item.vendor3}` : ""}`}
+                        {`${item.vendor1 ? "Vendor 1" : ""}${
+                          item.vendor2 ? `, Vendor 2` : ""
+                        }${item.vendor3 ? `, Vendor 3` : ""}`}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {item.vendor1 ? getRandomPricing("Vendor 1") : null}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {item.vendor2 ? getRandomPricing("Vendor 2") : null}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {item.vendor3 ? getRandomPricing("Vendor 3") : null}
                       </td>
                     </tr>
                   ))}

@@ -52,6 +52,12 @@ const VProductCatalog = () => {
     }
   };
 
+  // Function to handle sending to admin
+  const handleSendToAdmin = () => {
+    // Logic to send data to admin
+    alert("Sending to admin...");
+  };
+
   return (
     <Fragment>
       <VendorDashboard>
@@ -67,7 +73,7 @@ const VProductCatalog = () => {
             className="border border-gray-300 px-3 py-2 rounded-md mr-2"
           />
         </div>
-        
+
         {/* Product Table */}
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
@@ -79,18 +85,17 @@ const VProductCatalog = () => {
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Quotation ID
                 </th>
-
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Customer Name
                 </th>
-                {/* <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                  Product Id
-                </th> */}
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Product Name
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                  Quantity
+                  Set Amount
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  Action
                 </th>
               </tr>
             </thead>
@@ -108,22 +113,32 @@ const VProductCatalog = () => {
                       <td className="px-6 py-4 whitespace-nowrap">
                         {product.customerName}
                       </td>
-
-                      {/* <td className="px-6 py-4 whitespace-nowrap">
-                        {product.item.productId}
-                      </td> */}
                       <td className="px-6 py-4 whitespace-nowrap">
                         {product.item.productName}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {product.item.quantity}
+                        <input
+                          type="text"
+                          pattern="[0-9]*"
+                          inputMode="numeric"
+                          placeholder="Enter Amount"
+                          className="border border-gray-300 rounded-md px-3 py-2 w-32"
+                        />
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <button
+                          onClick={handleSendToAdmin}
+                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                          Send to Admin
+                        </button>
                       </td>
                     </tr>
                   );
                 })
               ) : (
                 <tr>
-                  <td colSpan="5" className="px-6 py-4 whitespace-nowrap">
+                  <td colSpan="6" className="px-6 py-4 whitespace-nowrap">
                     No products found.
                   </td>
                 </tr>
