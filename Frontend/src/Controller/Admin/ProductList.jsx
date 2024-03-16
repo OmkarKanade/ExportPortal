@@ -3,7 +3,6 @@ import Layout from '../Layout/Layout';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
 
@@ -22,21 +21,35 @@ const ProductPage = () => {
 
   return (
     <Layout>
-      <div className="Aproduct-page">
+      <div className="container mx-auto px-4">
         <h1 className="text-3xl text-gray-700 font-bold mb-4">Products List</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {products.map(product => (
-            <div className="cardd bg-white p-4 rounded-lg shadow-md" key={product.id}>
-              <div className="carddd-info">
+            <div key={product.id} className="bg-white rounded-lg overflow-hidden shadow-md">
+              <Link to={`/product/${product.id}`}>
+                <img
+                  src={product.imgPath}
+                  // alt={product.name}
+                  className="w-full h-48 object-cover object-center"
+                />
+              </Link>
+              <div className="p-4">
                 <Link to={`/product/${product.id}`}>
-                  <h5 className="carddd-text font-semibold">Product ID: {product.productId}</h5>
+                  <h2 className="text-lg font-medium text-gray-900 mb-2">{product.name}</h2>
                 </Link>
-                <h5 className="carddd-text">Name: {product.name}</h5>
-                <p className="carddd-text">Scientific Name: {product.scientificName}</p>
-                <p className="carddd-text">Total Price: {product.totalRate} Rs</p>
-                <p className="carddd-text">Gross Weight: {product.grossWeight} g</p>
-                <p className="carddd-text">Ingredients: {product.ingredients}</p>
-                <p className="carddd-text">Certification ID: {product.certification.name}</p>
+                <p className="text-gray-700 mb-2">{product.scientificName}</p>
+                <p className="text-gray-900 font-semibold mb-2">Price: {product.totalRate} Rs</p>
+                <p className="text-gray-700 mb-2">Gross Weight: {product.grossWeight} g</p>
+                <p className="text-gray-700 mb-2">Ingredients: {product.ingredients}</p>
+                <p className="text-gray-700 mb-2">Certification ID: {product.certification.name}</p>
+                <div className="flex justify-between items-center">
+                  <button
+                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded focus:outline-none"
+                  >
+                    View Details
+                  </button>
+                  {/* <span className="text-gray-600">Free Shipping</span> */}
+                </div>
               </div>
             </div>
           ))}

@@ -2,24 +2,6 @@ import React, { useState, useEffect } from 'react';
 import CustomerDashboard from './CustomerDashboard';
 import axios from 'axios';
 
-const ProductCard = ({ name, scientificName, totalRate, grossWeight, ingredients, certificationId, image }) => {
-  return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden w-full md:w-80">
-      <div className="px-6 py-4">
-        <img src={image} alt={name} className="w-full h-auto" />
-        <div className="mt-4">
-          <h5 className="text-xl font-semibold mb-2">Name: {name}</h5>
-          <p>Scientific Name: {scientificName}</p>
-          <p>Total Price: {totalRate} Rs</p>
-          <p>Gross Weight: {grossWeight} g</p>
-          <p>Ingredients: {ingredients}</p>
-          <p>CertificationId: {certificationId}</p>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
   const images = [
@@ -58,16 +40,17 @@ const ProductPage = () => {
         <h1 className="text-3xl font-semibold mb-4">Products List</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map(product => (
-            <ProductCard
-              key={product.id}
-              name={product.name}
-              scientificName={product.scientificName}
-              totalRate={product.totalRate}
-              grossWeight={product.grossWeight}
-              ingredients={product.ingredients}
-              certificationId={product.certification.name}
-              image={product.image}
-            />
+            <div key={product.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
+              <img src={product.image} alt={product.name} className="w-full h-48 object-cover object-center" />
+              <div className="px-6 py-4">
+                <h5 className="text-xl font-semibold mb-2">{product.name}</h5>
+                <p className="text-gray-700 mb-2">Scientific Name: {product.scientificName}</p>
+                <p className="text-gray-700 mb-2">Total Price: {product.totalRate} Rs</p>
+                <p className="text-gray-700 mb-2">Gross Weight: {product.grossWeight} g</p>
+                <p className="text-gray-700 mb-2">Ingredients: {product.ingredients}</p>
+                <p className="text-gray-700 mb-2">Certification ID: {product.certification.name}</p>
+              </div>
+            </div>
           ))}
         </div>
       </div>
