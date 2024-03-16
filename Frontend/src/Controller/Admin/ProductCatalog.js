@@ -55,16 +55,22 @@ const ProductCatalog = () => {
     let filtered = products;
 
     // Filter by search term
-    filtered = filtered.filter((product) =>
-      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.vendorCategory.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      String(product.totalRate).toLowerCase().includes(searchTerm.toLowerCase())
+    filtered = filtered.filter(
+      (product) =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.vendorCategory.name
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()) ||
+        String(product.totalRate)
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase())
     );
 
     // Filter by category
     if (category !== "") {
-      filtered = filtered.filter((product) =>
-        product.vendorCategory.name.toLowerCase() === category.toLowerCase()
+      filtered = filtered.filter(
+        (product) =>
+          product.vendorCategory.name.toLowerCase() === category.toLowerCase()
       );
     }
 
@@ -90,10 +96,6 @@ const ProductCatalog = () => {
     setFilteredProducts(sortedProducts);
   };
 
-  // Function to generate custom product ID
-  const generateProductId = (index) => {
-    return `000${index + 1}`.slice(-4);
-  };
 
   return (
     <Fragment>
@@ -121,7 +123,12 @@ const ProductCatalog = () => {
             <option value="">All Categories</option>
             {/* Populate categories dynamically */}
             {products.map((product) => (
-              <option key={product.vendorCategory.id} value={product.vendorCategory.name}>{product.vendorCategory.name}</option>
+              <option
+                key={product.vendorCategory.id}
+                value={product.vendorCategory.name}
+              >
+                {product.vendorCategory.name}
+              </option>
             ))}
           </select>
 
@@ -170,7 +177,7 @@ const ProductCatalog = () => {
                         {index + 1}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {generateProductId(index)}
+                        {product.productId}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {product.name}

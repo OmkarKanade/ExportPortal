@@ -121,14 +121,17 @@ const ProductForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+    
         const formDataToSend = new FormData();
         formDataToSend.append('name', formData.name);
         formDataToSend.append('scientificName', formData.scientificName);
         formDataToSend.append('vendorCategoryId', formData.vendorCategoryId);
-        formDataToSend.append('vendorId1', formData.vendorId1);
-        formDataToSend.append('vendorId2', formData.vendorId2);
-        formDataToSend.append('vendorId3', formData.vendorId3);
+        
+        // Check if a vendor is selected, if not, set the value to null
+        formDataToSend.append('vendorId1', formData.vendorId1 ? formData.vendorId1 : null);
+        formDataToSend.append('vendorId2', formData.vendorId2 ? formData.vendorId2 : null);
+        formDataToSend.append('vendorId3', formData.vendorId3 ? formData.vendorId3 : null);
+        
         formDataToSend.append('hsnCode', formData.hsnCode);
         formDataToSend.append('toPuneFreight', formData.toPuneFreight);
         formDataToSend.append('innerPackageMaterial', formData.innerPackageMaterial);
@@ -148,11 +151,11 @@ const ProductForm = () => {
         formDataToSend.append('dairyDeclarationRequired', formData.dairyDeclarationRequired);
         formDataToSend.append('isForHumanConsumption', formData.isForHumanConsumption);
         formDataToSend.append('certificationId', formData.certificationId);
-
+    
         formDataToSend.append('file', fileData);
-
+    
         console.log(formData)
-
+    
         axios.post('https://localhost:7051/api/Product', formDataToSend)
             .then(response => {
                 toast.success(`Product ${formData.name} created successfully`);
@@ -208,7 +211,7 @@ const ProductForm = () => {
                                 <div className="mb-4">
                                     <label htmlFor="categorySelect" className="block text-gray-700 text-sm font-bold mb-2">Select a category:</label>
                                     <select required id="categorySelect" name="vendorCategoryId" value={formData.vendorCategoryId} onChange={handleChange} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                                        <option value="" disabled>Select an option</option>
+                                        <option value="">Select an option</option>
                                         {categories.map(category => (
                                             <option key={category.id} value={category.id}>
                                                 {category.name}

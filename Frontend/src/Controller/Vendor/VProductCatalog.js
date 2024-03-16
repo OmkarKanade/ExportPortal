@@ -114,6 +114,9 @@ const VProductCatalog = () => {
                   Quotation ID
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                  Actions
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Product Name
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
@@ -135,8 +138,12 @@ const VProductCatalog = () => {
                         </td>
                       )}
                       <td className="px-6 py-4 whitespace-nowrap">
+                        Add Pricing
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
                         {item.productName}
                       </td>
+
                       <td className="px-6 py-4 whitespace-nowrap">
                         <input
                           type="text"
